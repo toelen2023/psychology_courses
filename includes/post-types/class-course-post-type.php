@@ -4,7 +4,7 @@ namespace PsychologyCourses\PostTypes;
 
 defined( 'ABSPATH' ) || exit;
 
-class Course_Post_Type {
+class PC_Course_Post_Type {
 
     public function register(): void {
         add_action( 'init', [ $this, 'register_post_type' ] );
