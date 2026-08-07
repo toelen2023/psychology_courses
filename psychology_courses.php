@@ -12,7 +12,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PC_VERSION', '1.0.0' );
 define( 'PC_PLUGIN_FILE', FILE );
 define( 'PC_PLUGIN_PATH', plugin_dir_path( FILE ) );
 define( 'PC_PLUGIN_URL', plugin_dir_url( FILE ) );

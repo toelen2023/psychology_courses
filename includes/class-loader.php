@@ -25,7 +25,7 @@ class PC_Loader {
     private function load_files(): void {
 
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-course-post-type.php';
-        require_once PC_PLUGIN_PATH . 'includes/post-types/class-course-stream-post-type.php';
+       // require_once PC_PLUGIN_PATH . 'includes/post-types/class-course-stream-post-type.php';
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-teacher-post-type.php';
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-review-post-type.php';
 
