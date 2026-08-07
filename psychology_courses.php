@@ -12,9 +12,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PC_PLUGIN_FILE', FILE );
-define( 'PC_PLUGIN_PATH', plugin_dir_path( FILE ) );
-define( 'PC_PLUGIN_URL', plugin_dir_url( FILE ) );
+define( 'PC_PLUGIN_FILE', __FILE__ );
+define( 'PC_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'PC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 require_once PC_PLUGIN_PATH . 'includes/class-loader.php';
 

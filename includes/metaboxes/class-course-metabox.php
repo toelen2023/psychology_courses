@@ -1,5 +1,3 @@
-includes/metaboxes/class-course-metabox.php
-
 <?php
 /**
  * Course metaboxes.
