@@ -20,13 +20,13 @@ class PC_Template_Loader {
 
         if ( is_singular( 'course' ) ) {
 
-            return PC_PLUGIN_DIR . 'templates/single-course.php';
+            return PC_PLUGIN_PATH . 'templates/course/single-course.php';
 
         }
 
         if ( is_post_type_archive( 'course' ) ) {
 
-            return PC_PLUGIN_DIR . 'templates/archive-course.php';
+            return PC_PLUGIN_PATH . 'templates/course/archive-course.php';
 
         }
 
