@@ -39,6 +39,15 @@ class PC_Course_Metabox {
    'default'
   );
 
+   add_meta_box(
+    'pc_course_teachers',
+    __( 'Teachers', 'psychology-courses' ),
+    array( $this, 'render_course_teachers' ),
+    'course',
+    'side',
+    'default'
+   );
+
  }
 
  /**
@@ -66,27 +75,18 @@ class PC_Course_Metabox {
   ?>
 
   <table class="form-table" role="presentation">
-
    <tbody>
-
     <tr>
-
      <th scope="row">
 
       <label for="pc_duration">
-
        <?php esc_html_e( 'Duration', 'psychology-courses' ); ?>
-
       </label>
-
      </th>
-
      <td>
-
       <select
        name="pc_duration"
-       id="pc_duration"
-      >
+       id="pc_duration">
 
        <option value="">
 
@@ -104,29 +104,21 @@ class PC_Course_Metabox {
          <?php
          printf(
           esc_html(
-           _n(
-            '%d month',
-            '%d months',
+           _n('%d month','%d months',
             $i,
-            'psychology-courses'
-           )
+            'psychology-courses')
           ),
           $i
          );
          ?>
-
         </option>
 
        <?php endfor; ?>
 
       </select>
-
      </td>
-
     </tr>
-
    </tbody>
-
   </table>
 
   <h3>
@@ -141,17 +133,11 @@ class PC_Course_Metabox {
   <table class="widefat striped">
 
    <thead>
-
     <tr>
-
      <th><?php esc_html_e( 'Currency', 'psychology-courses' ); ?></th>
-
      <th><?php esc_html_e( 'Full price', 'psychology-courses' ); ?></th>
-
      <th><?php esc_html_e( 'Monthly payment', 'psychology-courses' ); ?></th>
-
     </tr>
-
    </thead>
 
    <tbody>
@@ -166,53 +152,84 @@ class PC_Course_Metabox {
      ?>
 
      <tr>
-
       <td>
-
-       <strong>
-
-        <?php echo esc_html( $label ); ?>
-
-       </strong>
-
+       <strong><?php echo esc_html( $label ); ?></strong>
       </td>
-
       <td>
-
        <input
         type="number"
         name="pc_prices[<?php echo esc_attr( $code ); ?>][full]"
         value="<?php echo esc_attr( $full_price ); ?>"
         min="0"
         step="0.01"
-        class="regular-text"
-       >
-
+        class="regular-text">
       </td>
-
       <td>
-
        <input
         type="number"
         name="pc_prices[<?php echo esc_attr( $code ); ?>][month]"
         value="<?php echo esc_attr( $month_price ); ?>"
         min="0"
         step="10"
-        class="regular-text"
-       >
-
+        class="regular-text">
       </td>
-
      </tr>
 
     <?php endforeach; ?>
 
    </tbody>
-
   </table>
 
   <?php
 
  }
+/**
+ * Render teachers metabox.
+ * @param WP_Post $post Current post.
+ * @return void
+ */
+public function render_course_teachers( WP_Post $post ): void {
 
+$selected_teachers = get_post_meta( $post->ID,
+    pc_get_course_teachers_meta_key(), true );
+
+if ( ! is_array( $selected_teachers ) )  $selected_teachers = array();
+
+$teachers = get_posts(
+    array(
+    'post_type'      => 'teacher',
+    'post_status'    => 'publish',
+    'posts_per_page' => -1,
+    'orderby'        => 'title',
+    'order'          => 'ASC',
+    )
+);
+
+if ( empty( $teachers ) ) {
+    esc_html_e('No teachers available.', 'psychology-courses' );
+    return;
+}
+
+?>
+
+<div class="pc-course-teachers">
+
+<?php foreach ( $teachers as $teacher ) : ?>
+  <p>
+    <label>
+     <input
+        type="checkbox"
+        name="pc_course_teachers[]"
+        value="<?php echo esc_attr( $teacher->ID ); ?>"
+        <?php checked( in_array( $teacher->ID, $selected_teachers, true ) ); ?>>
+
+    <?php echo esc_html( $teacher->post_title ); ?>
+    </label>
+    </p>
+
+    <?php endforeach; ?>
+    </div>
+
+    <?php
+  }
 }

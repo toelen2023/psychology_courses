@@ -57,7 +57,7 @@ class PC_Loader {
 
         // ( new PC_Course_Stream_Post_Type() )->register();
 
-        // ( new PC_Teacher_Post_Type() )->register();
+        ( new PC_Teacher_Post_Type() )->register();
 
         // ( new PC_Review_Post_Type() )->register(); 
 

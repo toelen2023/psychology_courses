@@ -50,6 +50,18 @@ if ( ! function_exists( 'pc_get_duration_meta_key' ) ) {
 
 }
 
+if ( ! function_exists( 'pc_get_course_teachers_meta_key' ) ) {
+
+ /**
+  * Returns meta key for teachers who can teach the course.
+  * @return string
+  */
+ function pc_get_course_teachers_meta_key(): string {
+  return 'pc_course_teachers';
+ }
+
+}
+
 if ( ! function_exists( 'pc_get_course_prices' ) ) {
 
  /**
@@ -105,9 +117,7 @@ function pc_get_template_part( string $template, array $args = array() ): void {
 
  $file = PC_PLUGIN_DIR . 'templates/' . $template . '.php';
 
- if ( ! file_exists( $file ) ) {
-  return;
- }
+ if ( ! file_exists( $file ) ) return;
 
  $template_args = $args;
 
