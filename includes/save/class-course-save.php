@@ -58,6 +58,7 @@ class PC_Course_Save {
 
   $this->save_duration( $post_id );
   $this->save_prices( $post_id );
+  $this->save_short_title( $post_id );
   $this->save_teachers( $post_id );
 
  }
@@ -108,6 +109,25 @@ class PC_Course_Save {
 
   update_post_meta( $post_id, pc_get_price_meta_key(), $prices );
 
+ }
+
+  /**
+  * Save short title.
+  * @param int $post_id Post ID.
+  * @return void
+  */
+ private function save_short_title( int $post_id ): void {
+
+  $short_title = isset( $_POST['pc_course_short_title'] )
+    ? sanitize_text_field(
+    wp_unslash( $_POST['pc_course_short_title'] )  )   : '';
+
+  if ( '' === $short_title ) {
+    delete_post_meta( $post_id, 'pc_course_short_title' );
+    return;
+  }
+
+  update_post_meta( $post_id, 'pc_course_short_title', $short_title );
  }
  /**
  * Save course teachers.

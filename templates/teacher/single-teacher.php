@@ -32,7 +32,7 @@ while ( have_posts() ) :
         
         <?php if ( has_post_thumbnail() ) : ?>
 
-            <div class="pc-teacher-image column-1-2">
+            <div class="pc-teacher-image column-1-4">
                 <?php
                 the_post_thumbnail('medium',
                     array('alt' => get_the_title(),  )
@@ -42,7 +42,7 @@ while ( have_posts() ) :
 
         <?php endif; ?>
     
-        <section class="pc-teacher-content column-1-2" itemprop="text">
+        <section class="pc-teacher-content column-3-4" itemprop="text">
 
             <?php the_content(); ?>
 
@@ -72,6 +72,7 @@ while ( have_posts() ) :
                     'orderby'        => 'title',
                     'order'         => 'ASC',
                     ) );
+                   // print_r($courses);
                 ?>
 
             <?php if ( $courses->have_posts() ) : ?>
@@ -82,12 +83,19 @@ while ( have_posts() ) :
 
                 <?php $courses->the_post(); ?>
 
+                <?php 
+                $course_id = get_the_ID();
+                $short_title = get_post_meta( $course_id, 'pc_course_short_title',  true); 
+                
+                 ?>
+
                 <li class="pc-teacher__course-item">
 
                 <a href="<?php the_permalink(); ?>">
-
-                    <?php the_title(); ?>
-
+                 <?php
+                    if ( $short_title ) echo esc_html( $short_title );
+                    else the_title();  
+                 ?>
                 </a>
 
                 </li>

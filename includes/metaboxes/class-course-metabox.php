@@ -69,6 +69,8 @@ class PC_Course_Metabox {
 
   $prices = pc_get_course_prices( $post->ID );
 
+  $short_title = get_post_meta( $post->ID, 'pc_course_short_title', true );
+
   ?>
 
   <table class="form-table" role="presentation">
@@ -114,6 +116,20 @@ class PC_Course_Metabox {
 
       </select>
      </td>
+     <th scope="row">
+
+      <label for="pc_course_short_title">
+       <?php esc_html_e( 'Course short title', 'psychology-courses' ); ?>
+      </label>
+     </th>
+     <td>
+      <input type="text" 
+        id="pc_course_short_title" 
+        name="pc_course_short_title"
+        class="regular-text"
+        placeholder="КПТ, Практична психологія"
+        value="<?php echo esc_html( $short_title ); ?>">
+    </td>
     </tr>
    </tbody>
   </table>
