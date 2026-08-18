@@ -27,14 +27,14 @@ class PC_Teacher_Metabox {
   */
  public function add_meta_boxes(): void {
 
-  /* add_meta_box(
-   'pc_teacher_consult_price',
-   __( 'Teacher Consultation Price', 'psychology-courses' ),
-   array( $this, 'render_teacher_consult_price' ),
-   'teacher',
-   'side',
-   'default'
-  ); */
+  add_meta_box(
+    'pc_teacher_consultation_price',
+    __( 'Consultation Price', 'psychology-courses' ),
+    array( $this, 'render_consultation_price' ),
+    'teacher',
+    'side',
+    'default'
+    );
 
    add_meta_box(
     'pc_teacher_courses',
@@ -87,24 +87,53 @@ public function render_courses( WP_Post $post ): void {
     ?>
 
     <p>
-
-    <label>
-
-        <input
-        type="checkbox"
-        name="pc_teacher_courses[]"
-        value="<?php echo esc_attr( $course->ID ); ?>"
-        <?php checked( in_array( $teacher_id, $teachers, true ) ); ?>
-        >
-
-        <?php echo esc_html( $course->post_title ); ?>
-
-    </label>
+        <label>
+            <input
+            type="checkbox"
+            name="pc_teacher_courses[]"
+            value="<?php echo esc_attr( $course->ID ); ?>"
+            <?php checked( in_array( $teacher_id, $teachers, true ) ); ?>>
+            <?php echo esc_html( $course->post_title ); ?>
+        </label>
 
     </p>
 
     <?php
     }
   }
+
+  /**
+ * Render consultation price metabox.
+ *
+ * @param WP_Post $post Current teacher post.
+ *
+ * @return void
+ */
+public function render_consultation_price( WP_Post $post ): void {
+
+    $price = get_post_meta( $post->ID, pc_get_consultation_price_meta_key(), true );
+
+    wp_nonce_field(
+        'pc_teacher_consultation_price',
+        'pc_teacher_consultation_price_nonce' );
+    ?>
+
+    <p>
+        <label for="pc_consultation_price">
+        <?php
+            esc_html_e('Consultation price (UAH):', 'psychology-courses');
+        ?>
+        </label>
+    </p>
+
+    <input
+        type="number"
+        id="pc_consultation_price"
+        name="pc_consultation_price"
+        value="<?php echo esc_attr( $price ); ?>"
+        min="0" step="50" class="small-text">
+
+     <?php
+    }
 
 }//end class

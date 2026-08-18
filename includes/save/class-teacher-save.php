@@ -37,16 +37,10 @@ class PC_Teacher_Save {
    return;
   }
 
-  /*
-   * Check user permissions.
-   */
-  if ( ! current_user_can( 'edit_post', $post_id ) ) {
-   return;
-  }
+  /* Check user permissions.  */
+  if ( ! current_user_can( 'edit_post', $post_id ) )    return;
 
-  /*
-   * Check nonce.
-   */
+  // Check nonce.
   if (
    ! isset( $_POST['pc_teacher_courses_nonce'] )
    || ! wp_verify_nonce(
@@ -61,10 +55,10 @@ class PC_Teacher_Save {
    return;
   }
 
-  /*
-   * Save courses assigned to this teacher.
-   */
+  // Save courses assigned to this teacher.
+
   $this->save_courses( $post_id );
+  $this->save_consultation_price( $post_id );
 
  }
 
@@ -75,16 +69,14 @@ class PC_Teacher_Save {
   * pc_course_teachers.
   *
   * @param int $teacher_id Teacher post ID.
-  *
   * @return void
   */
  private function save_courses( int $teacher_id ): void {
 
   $selected_courses = array();
 
-  /*
-   * Get selected courses from the metabox.
-   */
+  // Get selected courses from the metabox.
+  
   if ( isset( $_POST['pc_teacher_courses'] ) ) {
 
    $selected_courses = wp_unslash(
@@ -97,23 +89,13 @@ class PC_Teacher_Save {
 
   }
 
-  /*
-   * Sanitize course IDs.
-   */
-  $selected_courses = array_map(
-   'absint',
-   $selected_courses
-  );
+  // Sanitize course IDs.
+   
+  $selected_courses = array_map('absint', $selected_courses );
 
-  $selected_courses = array_filter(
-   $selected_courses
-  );
+  $selected_courses = array_filter( $selected_courses );
 
-  $selected_courses = array_values(
-   array_unique(
-    $selected_courses
-   )
-  );
+  $selected_courses = array_values( array_unique( $selected_courses ));
 
   /*
    * Get all courses.
@@ -136,10 +118,8 @@ class PC_Teacher_Save {
    )
   );
 
-  /*
-   * Update the teacher relationship
-   * in every course.
-   */
+  // Update the teacher relationship in every course.
+   
   foreach ( $courses as $course_id ) {
 
    $teachers = get_post_meta(
@@ -148,112 +128,87 @@ class PC_Teacher_Save {
     true
    );
 
-   /*
-    * Make sure we have an array.
-    */
+   // Make sure we have an array.
+    
    if ( ! is_array( $teachers ) ) {
     $teachers = array();
    }
 
-   /*
-    * Sanitize existing teacher IDs.
-    */
-   $teachers = array_map(
-    'absint',
-    $teachers
-   );
+   // Sanitize existing teacher IDs.
+   $teachers = array_map( 'absint', $teachers );
 
-   $teachers = array_filter(
-    $teachers
-   );
+   $teachers = array_filter( $teachers );
 
-   $teachers = array_values(
-    array_unique(
-     $teachers
-    )
-   );
+   $teachers = array_values(array_unique( $teachers ) );
 
-   /*
-    * Is this course selected for the teacher?
-    */
-   $is_selected = in_array(
-    $course_id,
-    $selected_courses,
-    true
-   );
+   // Is this course selected for the teacher?
+   $is_selected = in_array( $course_id, $selected_courses, true );
 
-   /*
-    * Is the teacher already assigned to the course?
-    */
-   $has_teacher = in_array(
-    $teacher_id,
-    $teachers,
-    true
-   );
+   // Is the teacher already assigned to the course?
 
-   /*
-    * Checkbox checked:
-    * add teacher to the course.
-    */
-   if ( $is_selected && ! $has_teacher ) {
+   $has_teacher = in_array(  $teacher_id, $teachers, true );
 
-    $teachers[] = $teacher_id;
+   // Checkbox checked:  add teacher to the course.
+   
+   if ( $is_selected && ! $has_teacher )  $teachers[] = $teacher_id;
 
-   }
+  
 
-   /*
-    * Checkbox unchecked:
-    * remove teacher from the course.
-    */
-   if ( ! $is_selected && $has_teacher ) {
+   // Checkbox unchecked: remove teacher from the course.
+    
+   if ( ! $is_selected && $has_teacher )  $teachers = array_diff( $teachers, array( $teacher_id )  );
 
-    $teachers = array_diff(
-     $teachers,
-     array( $teacher_id )
-    );
+   // Clean the resulting array.
+   
+   $teachers = array_map( 'absint', $teachers );
 
-   }
+   $teachers = array_filter( $teachers );
 
-   /*
-    * Clean the resulting array.
-    */
-   $teachers = array_map(
-    'absint',
-    $teachers
-   );
+   $teachers = array_values( array_unique( $teachers) );
 
-   $teachers = array_filter(
-    $teachers
-   );
-
-   $teachers = array_values(
-    array_unique(
-     $teachers
-    )
-   );
-
-   /*
-    * Save or delete the meta field.
-    */
+   // Save or delete the meta field.
    if ( empty( $teachers ) ) {
-
-    delete_post_meta(
-     $course_id,
-     pc_get_course_teachers_meta_key()
-    );
-
+    delete_post_meta( $course_id, pc_get_course_teachers_meta_key() );
    } else {
-
-    update_post_meta(
-     $course_id,
-     pc_get_course_teachers_meta_key(),
-     $teachers
-    );
-
+    update_post_meta( $course_id, pc_get_course_teachers_meta_key(), $teachers);
    }
 
   }
 
  }
+
+/**
+ * Save teacher consultation price.
+ * @param int $post_id Teacher post ID.
+ * @return void
+ */
+private function save_consultation_price( int $post_id ): void {
+
+    if ( ! isset( $_POST['pc_teacher_consultation_price_nonce'] ) ) {
+    return;
+    }
+
+    if (
+    ! wp_verify_nonce(
+    sanitize_text_field(
+        wp_unslash(
+        $_POST['pc_teacher_consultation_price_nonce']
+        )
+    ),
+    'pc_teacher_consultation_price'
+    )
+    ) {
+    return;
+    }
+
+    $price = isset( $_POST['pc_consultation_price'] ) ? absint( $_POST['pc_consultation_price'] ) : 0;
+
+    if ( $price <= 0 ) {
+        delete_post_meta( $post_id, pc_get_consultation_price_meta_key() );
+        return;
+    }
+
+    update_post_meta( $post_id, pc_get_consultation_price_meta_key(), $price );
+  }
 
 }

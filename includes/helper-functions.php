@@ -83,6 +83,17 @@ if ( ! function_exists( 'pc_get_course_prices' ) ) {
 
 }
 
+if ( ! function_exists( 'pc_get_consultation_price_meta_key' ) ) {
+
+ /**
+  * Returns meta key for teacher consultation price.
+  * @return string
+  */
+ function pc_get_consultation_price_meta_key(): string {
+    return 'pc_consultation_price';
+ }
+
+}
 /**
  * Includes a template part from the plugin.
  *
