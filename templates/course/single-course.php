@@ -84,25 +84,15 @@ while ( have_posts() ) :
     ?>
 
     <tr>
-
      <th>
-
       <?php echo esc_html( $label ); ?>
-
      </th>
-
      <td>
-
       <?php echo esc_html( $full ); ?>
-
      </td>
-
      <td>
-
       <?php echo esc_html( $month ); ?>
-
      </td>
-
     </tr>
 
    <?php endforeach; ?>
