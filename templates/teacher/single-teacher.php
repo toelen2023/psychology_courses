@@ -60,19 +60,23 @@ while ( have_posts() ) :
 
     <?php
     $courses = new WP_Query(
-            array(
-            'post_type'      => 'course',
-            'post_status'    => 'publish',
-            'posts_per_page' => -1,
-            'meta_query'     => array(
+        array(
+        'post_type'      => 'course',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+
+        'meta_query'     => array(
             array(
                 'key'     => pc_get_course_teachers_meta_key(),
-                'value'   => '"' . $teacher_id . '"',
+                'value'   => 'i:' . absint( $teacher_id ) . ';',
                 'compare' => 'LIKE',
-            ), ),
-            'orderby'        => 'title',
-            'order'          => 'ASC',
-            ) );
+            ),
+            ),
+
+        'orderby'        => 'title',
+        'order'         => 'ASC',
+        )
+        );
 
             print_r($courses);
     ?>

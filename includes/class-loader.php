@@ -35,9 +35,13 @@ class PC_Loader {
        // require_once PC_PLUGIN_PATH . 'includes/post-types/class-course-stream-post-type.php';
        //teachers
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-teacher-post-type.php';
+        require_once PC_PLUGIN_PATH . 'includes/metaboxes/class-teacher-metabox.php';
+        require_once PC_PLUGIN_PATH . 'includes/save/class-teacher-save.php';
+
+        //Reviews
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-review-post-type.php';
 
-
+        //all templates pathes
         require_once PC_PLUGIN_PATH . 'includes/template/class-template-loader.php';
 
     }
@@ -58,7 +62,10 @@ class PC_Loader {
         // ( new PC_Course_Stream_Post_Type() )->register();
 
         ( new PC_Teacher_Post_Type() )->register();
+        ( new PC_Teacher_Metabox() )->register();
+        ( new PC_Teacher_Save() )->register();
 
+    
         // ( new PC_Review_Post_Type() )->register(); 
 
         //load & show templates

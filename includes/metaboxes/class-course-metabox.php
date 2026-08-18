@@ -1,7 +1,6 @@
 <?php
 /**
  * Course metaboxes.
- *
  * @package Psychology_Courses
  */
 
@@ -11,7 +10,6 @@ class PC_Course_Metabox {
 
  /**
   * Register hooks.
-  *
   * @return void
   */
  public function register(): void {
@@ -25,7 +23,6 @@ class PC_Course_Metabox {
 
  /**
   * Register metaboxes.
-  *
   * @return void
   */
  public function add_meta_boxes(): void {
