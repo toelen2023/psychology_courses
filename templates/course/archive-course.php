@@ -12,7 +12,7 @@ if ( have_posts() ) :
 
   the_post();
 
-  pc_get_template_part( 'parts/course-card' );
+  pc_get_template_part( 'course/parts/course-card' );
 
  endwhile;
 

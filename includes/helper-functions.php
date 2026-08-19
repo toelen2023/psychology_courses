@@ -108,7 +108,7 @@ if ( ! function_exists( 'pc_get_consultation_price_meta_key' ) ) {
   extract( $args, EXTR_SKIP );
  }
 
- $file = PC_PLUGIN_DIR . 'templates/' . $template . '.php';
+ $file = PC_PLUGIN_PATH . 'templates/' . $template . '.php';
 
  if ( file_exists( $file ) ) {
   require $file;
@@ -126,7 +126,7 @@ if ( ! function_exists( 'pc_get_consultation_price_meta_key' ) ) {
  */
 function pc_get_template_part( string $template, array $args = array() ): void {
 
- $file = PC_PLUGIN_DIR . 'templates/' . $template . '.php';
+ $file = PC_PLUGIN_PATH . 'templates/' . $template . '.php';
 
  if ( ! file_exists( $file ) ) return;
 
