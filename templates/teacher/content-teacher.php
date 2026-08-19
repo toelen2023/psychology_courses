@@ -10,8 +10,12 @@ $teacher_id = get_the_ID();
 $consult_price = get_post_meta( $teacher_id, pc_get_consultation_price_meta_key(), true );
 ?>
 
-<header class="entry-header pc-teacher-header">    
+<header class="entry-header pc-teacher-header"> 
+    <?php  if ( is_singular( 'teacher' ) ) :?>   
     <h1 class="entry-title"><?php the_title(); ?></h1>
+    <?php else: ?>
+    <h2 class="entry-title"><?php the_title(); ?></h2>
+    <?php endif; ?>
 </header>
 
 <div class="entry-content d-flex-between" itemprop="text">

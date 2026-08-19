@@ -11,25 +11,30 @@ get_header();
 
 ?>
 
-<main class="pc-teachers-archive">
-    <h1>Teachers</h1>
+<main class="site-main" id="main">
+  <article <?php post_class(); ?>>
+    <div class="inside-article pc-teachers-archive">
+        <header class="entry-header pc-teacher-header">  
+            <h1 class="entry-title"><?php _e( 'Our Teachers', 'psychology-courses' ); ?></h1>
+        </header>
 
- <?php if ( have_posts() ) : ?>
+        <?php if ( have_posts() ) : ?>
 
-  <div class="pc-teachers-list">
+        <div class="pc-teachers-list">
 
-   <?php while ( have_posts() ) : ?>
+        <?php while ( have_posts() ) : ?>
 
-    <?php the_post(); ?>
+            <?php the_post(); ?>
 
-    <?php pc_get_template_part('teacher/content-teacher' );  ?>
+            <?php pc_get_template_part('teacher/content-teacher' );  ?>
 
-   <?php endwhile; ?>
+        <?php endwhile; ?>
 
-  </div>
+        </div>
 
- <?php endif; ?>
-
+        <?php endif; ?>
+    </div>
+  </article>
 </main>
 
 <?php
