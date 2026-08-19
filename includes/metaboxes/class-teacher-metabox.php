@@ -16,8 +16,16 @@ class PC_Teacher_Metabox {
 
   add_action(
    'add_meta_boxes',
-   array( $this, 'add_meta_boxes' )
-  );
+   array( $this, 'add_meta_boxes' ) );
+
+   add_filter(
+    'manage_teacher_posts_columns',
+    array( $this, 'add_admin_columns' ) );
+
+   add_action(
+     'manage_teacher_posts_custom_column',
+     array( $this, 'render_admin_column' ),
+     10, 2 );
 
  }
 
@@ -135,5 +143,53 @@ public function render_consultation_price( WP_Post $post ): void {
 
      <?php
     }
+
+    /**
+     * Add custom columns to teacher admin list.
+     *
+     * @param array $columns Existing columns.
+     *
+     * @return array
+     */
+ public function add_admin_columns( array $columns ): array {
+
+    $new_columns = array();
+
+    foreach ( $columns as $key => $label ) {
+
+        $new_columns[ $key ] = $label;
+
+        if ( 'title' === $key ) {
+            $new_columns['consultation_price'] = __(
+                'Consultation price',
+                'psychology-courses'   );
+        }
+    }
+
+    return $new_columns;
+  }
+  /**
+     * Render custom teacher admin columns.
+     *
+     * @param string $column  Column name.
+     * @param int    $post_id Post ID.
+     *
+     * @return void
+     */   
+  public function render_admin_column( string $column, int $post_id ): void {
+
+    if ( 'consultation_price' !== $column ) return;
+    
+
+    $price = get_post_meta(  $post_id,
+     pc_get_consultation_price_meta_key(), true );
+
+    if ( '' === $price ) {
+        echo '—';
+        return;
+    }
+
+    echo esc_html( $price . ' грн' );
+ }
 
 }//end class
