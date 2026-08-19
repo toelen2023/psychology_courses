@@ -7,6 +7,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $teacher_id = get_the_ID();
+?>
 
 <div class="pc-teacher-courses">
 
