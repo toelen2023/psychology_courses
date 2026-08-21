@@ -12,7 +12,7 @@ get_header();
 while ( have_posts() ) :
  the_post();
 
- $prices = pc_get_course_prices( get_the_ID() );
+ //$prices = pc_get_course_prices( get_the_ID() );
 
  $duration = get_post_meta(
   get_the_ID(),
@@ -22,87 +22,44 @@ while ( have_posts() ) :
 ?>
 
 <main class="pc-course">
+ <article>
+    <div class="inside-article">
+        <header class="entry-header pc-course-header">
+            <h1 class="entry-title"><?php the_title(); ?></h1>
+        </header>
+        <div class="entry-content">
 
- <header class="pc-course__header">
+        <p class="pc-course-meta">
+            <strong><?php esc_html_e( 'Duration:', 'psychology-courses' ); ?></strong>
+            <?php
+                printf(
+                    esc_html( _n('%d month', '%d months',
+                    (int) $duration, 'psychology-courses' )
+                    ), (int) $duration  );
+            ?>
+        </p>
 
-  <h1 class="entry-title"><?php the_title(); ?></h1>
+        <section class="pc-course__content">
 
- </header>
+        <?php the_content(); ?>
 
- <section class="pc-course__meta">
+        </section>
 
-  <p>
+        <section class="pc-course__prices">
 
-   <strong><?php esc_html_e( 'Duration:', 'psychology-courses' ); ?></strong>
+            <h4 class="entry-header" itemprop="headline">
+            <?php esc_html_e( 'Course price', 'psychology-courses'); ?>
+            </h4>
 
-   <?php
-   printf(
-    esc_html(
-     _n(
-      '%d month',
-      '%d months',
-      (int) $duration,
-      'psychology-courses'
-     )
-    ),
-    (int) $duration
-   );
-   ?>
+        <?php 
+            //pc_get_template_part( 'parts/course-price-table' ); 
+            pc_get_template_part( 'parts/course-price-month' ); 
+        ?>
 
-  </p>
-
- </section>
-
- <section class="pc-course__content">
-
-  <?php the_content(); ?>
-
- </section>
-
- <section class="pc-course__prices">
-
-  <h2>
-
-   <?php esc_html_e(
-    'Course price',
-    'psychology-courses'
-   ); ?>
-
-  </h2>
-
-  <table>
-
-   <tbody>
-
-   <?php foreach ( pc_get_currencies() as $code => $label ) : ?>
-
-    <?php
-
-    $full  = $prices[ $code ]['full'] ?? '';
-    $month = $prices[ $code ]['month'] ?? '';
-
-    ?>
-
-    <tr>
-     <th>
-      <?php echo esc_html( $label ); ?>
-     </th>
-     <td>
-      <?php echo esc_html( $full ); ?>
-     </td>
-     <td>
-      <?php echo esc_html( $month ); ?>
-     </td>
-    </tr>
-
-   <?php endforeach; ?>
-
-   </tbody>
-
-  </table>
-
- </section>
-
+        </section>
+      </div>  
+    </div>
+  </article>   
 </main>
 
 <?php

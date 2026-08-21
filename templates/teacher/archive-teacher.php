@@ -17,7 +17,7 @@ get_header();
         <header class="entry-header pc-teacher-header">  
             <h1 class="entry-title"><?php _e( 'Our Teachers', 'psychology-courses' ); ?></h1>
         </header>
-
+        <div class="entry-content">
         <?php if ( have_posts() ) : ?>
 
         <div class="pc-teachers-list">
@@ -27,12 +27,14 @@ get_header();
             <?php the_post(); ?>
 
             <?php pc_get_template_part('teacher/content-teacher' );  ?>
+            <?php pc_get_template_part('teacher/parts/teacher-card' );  ?>
 
         <?php endwhile; ?>
 
         </div>
 
         <?php endif; ?>
+     </div>
     </div>
   </article>
 </main>

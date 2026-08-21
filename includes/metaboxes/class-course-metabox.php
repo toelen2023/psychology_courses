@@ -18,6 +18,14 @@ class PC_Course_Metabox {
    'add_meta_boxes',
    array( $this, 'add_meta_boxes' )
   );
+  add_filter(
+    'manage_course_posts_columns',
+    array( $this, 'add_admin_columns' ) );
+
+   add_action(
+     'manage_course_posts_custom_column',
+     array( $this, 'render_admin_column' ),
+     10, 2 );
 
  }
 
@@ -245,4 +253,44 @@ if ( empty( $teachers ) ) {
 
     <?php
   }
+
+  public function add_admin_columns( array $columns ): array {
+
+    $new_columns = array();
+
+    foreach ( $columns as $key => $label ) {
+
+        $new_columns[ $key ] = $label;
+
+        if ( 'title' === $key ) {
+            $new_columns['duration'] = __(
+                'Duration',
+                'psychology-courses'   );
+        }
+    }
+
+    return $new_columns;
+  }
+  /**
+     * Render custom course admin columns.
+     *
+     * @param string $column  Column name.
+     * @param int    $post_id Post ID.
+     *
+     * @return void
+     */   
+  public function render_admin_column( string $column, int $post_id ): void {
+
+    if ( 'duration' !== $column ) return;
+    
+
+    $duration = get_post_meta($post_id, pc_get_duration_meta_key(), true );
+
+    if ( '' === $duration ) {
+        echo '—';
+        return;
+    }
+
+    echo esc_html( $duration . ' мес' );
+ }
 }
