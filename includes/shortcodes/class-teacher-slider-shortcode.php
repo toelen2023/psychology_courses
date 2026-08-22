@@ -34,7 +34,7 @@ class PC_Teacher_Slider_Shortcode {
    $atts,
    'pc_teacher_slider'
   );
-  print_r($atts['ids']);
+
   if ( empty( $atts['ids'] ) )  return '';
 
 
@@ -48,10 +48,8 @@ class PC_Teacher_Slider_Shortcode {
   ob_start();
 
   pc_get_template_part(
-   'teacher/parts/teacher-slider',
-   array(
-    'teacher_ids' => $teacher_ids,
-   )
+   'teacher/teacher-slider',
+   array('teacher_ids' => $teacher_ids, )
   );
 
   return ob_get_clean();

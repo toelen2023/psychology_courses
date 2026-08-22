@@ -6,9 +6,9 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-
-$teacher_ids = $args['teacher_ids'] ?? array();
-print_r($teacher_ids);
+echo "This is slider";
+$teacher_ids = $template_args['teacher_ids'] ?? array();
+echo count($teacher_ids);
 
 $teachers = new WP_Query(
  array(
@@ -20,13 +20,13 @@ $teachers = new WP_Query(
  )
 );
 
-print_r($teachers);
+
 if ( ! $teachers->have_posts() ) return;
 
 ?>
 
 <section class="pc-teacher-slider">
-<h2>Slider</h2>
+
  <div class="swiper pc-teacher-slider__swiper">
 
   <div class="swiper-wrapper">
@@ -41,12 +41,13 @@ if ( ! $teachers->have_posts() ) return;
      pc_get_template_part(
       'teacher/parts/teacher-card'
      );
+
      ?>
 
     </div>
 
-   <?php endwhile; ?>
-
+   <?php endwhile; 
+    wp_reset_postdata();?>
   </div>
 
   <button
@@ -67,4 +68,3 @@ if ( ! $teachers->have_posts() ) return;
 
 <?php
 
-wp_reset_postdata();

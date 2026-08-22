@@ -50,10 +50,8 @@ $teacher_id = get_the_ID();
             </li>
 
         <?php endwhile; ?>
-
+        <?php wp_reset_postdata(); ?>
      </ul>
-
-     <?php wp_reset_postdata(); ?>
 
     <?php endif; ?>
 
