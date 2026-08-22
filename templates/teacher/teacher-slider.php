@@ -8,6 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $course_id = $args['course_id'] ?? 0;
+echo "ID=".$course_id;
 
 $teacher_ids = array();
 
@@ -35,7 +36,7 @@ if ( $course_id ) {
   $teacher_ids
  );
 }
-
+print_r($teacher_ids);
 /*
  * Query teachers.
  */
@@ -78,7 +79,7 @@ if ( ! $teachers->have_posts() ) {
 ?>
 
 <section class="pc-teacher-slider">
-
+<h2>Slider</h2>
  <div class="swiper pc-teacher-slider__swiper">
 
   <div class="swiper-wrapper">

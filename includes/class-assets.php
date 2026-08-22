@@ -31,9 +31,14 @@ class PC_Assets {
    && ! is_post_type_archive( array( 'course', 'teacher' ) ) )  return;
 
   wp_enqueue_style(
-   'psy-courses-frontend', PC_PLUGIN_URL . 'assets/css/psy_courses.css',
+   'pc-swiper', PC_PLUGIN_URL . 'assets/css/swiper-bundle.min.css',
    array(), PC_VERSION );
-
- }
+  wp_enqueue_style(
+   'pc-frontend', PC_PLUGIN_URL . 'assets/css/psy_courses.css',
+   array('pc-swiper'), PC_VERSION );
+   wp_enqueue_script(
+   'pc-swiper-script', PC_PLUGIN_URL . 'assets/js/swiper-bundle.min.js',
+   array(), PC_VERSION, true );
+}
 
 }

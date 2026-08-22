@@ -164,6 +164,9 @@ public function render_consultation_price( WP_Post $post ): void {
                 'Consultation price',
                 'psychology-courses'   );
         }
+        if ( 'cb' === $key ) {
+            $new_columns['teacher_id'] = __( 'ID', 'psychology-courses' );
+        }
     }
 
     return $new_columns;
@@ -178,7 +181,7 @@ public function render_consultation_price( WP_Post $post ): void {
      */   
   public function render_admin_column( string $column, int $post_id ): void {
 
-    if ( 'consultation_price' !== $column ) return;
+    if ( 'consultation_price' !== $column || 'teacher_id' !== $column) return;
     
 
     $price = get_post_meta(  $post_id,
