@@ -151,26 +151,22 @@ public function render_consultation_price( WP_Post $post ): void {
      *
      * @return array
      */
- public function add_admin_columns( array $columns ): array {
+
+  public function add_admin_columns( array $columns ): array {
 
     $new_columns = array();
 
     foreach ( $columns as $key => $label ) {
 
-        $new_columns[ $key ] = $label;
+      $new_columns[ $key ] = $label;
+      if ( 'title' === $key ) {
 
-        if ( 'title' === $key ) {
-            $new_columns['consultation_price'] = __(
-                'Consultation price',
-                'psychology-courses'   );
-        }
-        if ( 'cb' === $key ) {
-            $new_columns['teacher_id'] = __( 'ID', 'psychology-courses' );
-        }
+        $new_columns['teacher_id'] = __('ID','psychology-courses');
+        $new_columns['consultation_price'] = __('Consultation price','psychology-courses');
+      }
     }
-
     return $new_columns;
-  }
+}
   /**
      * Render custom teacher admin columns.
      *
@@ -181,18 +177,19 @@ public function render_consultation_price( WP_Post $post ): void {
      */   
   public function render_admin_column( string $column, int $post_id ): void {
 
-    if ( 'consultation_price' !== $column || 'teacher_id' !== $column) return;
-    
-
-    $price = get_post_meta(  $post_id,
-     pc_get_consultation_price_meta_key(), true );
-
-    if ( '' === $price ) {
-        echo '—';
+    if ( 'teacher_id' === $column ) {
+        echo esc_html( (string) $post_id );
         return;
     }
-
-    echo esc_html( $price . ' грн' );
+    if ( 'consultation_price' === $column ) {
+        $price = get_post_meta($post_id, pc_get_consultation_price_meta_key(), true );
+        if ( '' === $price ) {
+            echo '—';
+            return;
+        }
+        echo esc_html( $price . ' грн' );
+        return;
+    }
  }
 
 }//end class
