@@ -38,6 +38,7 @@ class PC_Loader {
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-teacher-post-type.php';
         require_once PC_PLUGIN_PATH . 'includes/metaboxes/class-teacher-metabox.php';
         require_once PC_PLUGIN_PATH . 'includes/save/class-teacher-save.php';
+        require_once PC_PLUGIN_PATH . 'includes/shortcodes/class-teacher-slider-shortcode.php';
 
         //Reviews
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-review-post-type.php';
@@ -65,6 +66,7 @@ class PC_Loader {
         ( new PC_Teacher_Post_Type() )->register();
         ( new PC_Teacher_Metabox() )->register();
         ( new PC_Teacher_Save() )->register();
+        ( new PC_Teacher_Slider_Shortcode() )->register();
 
     
         // ( new PC_Review_Post_Type() )->register(); 
