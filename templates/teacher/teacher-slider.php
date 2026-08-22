@@ -6,9 +6,8 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-echo "This is slider";
+
 $teacher_ids = $template_args['teacher_ids'] ?? array();
-echo count($teacher_ids);
 
 $teachers = new WP_Query(
  array(
@@ -27,7 +26,7 @@ if ( ! $teachers->have_posts() ) return;
 
 <section class="pc-teacher-slider">
 
- <div class="swiper pc-teacher-slider__swiper">
+ <div class="swiper pc-teacher-slider-swiper">
 
   <div class="swiper-wrapper">
 
@@ -37,12 +36,7 @@ if ( ! $teachers->have_posts() ) return;
 
     <div class="swiper-slide">
 
-     <?php
-     pc_get_template_part(
-      'teacher/parts/teacher-card'
-     );
-
-     ?>
+     <?php  pc_get_template_part('teacher/parts/teacher-card'); ?>
 
     </div>
 
@@ -50,17 +44,12 @@ if ( ! $teachers->have_posts() ) return;
     wp_reset_postdata();?>
   </div>
 
-  <button
-   class="swiper-button-prev pc-teacher-slider__prev"
-   type="button"
-  ></button>
+  <button class="pc-teacher-slider-prev" type="button" aria-label="<?php _e('Previous teacher', 'psychology-courses'); ?>">←</button>
 
   <button
-   class="swiper-button-next pc-teacher-slider__next"
-   type="button"
-  ></button>
+   class="pc-teacher-slider-next" type="button" aria-label="<?php _e('Next teacher', 'psychology-courses') ?>">→</button>
 
-  <div class="swiper-pagination pc-teacher-slider__pagination"></div>
+  <div class="swiper-pagination pc-teacher-slider-pagination">→</div>
 
  </div>
 

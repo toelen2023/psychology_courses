@@ -27,7 +27,7 @@ get_header();
             <?php the_post(); ?>
 
             <?php pc_get_template_part('teacher/content-teacher' );  ?>
-            <?php pc_get_template_part('teacher/parts/teacher-card' );  ?>
+            <?php //pc_get_template_part('teacher/parts/teacher-card' );  ?>
 
         <?php endwhile; ?>
 

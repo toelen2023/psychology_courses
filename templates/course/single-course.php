@@ -57,7 +57,6 @@ while ( have_posts() ) :
         ?>
 
         </section>
-        <?php //pc_get_template_part('teacher/teacher-slider' );  ?>
       </div>  
     </div>
   </article>   

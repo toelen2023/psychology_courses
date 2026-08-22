@@ -39,6 +39,9 @@ class PC_Assets {
    wp_enqueue_script(
    'pc-swiper-script', PC_PLUGIN_URL . 'assets/js/swiper-bundle.min.js',
    array(), PC_VERSION, true );
+   wp_enqueue_script(
+   'pc-main', PC_PLUGIN_URL . 'assets/js/psy_courses.js',
+   array('pc-swiper-script'), PC_VERSION, true );
 }
 
 }

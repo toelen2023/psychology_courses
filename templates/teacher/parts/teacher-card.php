@@ -9,11 +9,8 @@ defined( 'ABSPATH' ) || exit;
 
 $teacher_id = get_the_ID();
 
-$consultation_price = get_post_meta(
- $teacher_id,
- pc_get_consultation_price_meta_key(),
- true
-);
+$consultation_price = get_post_meta( $teacher_id, pc_get_consultation_price_meta_key(), true);
+$teacher_excerpt = get_the_excerpt($teacher_id);
 ?>
 
 <div class="pc-teacher-card">
@@ -33,13 +30,15 @@ $consultation_price = get_post_meta(
 
  <?php endif; ?>
  
- <div class="pc-teacher-card__content">
+ <div class="pc-teacher-card-content">
 
     <h3><?php the_title(); ?></h3>
     <p><?php pc_get_template_part('teacher/parts/teacher-courses-shortlist'); ?></p>
     <div>
-        <?php the_excerpt(); ?>
+        <?php echo wp_kses_post($teacher_excerpt); ?>
     </div>
+    
+    
     
  </div>
 

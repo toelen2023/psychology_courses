@@ -25,9 +25,88 @@
 .unstyled {list-style-type: none;padding: 0; margin: 0;}
 .d-inline {display: inline;}
 
-.pc-teacher-shortlistcourse-item:not(:last-of-type)::after {content: ","}
+.pc-teacher-shortlistcourse-item:not(:last-of-type)::after {content: ","; margin-left: -3px;}
 
+/* Teacher Card */
+.pc-teacher-card {
+    background-color: #fff;
+    box-shadow: var(--olvia-long-shadow);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.pc-teacher-card-content {
+    padding: 15px;
+}
+.pc-teacher-card-content h3{
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+.pc-teacher-shortlistcourse-item a {
+    color: inherit;
+    text-decoration: none;
+}
+/* Sliders */
 
+.pc-teacher-slider .swiper-wrapper {
+ align-items: stretch;
+}
+
+.pc-teacher-slider .swiper-slide {
+ height: auto;
+ display: flex;
+ margin-bottom: 20px;
+}
+
+.pc-teacher-slider {
+ width: 100%;
+ max-width: 100%;
+ min-width: 0;
+}
+
+.pc-teacher-slider .swiper {
+ width: 1080px;
+ max-width: 100%;
+ min-width: 0;
+ padding: 20px 10px 50px;
+ margin-bottom: 40px;
+}
+
+.pc-teacher-slider .swiper-slide {
+ min-width: 0;
+ box-sizing: border-box;
+}
+.pc-teacher-card-image {
+    overflow: hidden;
+}
+.pc-teacher-card-image img{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.swiper-pagination-bullet-active {
+    background: var(--main-accent-color);
+}
+.pc-teacher-slider-prev, .pc-teacher-slider-next {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    background-color: var(--rgba-white-color);
+    border: .5px solid var(--rgba-accent-color);
+    color: var(--rgba-accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 30%;
+    left: 2px;
+    z-index: 20;
+    /* cursor: pointer; */
+    transition: all .3s ease-in-out;
+}
+.pc-teacher-slider-next {
+    left: auto;
+    right: 2px;
+}
 @media (max-width: 576px) {
     .d-flex-between {
         flex-direction: column;
