@@ -14,11 +14,7 @@ while ( have_posts() ) :
 
  //$prices = pc_get_course_prices( get_the_ID() );
 
- $duration = get_post_meta(
-  get_the_ID(),
-  pc_get_duration_meta_key(),
-  true
- );
+ $duration = get_post_meta(get_the_ID(), pc_get_duration_meta_key(), true  );
 ?>
 
 <main class="pc-course">
@@ -52,8 +48,8 @@ while ( have_posts() ) :
             </h4>
 
         <?php 
-            //pc_get_template_part( 'parts/course-price-table' ); 
-            pc_get_template_part( 'parts/course-price-month' ); 
+            //pc_get_template_part( 'course/parts/course-price-table' ); 
+            pc_get_template_part( 'course/parts/course-price-month' ); 
         ?>
 
         </section>

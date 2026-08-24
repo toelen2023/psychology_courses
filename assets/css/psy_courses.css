@@ -1,4 +1,8 @@
 /* Grid  */
+.d-flex-column {
+  display: flex;
+  flex-direction: column;
+}
 .d-flex-between {
     display: flex;
     justify-content: space-between;
@@ -20,19 +24,80 @@
     flex: 0 0 75%;
 }
 
+.pc-courses-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 20px;
+}
+
+@media (max-width: 900px) {
+ .pc-courses-grid {
+  grid-template-columns: repeat(2, 1fr);
+ }
+}
+
+@media (max-width: 576px) {
+  .d-flex-between {
+    flex-direction: column;
+    gap: 10px;
+  }
+ .pc-courses-grid {
+  grid-template-columns: 1fr;
+ }
+}
+
 /* common styles */
 .text-bold {font-weight: bold;}
 .unstyled {list-style-type: none;padding: 0; margin: 0;}
 .d-inline {display: inline;}
 
-.pc-teacher-shortlistcourse-item:not(:last-of-type)::after {content: ","; margin-left: -3px;}
+/* Courses */
+.pc-course-card {
+    background-color: #ffffffd3;
+    box-shadow: var(--olvia-long-shadow);
+    border: 2px solid var( --main-accent-color);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 15px;
+    
+}
 
-/* Teacher Card */
-.pc-teacher-card {
-    background-color: #fff;
+.pc-course-card a{
+    text-decoration: none;
+    color: currentColor;
+}
+.pc-course-card__categories {
+ margin-bottom: 15px;
+}
+.pc-course-card__badge {
+    display: inline-block;
+    border: 1px solid var(--main-accent-color);
+    border-radius: 10px;
+    padding: 4px;  
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+.pc-course-card__buttons {
+    margin-top: auto;
+}
+/* Teacher Card, Item */
+.pc-teacher-shortlistcourse-item:not(:last-of-type)::after {content: ","; margin-left: -3px;}
+.pc-teacher-card, .pc-teacher-item  {
+    background-color: #ffffffd3;
     box-shadow: var(--olvia-long-shadow);
     border-radius: 10px;
     overflow: hidden;
+}
+.pc-teacher-item {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid var( --small-line);
+    border-radius: 20px;
+}
+.pc-teacher-item ul, .pc-teacher-item ol {
+    padding: 0;
+    margin: 10px;
 }
 .pc-teacher-card-content {
     padding: 15px;
@@ -106,9 +171,4 @@
 .pc-teacher-slider-next {
     left: auto;
     right: 2px;
-}
-@media (max-width: 576px) {
-    .d-flex-between {
-        flex-direction: column;
-    }
 }

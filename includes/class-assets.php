@@ -28,7 +28,7 @@ class PC_Assets {
  public function enqueue_frontend_styles(): void {
 
   if ( ! is_singular( array( 'course', 'teacher' ) )
-   && ! is_post_type_archive( array( 'course', 'teacher' ) ) )  return;
+   && ! is_post_type_archive( array( 'course', 'teacher' ) ) && !is_front_page() )  return;
 
   wp_enqueue_style(
    'pc-swiper', PC_PLUGIN_URL . 'assets/css/swiper-bundle.min.css',
