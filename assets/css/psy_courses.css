@@ -5,8 +5,9 @@
 }
 .d-flex-between {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 20px;
+    gap: 10px;
 }
 .column-1-4 {
     flex: 0 0 25%;
@@ -34,12 +35,12 @@
  .pc-courses-grid {
   grid-template-columns: repeat(2, 1fr);
  }
+ 
 }
 
 @media (max-width: 576px) {
   .d-flex-between {
     flex-direction: column;
-    gap: 10px;
   }
  .pc-courses-grid {
   grid-template-columns: 1fr;
@@ -52,6 +53,7 @@
 .d-inline {display: inline;}
 
 /* Courses */
+
 .pc-course-card {
     background-color: #ffffffd3;
     box-shadow: var(--olvia-long-shadow);
@@ -59,27 +61,40 @@
     border-radius: 10px;
     overflow: hidden;
     padding: 15px;
-    
+     opacity: 1;
 }
-
+.pc-course-card.is-hidden {
+ opacity: 0;
+ pointer-events: none;
+}
+.pc-course-card.is-removed {
+ display: none;
+}
 .pc-course-card a{
     text-decoration: none;
     color: currentColor;
 }
 .pc-course-card__categories {
+    margin-bottom: 15px;
+}
+.pc-course-card__categories button {
  margin-bottom: 15px;
 }
 .pc-course-card__badge {
     display: inline-block;
     border: 1px solid var(--main-accent-color);
     border-radius: 10px;
-    padding: 4px;  
+    padding: 4px 6px;  
     font-size: 0.7em;
     font-weight: bold;
+    text-align: center;
 }
 
 .pc-course-card__buttons {
     margin-top: auto;
+}
+.pc-course-filters button {
+    margin: 0 10px 10px 0;
 }
 /* Teacher Card, Item */
 .pc-teacher-shortlistcourse-item:not(:last-of-type)::after {content: ","; margin-left: -3px;}

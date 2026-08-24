@@ -61,7 +61,7 @@ $duration = get_post_meta($course_id, pc_get_duration_meta_key(), true  );
   </div>
   <div class="pc-course-card__buttons d-flex-between">
 
-    <?php echo do_shortcode('[cf7ip_button form_id="081af97" text="'. __('Sign up for a course','psychology-courses'). '" title="'. __('Sign up for a course','psychology-courses'). '" animation="slide-left" course="'.get_the_title().'"] ');
+    <?php echo do_shortcode('[cf7ip_button form_id="081af97" text="'. __('Sign up for a course','psychology-courses'). '" title="'. __('Sign up for a course '.get_the_title(),'psychology-courses'). '" animation="slide-left" course="'.get_the_title().'"] ');
     ?>
 
    <a class="button pc-course-btn-more" href="<?php echo esc_url( $course_url ); ?>" >
