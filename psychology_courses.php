@@ -16,7 +16,7 @@ define( 'PC_PLUGIN_FILE', __FILE__ );
 define( 'PC_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
-add_action('init','pc_load_textdomain');
+/* add_action('init','pc_load_textdomain');
 
 function pc_load_textdomain(): void {
     load_plugin_textdomain(
@@ -24,7 +24,7 @@ function pc_load_textdomain(): void {
         false,
         dirname( plugin_basename( __FILE__ ) ) . '/languages'
     );
-}
+} */
 
 require_once PC_PLUGIN_PATH . 'includes/class-loader.php';
 
