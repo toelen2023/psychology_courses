@@ -254,6 +254,7 @@ if ( empty( $teachers ) ) {
     <?php
   }
 
+
   public function add_admin_columns( array $columns ): array {
 
     $new_columns = array();
@@ -263,9 +264,8 @@ if ( empty( $teachers ) ) {
         $new_columns[ $key ] = $label;
 
         if ( 'title' === $key ) {
-            $new_columns['duration'] = __(
-                'Duration',
-                'psychology-courses'   );
+          $new_columns['course_id'] = __('ID','psychology-courses');
+          $new_columns['duration'] = __('Duration','psychology-courses'   );
         }
     }
 
@@ -279,18 +279,23 @@ if ( empty( $teachers ) ) {
      *
      * @return void
      */   
+
+   
   public function render_admin_column( string $column, int $post_id ): void {
 
-    if ( 'duration' !== $column ) return;
-    
-
-    $duration = get_post_meta($post_id, pc_get_duration_meta_key(), true );
-
-    if ( '' === $duration ) {
-        echo '—';
+    if ( 'course_id' === $column ) {
+        echo esc_html( (string) $post_id );
         return;
     }
-
-    echo esc_html( $duration . ' мес' );
- }
+    if ( 'duration' === $column ) {
+       $duration = get_post_meta($post_id, pc_get_duration_meta_key(), true );
+        if ( '' === $duration ) {
+            echo '—';
+            return;
+        }
+        echo esc_html( $duration . ' мес' );
+        return;
+    }
+  
+ } 
 }

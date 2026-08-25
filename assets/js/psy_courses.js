@@ -43,9 +43,15 @@ const swiper = new Swiper('.pc-teacher-slider-swiper', {
 
  const filters = document.querySelectorAll('.pc-course-filter');
  const grid = document.querySelector('.pc-courses-grid');
+ const toggle = container.querySelector('.pc-course-cards__toggle');
+ let expanded = false;
+
+ function getVisibleLimit() {
+   return window.innerWidth < 600?  4: 6;
+ }
 
  if (!filters.length || !grid) return;
- 
+   
 
  const cards = Array.from(grid.querySelectorAll('.pc-course-card'));
 
