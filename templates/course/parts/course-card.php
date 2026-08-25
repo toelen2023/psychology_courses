@@ -22,7 +22,7 @@ $duration = get_post_meta($course_id, pc_get_duration_meta_key(), true  );
 
   <?php if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) : ?>
 
-   <div class="pc-course-card__categories d-flex-between">
+   <div class="pc-course-card__categories d-flex-between flex-wrap">
 
         <?php foreach ( $categories as $category ) : ?>
 
@@ -59,7 +59,7 @@ $duration = get_post_meta($course_id, pc_get_duration_meta_key(), true  );
   <?php endif; ?>
 
   </div>
-  <div class="pc-course-card__buttons d-flex-between">
+  <div class="pc-course-card__buttons d-flex-between flex-wrap">
 
     <?php echo do_shortcode('[cf7ip_button form_id="081af97" text="'. __('Sign up for a course','psychology-courses'). '" title="'. __('Sign up for a course '.get_the_title(),'psychology-courses'). '" animation="slide-left" course="'.get_the_title().'"] ');
     ?>

@@ -15,4 +15,4 @@ const PC_VERSION = '1.0.0';
 /**
  * Maximum course duration (months).
  */
-const PC_MAX_MONTHS = 6;
+const PC_MAX_MONTHS = 12;

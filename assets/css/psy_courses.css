@@ -4,11 +4,14 @@
   flex-direction: column;
 }
 .d-flex-between {
-    display: flex;
-    flex-wrap: wrap;
+    display: flex; 
     justify-content: space-between;
     gap: 10px;
 }
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .column-1-4 {
     flex: 0 0 25%;
 }
@@ -61,11 +64,22 @@
     border-radius: 10px;
     overflow: hidden;
     padding: 15px;
-     opacity: 1;
+    animation: fadeIn .3s ease forwards; 
+    opacity: 1;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Начальная точка: полная прозрачность */
+  }
+  to {
+    opacity: 1; /* Конечная точка: полная видимость */
+  }
 }
 .pc-course-card.is-hidden {
  opacity: 0;
  pointer-events: none;
+ transition: opacity 0.35s ease,
+    transform 0.35s ease;
 }
 .pc-course-card.is-removed {
  display: none;
@@ -89,12 +103,19 @@
     font-weight: bold;
     text-align: center;
 }
-
 .pc-course-card__buttons {
     margin-top: auto;
 }
-.pc-course-filters button {
+.pc-course-filter {
     margin: 0 10px 10px 0;
+    background-color: var(--light-accent-color);
+    color: var(--main-header-color);
+    border: 2px solid var(--main-header-color);
+    font-weight: bold;
+}
+.pc-course-filter.is-active, .pc-course-filter:hover {
+    background-color: var(--main-accent-color);
+    color: var(--main-bg-color);
 }
 /* Teacher Card, Item */
 .pc-teacher-shortlistcourse-item:not(:last-of-type)::after {content: ","; margin-left: -3px;}
