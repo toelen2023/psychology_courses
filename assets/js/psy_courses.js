@@ -34,21 +34,19 @@ const swiper = new Swiper('.pc-teacher-slider-swiper', {
     // when window width is >= 640px
     768: {
       slidesPerView: 3.3,
+    },
+    1100: {
+      slidesPerView: 4.3,
     }
   }
 });
+
 
 //filter for courses
  function courseFilter() {
 
  const filters = document.querySelectorAll('.pc-course-filter');
  const grid = document.querySelector('.pc-courses-grid');
- const toggle = container.querySelector('.pc-course-cards__toggle');
- let expanded = false;
-
- function getVisibleLimit() {
-   return window.innerWidth < 600?  4: 6;
- }
 
  if (!filters.length || !grid) return;
    
@@ -80,10 +78,45 @@ const swiper = new Swiper('.pc-teacher-slider-swiper', {
  
    filters.forEach( (button) =>  button.classList.remove('is-active') );
    this.classList.add('is-active');
-
+   toggleCards(true);
+   updateCards(true, selectedFilter);
   });
-
  });
-
 };
+
 courseFilter();
+
+let getVisibleLimit = () => window.innerWidth < 600?  4: 6;
+
+function toggleCards(expanded = false){
+    const toggle = document.querySelector('.pc-course-cards__toggle');
+    if (!toggle) return; 
+    updateCards(expanded);
+
+    toggle.addEventListener('click', toggleBtnHandler);
+    function toggleBtnHandler(){
+        expanded = !expanded;
+        toggle.textContent = expanded ? toggle.dataset.hideText : toggle.dataset.showText;
+        toggle.classList.toggle('is-open');
+        updateCards(expanded);
+    }
+}
+
+toggleCards();
+
+
+function updateCards(expanded, selectedFilter = "all") {
+    let cards = Array.from(document.querySelectorAll('.pc-course-card'));
+    let visibleLimit = getVisibleLimit(),  visibleCount = 0; 
+    cards.forEach( (card) => {
+        if (expanded) {
+            card.classList.remove('is-removed');
+            return;
+        }
+        if (visibleCount < visibleLimit) {
+            card.classList.remove('is-removed');
+            visibleCount++;
+        } else  card.classList.add('is-removed');
+    });
+}
+

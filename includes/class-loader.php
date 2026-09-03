@@ -27,6 +27,9 @@ class PC_Loader {
         require_once PC_PLUGIN_PATH . 'includes/constants.php';
         require_once PC_PLUGIN_PATH . 'includes/helper-functions.php';
         require_once PC_PLUGIN_PATH . 'includes/class-assets.php';
+        require_once PC_PLUGIN_PATH . 'includes/admin/class-admin-assets.php';
+        //Plugin settings page
+        require_once PC_PLUGIN_PATH . 'includes/admin/class-plugin-settings.php';
         //Course
         require_once PC_PLUGIN_PATH . 'includes/taxonomies/class-course-category-taxonomy.php';
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-course-post-type.php';
@@ -76,6 +79,9 @@ class PC_Loader {
        ( new PC_Template_Loader() )->register();
 
        ( new PC_Assets() )->register();
+       ( new PC_Admin_Assets() )->register();
+       //Plugin settings
+       new PC_Plugin_Settings();
 
     }
 
