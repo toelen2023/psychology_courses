@@ -38,18 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 jQuery(document).ready(function ($) {
 
-    let mediaFrame;
-
     $('.pc-schedule-icon-upload').on('click', function (e) {
         e.preventDefault();
-        let btn =  $(this);
 
-        if (mediaFrame) {
-            mediaFrame.open();
-            return;
-        }
+        const btn = $(this);
 
-        mediaFrame = wp.media({
+        const mediaFrame = wp.media({
             title: 'Выберите иконку',
             button: {
                 text: 'Использовать изображение'
@@ -60,22 +54,26 @@ jQuery(document).ready(function ($) {
         mediaFrame.on('select', function () {
 
             const attachment = mediaFrame
-                .state()
-                .get('selection')
-                .first()
-                .toJSON();
+                .state().get('selection')
+                .first().toJSON();
 
-            btn.parent().find('.pc_schedule_icon').val(attachment.id);
-            console.log("icon", btn.parent().find('.pc_schedule_icon'));
+            const field = btn.closest('.pc-schedule-icon-field')
+                .find('.pc-schedule-icon-id');
 
-            btn.prev('.pc-schedule-icon-preview').html(
+            const preview = btn.closest('.pc-schedule-icon-field')
+                .find('.pc-schedule-icon-preview');
+
+            const removeButton = btn.closest('.pc-schedule-icon-field')
+                .find('.pc-schedule-icon-remove');
+
+            field.val(attachment.id);
+
+            preview.html(
                 '<img src="' + attachment.url + '" ' +
                 'style="max-width:60px;height:auto;">'
             );
 
-            btn.next('.pc-schedule-icon-remove').show();
-            console.log("prev", btn.prev(),
-                        "next", btn.next());
+            removeButton.show();
         });
 
         mediaFrame.open();
@@ -84,9 +82,13 @@ jQuery(document).ready(function ($) {
 
     $('.pc-schedule-icon-remove').on('click', function (e) {
         e.preventDefault();
-        let btn =  $(this);
-        btn.parent().find('.pc_schedule_icon').val('');
-        btn.parent().find('.pc-schedule-icon-preview').empty();
+
+        const btn = $(this);
+        const field = btn.closest('.pc-schedule-icon-field');
+
+        field.find('.pc-schedule-icon-id').val('');
+        field.find('.pc-schedule-icon-preview').empty();
+
         btn.hide();
     });
 
