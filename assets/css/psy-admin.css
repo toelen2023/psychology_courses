@@ -1,0 +1,30 @@
+.pc-schedule-course {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 17px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 15px 5px 25px;
+}
+.pc-schedule-row {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px;
+    border-right: 1px solid #aaa;
+}
+.pc-schedule-row__field label {
+    display: inline-block;
+    font-weight: bold;
+}
+.pc-schedule-row__field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.pc-schedule-row__field select {margin-bottom: 0;}
+.pc-schedule-row__field textarea {
+    display: inline-block; 
+    width: clamp(400px, 650px, 750px);
+}
