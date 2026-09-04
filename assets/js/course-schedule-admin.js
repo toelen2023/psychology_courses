@@ -40,8 +40,9 @@ jQuery(document).ready(function ($) {
 
     let mediaFrame;
 
-    $('#pc-schedule-icon-upload').on('click', function (e) {
+    $('.pc-schedule-icon-upload').on('click', function (e) {
         e.preventDefault();
+        let btn =  $(this);
 
         if (mediaFrame) {
             mediaFrame.open();
@@ -64,26 +65,29 @@ jQuery(document).ready(function ($) {
                 .first()
                 .toJSON();
 
-            $('#pc_schedule_icon').val(attachment.id);
+            btn.parent().find('.pc_schedule_icon').val(attachment.id);
+            console.log("icon", btn.parent().find('.pc_schedule_icon'));
 
-            $('#pc-schedule-icon-preview').html(
+            btn.prev('.pc-schedule-icon-preview').html(
                 '<img src="' + attachment.url + '" ' +
                 'style="max-width:60px;height:auto;">'
             );
 
-            $('#pc-schedule-icon-remove').show();
+            btn.next('.pc-schedule-icon-remove').show();
+            console.log("prev", btn.prev(),
+                        "next", btn.next());
         });
 
         mediaFrame.open();
     });
 
 
-    $('#pc-schedule-icon-remove').on('click', function (e) {
+    $('.pc-schedule-icon-remove').on('click', function (e) {
         e.preventDefault();
-
-        $('#pc_schedule_icon').val('');
-        $('#pc-schedule-icon-preview').empty();
-        $(this).hide();
+        let btn =  $(this);
+        btn.parent().find('.pc_schedule_icon').val('');
+        btn.parent().find('.pc-schedule-icon-preview').empty();
+        btn.hide();
     });
 
 });

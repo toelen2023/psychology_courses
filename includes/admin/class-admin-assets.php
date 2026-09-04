@@ -24,9 +24,10 @@ class PC_Admin_Assets {
     $screen = get_current_screen();
 
     if ( $screen  && 'course-stream' === $screen->post_type ) {
+        wp_enqueue_media();
         wp_enqueue_script( 'pc-course-schedule-admin',
             PC_PLUGIN_URL . '/assets/js/course-schedule-admin.js',
-            array('jquery'), PC_VERSION, true );
+              array( 'jquery', 'media-editor' ), PC_VERSION, true );
         wp_enqueue_style( 'pc-schedule-admin', PC_PLUGIN_URL . 'assets/css/psy-admin.css',
              array(), PC_VERSION );
     }

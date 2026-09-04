@@ -157,11 +157,10 @@ class PC_Schedule_Metabox {
     <input
         type="hidden"
         name="pc_schedule_icon"
-        id="pc_schedule_icon"
-        value="<?php echo esc_attr( $icon_id ); ?>"
-    />
+        class="pc_schedule_icon"
+        value="<?php echo esc_attr( $icon_id ); ?>">
 
-    <div id="pc-schedule-icon-preview">
+    <div class="pc-schedule-icon-preview">
         <?php
         if ( $icon_id ) {
             echo wp_get_attachment_image(  $icon_id,
@@ -172,11 +171,11 @@ class PC_Schedule_Metabox {
         ?>
     </div>
 
-    <button type="button" class="button" id="pc-schedule-icon-upload">
+    <button type="button" class="button pc-schedule-icon-upload">
         <?php esc_html_e( 'Выбрать иконку', 'psychology-courses' ); ?>
     </button>
 
-    <button type="button" class="button" id="pc-schedule-icon-remove"
+    <button type="button" class="button pc-schedule-icon-remove"
         <?php echo $icon_id ? '' : 'style="display:none;"'; ?>>
         <?php esc_html_e( 'Удалить', 'psychology-courses' ); ?>
     </button>
