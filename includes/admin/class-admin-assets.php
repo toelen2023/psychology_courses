@@ -26,7 +26,7 @@ class PC_Admin_Assets {
     if ( $screen  && 'course-stream' === $screen->post_type ) {
         wp_enqueue_script( 'pc-course-schedule-admin',
             PC_PLUGIN_URL . '/assets/js/course-schedule-admin.js',
-            array(), PC_VERSION, true );
+            array('jquery'), PC_VERSION, true );
         wp_enqueue_style( 'pc-schedule-admin', PC_PLUGIN_URL . 'assets/css/psy-admin.css',
              array(), PC_VERSION );
     }

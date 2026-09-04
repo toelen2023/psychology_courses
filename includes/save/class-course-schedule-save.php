@@ -77,6 +77,8 @@ class PC_Course_Schedule_Save {
 
    $stream = isset( $row['stream'] ) ? absint( $row['stream'] ) : 0;
 
+   $icon_id = isset( $row['icon_id'] ) ? absint ( $row['icon_id'] ) : '';
+
    $date = isset( $row['date'] ) ? sanitize_text_field( $row['date'] ) : '';
 
    $time = isset( $row['time'] ) ? sanitize_text_field( $row['time'] ) : '';
@@ -84,7 +86,7 @@ class PC_Course_Schedule_Save {
    $duration = isset( $row['duration'] )  ? absint( $row['duration'] )  : 0;
 
    $lessons = isset( $row['lessons'] ) ? absint( $row['lessons'] ) : 0;
-
+   
    $icon_class = isset( $row['icon_class'] ) ? sanitize_html_class( $row['icon_class'] ) : '';
 
    $registration = isset( $row['registration'] )? sanitize_textarea_field( $row['registration'] )
@@ -95,6 +97,7 @@ class PC_Course_Schedule_Save {
    if ( 0 === $course_id
         && 0 === $teacher_id
         && 0 === $stream
+        && 0 === $icon_id
         && '' === $date
         && '' === $time
         && 0 === $duration
@@ -107,6 +110,7 @@ class PC_Course_Schedule_Save {
     'course_id'    => $course_id,
     'course_name'  => $course_name,
     'stream'       => $stream,
+    'icon_id'      => $icon_id,
     'date'         => $date,
     'time'         => $time,
     'duration'     => $duration,

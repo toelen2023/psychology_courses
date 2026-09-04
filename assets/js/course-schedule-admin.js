@@ -35,3 +35,55 @@ document.addEventListener('DOMContentLoaded', function () {
  });
 
 });
+
+jQuery(document).ready(function ($) {
+
+    let mediaFrame;
+
+    $('#pc-schedule-icon-upload').on('click', function (e) {
+        e.preventDefault();
+
+        if (mediaFrame) {
+            mediaFrame.open();
+            return;
+        }
+
+        mediaFrame = wp.media({
+            title: 'Выберите иконку',
+            button: {
+                text: 'Использовать изображение'
+            },
+            multiple: false
+        });
+
+        mediaFrame.on('select', function () {
+
+            const attachment = mediaFrame
+                .state()
+                .get('selection')
+                .first()
+                .toJSON();
+
+            $('#pc_schedule_icon').val(attachment.id);
+
+            $('#pc-schedule-icon-preview').html(
+                '<img src="' + attachment.url + '" ' +
+                'style="max-width:60px;height:auto;">'
+            );
+
+            $('#pc-schedule-icon-remove').show();
+        });
+
+        mediaFrame.open();
+    });
+
+
+    $('#pc-schedule-icon-remove').on('click', function (e) {
+        e.preventDefault();
+
+        $('#pc_schedule_icon').val('');
+        $('#pc-schedule-icon-preview').empty();
+        $(this).hide();
+    });
+
+});

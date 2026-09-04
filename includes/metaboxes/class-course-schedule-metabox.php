@@ -90,9 +90,12 @@ class PC_Schedule_Metabox {
 
   $teacher_id = isset( $row['teacher_id'] ) ? absint( $row['teacher_id'] ) : 0;
 
+  $icon_id = isset( $row['icon_id'] ) ? absint( $row['icon_id'] ) : 0;
+
   $icon_class = isset( $row['icon_class'] )? sanitize_html_class( $row['icon_class'] ) : '';
 
   $registration = isset( $row['registration'] ) ? $row['registration']  : '';
+  
 
   $courses = get_posts(
    array(
@@ -117,6 +120,7 @@ class PC_Schedule_Metabox {
   ?>
 
   <div class="pc-schedule-course">
+    <div class="pc-schedule-course__handle"> ⋮⋮ </div>
    <div class="pc-schedule-row">
 
    <div class="pc-schedule-row__field pc-schedule-row__course">
@@ -149,7 +153,34 @@ class PC_Schedule_Metabox {
      value="<?php echo esc_attr( $stream ); ?>">
 
    </div>
+   <div class="pc-schedule-icon-field">
+    <input
+        type="hidden"
+        name="pc_schedule_icon"
+        id="pc_schedule_icon"
+        value="<?php echo esc_attr( $icon_id ); ?>"
+    />
 
+    <div id="pc-schedule-icon-preview">
+        <?php
+        if ( $icon_id ) {
+            echo wp_get_attachment_image(  $icon_id,
+                'thumbnail', false,
+                array(  'style' => 'max-width: 60px; height: auto;',)
+            );
+        }
+        ?>
+    </div>
+
+    <button type="button" class="button" id="pc-schedule-icon-upload">
+        <?php esc_html_e( 'Выбрать иконку', 'psychology-courses' ); ?>
+    </button>
+
+    <button type="button" class="button" id="pc-schedule-icon-remove"
+        <?php echo $icon_id ? '' : 'style="display:none;"'; ?>>
+        <?php esc_html_e( 'Удалить', 'psychology-courses' ); ?>
+    </button>
+    </div>     
    <div class="pc-schedule-row__field">
 
     <label>
