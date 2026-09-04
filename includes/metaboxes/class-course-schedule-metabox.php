@@ -154,10 +154,8 @@ class PC_Schedule_Metabox {
 
    </div>
    <div class="pc-schedule-icon-field">
-    <input
-        type="hidden"
-        name="pc_schedule_icon"
-        class="pc_schedule_icon"
+    <input type="hidden" class="pc-schedule-icon-id"
+        name="pc_schedule_rows[<?php echo esc_attr( $index ); ?>][icon_id]"
         value="<?php echo esc_attr( $icon_id ); ?>">
 
     <div class="pc-schedule-icon-preview">
