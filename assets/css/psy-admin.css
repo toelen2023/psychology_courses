@@ -7,6 +7,7 @@
     border-radius: 8px;
     padding: 12px;
     margin: 15px 5px 25px;
+    background-color: #fff;
 }
 .pc-schedule-row {
     display: flex;

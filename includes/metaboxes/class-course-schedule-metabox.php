@@ -120,7 +120,7 @@ class PC_Schedule_Metabox {
   ?>
 
   <div class="pc-schedule-course">
-    <div class="pc-schedule-course__handle"> ⋮⋮ </div>
+    <div class="pc-schedule-course__handle"> ⋮⋮  ⋮⋮ ⋮⋮</div>
    <div class="pc-schedule-row">
 
    <div class="pc-schedule-row__field pc-schedule-row__course">

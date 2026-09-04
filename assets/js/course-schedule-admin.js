@@ -37,6 +37,32 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 jQuery(document).ready(function ($) {
+    $('#pc-schedule-rows').sortable({
+    handle: '.pc-schedule-course__handle',
+    cursor: 'pointer',
+    items: '.pc-schedule-course',
+    axis: 'y',
+
+    update: function () {
+        $('.pc-schedule-course').each(function (index) {
+
+            $(this).find('[name]').each(function () {
+
+                const name = $(this).attr('name');
+
+                if (name) {
+                    $(this).attr(
+                        'name',
+                        name.replace(
+                            /pc_schedule_rows\[\d+\]/,
+                            'pc_schedule_rows[' + index + ']'
+                            )
+                        );
+                    }
+                });
+            });
+        }
+    });
 
     $('.pc-schedule-icon-upload').on('click', function (e) {
         e.preventDefault();
