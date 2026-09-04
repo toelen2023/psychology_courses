@@ -20,23 +20,39 @@ if ( ! class_exists( 'PC_Plugin_Settings' ) ) {
    */
   private const OPTION_NAME = 'pc_plugin_settings';
 
-  /**
-   * Constructor.
-   */
+  // Constructor.
+
   public function __construct() {
 
-   add_action(
-    'admin_menu',
-    array( $this, 'add_settings_page' )
-   );
+   add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
 
-   add_action(
-    'admin_init',
-    array( $this, 'register_settings' )
-   );
-
+   add_action('admin_init',  array( $this, 'register_settings' ) );
+   
+   add_filter(  'plugin_action_links_' . plugin_basename( PC_PLUGIN_FILE ),
+    array( $this, 'add_settings_link' ) );
   }
 
+  /**
+ * Add settings link to plugin action links.
+ *
+ * @param array $links Plugin action links.
+ * @return array
+ */
+public function add_settings_link( array $links ): array {
+
+    $settings_url = menu_page_url(
+        'psychology-courses-settings',
+        false
+    );
+
+    $links[] = sprintf(
+        '<a href="%s">%s</a>',
+        esc_url( $settings_url ),
+        esc_html__( 'Settings', 'psychology-courses' )
+    );
+
+    return $links;
+  }
   /**
    * Add settings page.
    *
@@ -116,40 +132,50 @@ if ( ! class_exists( 'PC_Plugin_Settings' ) ) {
    * @param array $input Settings.
    * @return array
    */
-  public function sanitize_settings( array $input ): array {
+/**
+ * Sanitize settings.
+ *
+ * @param mixed $input Settings.
+ * @return array
+ */
+public function sanitize_settings( $input ): array {
 
-   return array('cf7_form_id' => isset( $input['cf7_form_id'] )
-     ? absint( $input['cf7_form_id'] ) : 0, );
+   if ( ! is_array( $input ) ) {
+      return array(
+         'cf7_form_id' => '',
+      );
+   }
 
-  }
+   return array(
+      'cf7_form_id' => isset( $input['cf7_form_id'] ) ? 
+      sanitize_text_field( $input['cf7_form_id'] ) : '', );
+}
 
-  /**
-   * Render CF7 field.
-   * @return void
-   */
-  public function render_cf7_field(): void {
+/**
+ * Render CF7 field.
+ * @return void
+ */
+public function render_cf7_field(): void {
 
    $options = get_option( self::OPTION_NAME, array() );
 
-   $form_id = isset( $options['cf7_form_id'] ) ? absint( $options['cf7_form_id'] )  : 0;
+   $form_id = isset( $options['cf7_form_id'] ) ? (string) $options['cf7_form_id'] : '';
    ?>
 
    <input
-    type="number" min="0" step="1" class="small-text"
+    type="text" class="regular-text"
     name="<?php echo esc_attr( self::OPTION_NAME ); ?>[cf7_form_id]"
     value="<?php echo esc_attr( $form_id ); ?>">
 
    <p class="description">
     <?php
-    esc_html_e(
-     'ID форми Contact Form 7, яка використовується для запису на курс.',
-     'psychology-courses'
-    );
+    esc_html_e('ID форми Contact Form 7, яка використовується для запису на курс.',
+     'psychology-courses');
     ?>
    </p>
 
    <?php
-  }
+}
 
   /**
    * Render course shortcode.

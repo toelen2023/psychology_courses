@@ -10,6 +10,7 @@ $course_categories = get_terms(
  array(
   'taxonomy'   => 'course_category',
   'hide_empty' => true,
+  'order' => 'DESC',
  )
 );
 

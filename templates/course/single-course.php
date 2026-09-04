@@ -20,12 +20,15 @@ while ( have_posts() ) :
 <main class="pc-course">
  <article>
     <div class="inside-article">
+        <?php //show/hide main header
+        if (!get_post_meta(get_the_ID(),"_generate-disable-headline", true)) :?>
         <header class="entry-header pc-course-header">
             <h1 class="entry-title"><?php the_title(); ?></h1>
         </header>
+        <?php endif; ?>
         <div class="entry-content">
 
-        <p class="pc-course-meta">
+        <!-- <p class="pc-course-meta">
             <strong><?php esc_html_e( 'Duration:', 'psychology-courses' ); ?></strong>
             <?php
                 printf(
@@ -33,7 +36,7 @@ while ( have_posts() ) :
                     (int) $duration, 'psychology-courses' )
                     ), (int) $duration  );
             ?>
-        </p>
+        </p> -->
 
         <section class="pc-course__content">
 
@@ -41,18 +44,18 @@ while ( have_posts() ) :
 
         </section>
 
-        <section class="pc-course__prices">
+        <!-- <section class="pc-course__prices">
 
             <h4 class="entry-header" itemprop="headline">
-            <?php esc_html_e( 'Course price', 'psychology-courses'); ?>
+            <?php //esc_html_e( 'Course price', 'psychology-courses'); ?>
             </h4>
 
         <?php 
             //pc_get_template_part( 'course/parts/course-price-table' ); 
-            pc_get_template_part( 'course/parts/course-price-month' ); 
+           // pc_get_template_part( 'course/parts/course-price-month' ); 
         ?>
 
-        </section>
+        </section> -->
       </div>  
     </div>
   </article>   

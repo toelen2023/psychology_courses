@@ -134,3 +134,12 @@ function pc_get_template_part( string $template, array $args = array() ): void {
 
  require $file;
 }
+
+//Settings Page get CF7 form_id option
+//$cf7_form_id = pc_get_cf7_form_id();
+function pc_get_cf7_form_id(): string {
+
+    $options = get_option( 'pc_plugin_settings', array() );
+
+    return (string) ( $options['cf7_form_id'] ?? '' );
+}
