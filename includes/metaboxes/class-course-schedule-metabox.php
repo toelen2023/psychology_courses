@@ -125,8 +125,8 @@ class PC_Schedule_Metabox {
 
    <div class="pc-schedule-row__field pc-schedule-row__course">
 
-    <label for="pc-schedule-course"><?php esc_html_e( 'Course', 'psychology-courses' ); ?></label>
-    <select class="pc-schedule-course" id="pc-schedule-course"
+    <label for="pc-schedule-course-select"><?php esc_html_e( 'Course', 'psychology-courses' ); ?></label>
+    <select class="pc-schedule-course-select" id="pc-schedule-course-select"
      name="pc_schedule_rows[<?php echo esc_attr( $index ); ?>][course_id]">
      <option value=""><?php esc_html_e( 'Select course', 'psychology-courses' ); ?></option>
      
