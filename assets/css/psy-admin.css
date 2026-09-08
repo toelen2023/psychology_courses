@@ -1,3 +1,4 @@
+.pc-schedule-period {display: flex; gap: 15px;}
 .pc-schedule-course {
     display: flex;
     justify-content: space-between;

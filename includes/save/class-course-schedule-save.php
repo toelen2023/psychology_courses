@@ -35,6 +35,19 @@ class PC_Course_Schedule_Save {
 
   if ( ! current_user_can( 'edit_post', $post_id ) ) return;
   
+  $month = isset( $_POST['pc_schedule_month'] ) ? absint( $_POST['pc_schedule_month'] )  : 0;
+
+  $year = isset( $_POST['pc_schedule_year'] )  ? absint( $_POST['pc_schedule_year'] )  : 0;
+
+    if ( $month >= 1 && $month <= 12 ) {
+        update_post_meta( $post_id,'_pc_schedule_month', $month );
+    } else  delete_post_meta( $post_id,  '_pc_schedule_month' );
+
+
+    if ( $year >= 2000 && $year <= 2100 ) {
+        update_post_meta( $post_id, '_pc_schedule_year',$year);
+    } else   delete_post_meta( $post_id, '_pc_schedule_year');
+    
 
   $rows = array();
 

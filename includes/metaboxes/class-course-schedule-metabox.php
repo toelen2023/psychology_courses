@@ -17,6 +17,9 @@ class PC_Schedule_Metabox {
   */
  public function register(): void {
     add_action( 'add_meta_boxes',  array( $this, 'add_meta_boxes' ) );
+    add_filter('manage_course-stream_posts_columns', array( $this, 'add_shortcode_column' ));
+
+    add_action( 'manage_course-stream_posts_custom_column', array( $this, 'render_shortcode_column' ),  10, 2);
  }
  public function add_meta_boxes(): void {
   add_meta_box( 'pc_schedule',
@@ -35,6 +38,12 @@ class PC_Schedule_Metabox {
   */
  public function render( WP_Post $post ): void {
 
+  $month = isset( $post->ID ) ? absint( get_post_meta( $post->ID, '_pc_schedule_month', true ) )
+ : 0;
+
+  $year = isset( $post->ID ) ? absint( get_post_meta( $post->ID, '_pc_schedule_year', true ) )
+ : 0;
+
   $rows = get_post_meta( $post->ID, 'pc_schedule_rows', true );
 
   if ( ! is_array( $rows ) )  $rows = array();
@@ -42,6 +51,30 @@ class PC_Schedule_Metabox {
   wp_nonce_field('pc_schedule_save', 'pc_schedule_nonce' );
 
   ?>
+  <div class="pc-schedule-period">
+
+    <p>
+        <label for="pc-schedule-month">
+        <strong><?php esc_html_e( 'Месяц:', 'psychology-courses' ); ?></strong>
+        </label>
+
+        <input type="number" min="1" max="12" step="1"
+        id="pc-schedule-month" name="pc_schedule_month"
+        value="<?php echo esc_attr( $month ); ?>">
+    </p>
+
+    <p>
+        <label for="pc-schedule-year">
+            <strong><?php esc_html_e( 'Год:', 'psychology-courses' ); ?></strong>
+        </label>
+
+        <input
+        type="number" min="2026"  max="2100" step="1"
+        id="pc-schedule-year" name="pc_schedule_year"
+        value="<?php echo esc_attr( $year ); ?>">
+    </p>
+
+  </div>
 
   <div id="pc-schedule-rows">
 
@@ -170,12 +203,12 @@ class PC_Schedule_Metabox {
     </div>
 
     <button type="button" class="button pc-schedule-icon-upload">
-        <?php esc_html_e( 'Выбрать иконку', 'psychology-courses' ); ?>
+        <?php esc_html_e( 'Choose icon', 'psychology-courses' ); ?>
     </button>
 
     <button type="button" class="button pc-schedule-icon-remove"
         <?php echo $icon_id ? '' : 'style="display:none;"'; ?>>
-        <?php esc_html_e( 'Удалить', 'psychology-courses' ); ?>
+        <?php esc_html_e( 'Remove', 'psychology-courses' ); ?>
     </button>
     </div>     
    <div class="pc-schedule-row__field">
@@ -273,4 +306,38 @@ class PC_Schedule_Metabox {
 
   <?php
  }
+
+    public function add_shortcode_column( $columns ): array {
+
+        $columns['pc_shortcode'] = __( 'Shortcode', 'psychology-courses' );
+
+        return $columns;
+    }
+
+   public function render_shortcode_column( $column, $post_id): void {
+
+    if ( 'pc_shortcode' !== $column ) return;
+    
+
+    $month = absint(get_post_meta( $post_id, '_pc_schedule_month', true));
+
+    $year = absint(get_post_meta( $post_id, '_pc_schedule_year', true ) );
+
+    if ( ! $month || ! $year ) {
+        echo '&mdash;';
+        return;
+    }
+
+    $shortcode = sprintf('[schedule month="%d" year="%d"]', $month, $year );
+
+    ?>
+    <div class="pc-shortcode-copy">
+
+        <input type="text" readonly class="pc-shortcode-copy__input"
+            value="<?php echo esc_attr( $shortcode ); ?>" onclick="this.select();if ( document.execCommand( 'copy' ) ) this.nextElementSibling.textContent ='✔️ copied';"> <span class="info"></span>
+
+    </div>
+    <?php
+  }
+
 }
