@@ -62,50 +62,49 @@ class PC_Main_Schedule_Shortcode {
   
   ob_start();
   ?>
-  <h2><?php echo $stream_title ?></h2>
-  <div class="wp-block-group schedule-main__group">
-    <div class="wp-block-columns schedule-main__header">
-        <div class="wp-block-column" style="flex-basis:75px"></div>
-        <div class="wp-block-column schedule-main__title">
-            <?php _e ('Course title', 'psychology-courses' ); ?>
-        </div>
-        <div class="wp-block-column">
-            <?php _e ('Start date', 'psychology-courses' ); ?>
-        </div>
-        <div class="wp-block-column">
-            <?php _e ('Duration', 'psychology-courses' ); ?>
-        </div>
-        <div class="wp-block-column">
-            <?php _e ('Teacher', 'psychology-courses' ); ?>
-        </div>
-        <div class="wp-block-column"></div>
-  </div>
+  
+  <div class="wp-block-group__inner-container pc-block">
+    <h2><?php echo $stream_title ?></h2>
+    <div class="wp-block-group schedule-main__group">
+        <div class="wp-block-columns schedule-main__header">
+            <div class="schedule-main__date">
+                <?php _e ('Start date', 'psychology-courses' ); ?>
+            </div>
+            <div class="schedule-main__title">
+                <?php _e ('Course title', 'psychology-courses' ); ?>
+            </div>    
+            <div class="wp-block-column">
+                <?php _e ('Teacher', 'psychology-courses' ); ?>
+            </div>
+            <div class="wp-block-column">
+                <?php _e ('Duration', 'psychology-courses' ); ?>
+            </div>
+            <div class="wp-block-column"></div>
+    </div>
 <?php
   foreach ( $rows as $row ) {
    // Здесь пока просто выводим данные.
    // Потом подключим шаблон строки.
    ?>
-   <div class="wp-block-columns is-layout-flex schedule-main__card <?php echo $row["icon_class"]; ?>">  
+   <div class="schedule-main__card align-items-center  <?php echo $row["icon_class"]; ?>">  
     <?php if ( ! empty( $row['date'] ) ) : ?>
-      <div class="wp-block-column schedule-main__date"> 
+      <div class="schedule-main__date"> 
         <?php $date = strtotime($row['date']); 
             $day = '<span class="schedule-main-day">'. wp_date( 'd', $date). '</span>';
             $week_day = '<span class="schedule-main-weekday">'. wp_date( 'D', $date). '</span>';
         ?>
-        <?php echo $day.' '. $week_day . __( ' from', 'psychology-courses' );  ?> <?php echo ! empty( $row['time'] ) ? esc_html( $row['time'] ) : "10:00"; ?>   
+        <?php echo $day.' '. $week_day; ?>
+        <span class="schedule-main-time"><?php _e( ' from', 'psychology-courses' );  ?> <?php echo ! empty( $row['time'] ) ? esc_html( $row['time'] ) : "10:00"; ?></span>   
       </div>
-    <?php endif; ?>
+    <?php endif; ?>  
+    <div class="d-flex-between schedule-main__content">
     <?php if ( ! empty( $row['course_name'] ) ) : ?>
-      <div class="wp-block-column schedule-main__title ">
-       <strong><?php echo esc_html( $row['course_name'] ); ?>
-        <?php if ( ! empty( $row['stream'] ) ) : ?>
-            - <?php echo esc_html( $row['stream'] ); ?>
-        <?php endif; ?>
-        </strong>
+      <div class="schedule-main__title">
+       <strong><?php echo esc_html( $row['course_name'] ); ?> </strong>
       </div>
      <?php endif; ?>
     <?php if ( ! empty( $row['teacher_name'] ) ) : ?>
-      <div class="wp-block-column schedule-main__teacher">
+      <div class="schedule-main__teacher">
        <?php echo esc_html( $row['teacher_name'] ); ?>
       </div>
      <?php endif; ?>
@@ -113,7 +112,7 @@ class PC_Main_Schedule_Shortcode {
      <?php if ( ! empty( $row['duration'] ) ) : 
         $duration = esc_html( $row['duration'] );
         $lessons  = ! empty( $row['lessons'] ) ?  esc_html( $row['lessons'] ) : "10"; ?>
-      <div class="wp-block-column schedule-main__duration">
+      <div class="schedule-main__duration">
        <?php printf( _n('%d month','%d months', $duration, 'psychology-courses'), $duration); ?> | <?php echo $lessons; ?> <?php  _e (' lessons', 'psychology-courses' );   ?>
       </div>
      <?php endif; ?>
@@ -121,16 +120,18 @@ class PC_Main_Schedule_Shortcode {
      
 
      <?php if ( ! empty( $row['registration'] ) ) : ?>
-      <div class="wp-block-column schedule-main__button">
+      <div class="schedule-main__button">
        <?php echo do_shortcode( $row['registration'] ); ?>
       </div>
      <?php endif; ?>
 
-    
+    </div><!-- /.schedule-main__content -->
    </div>
    <?php  } ?>
  </div>
 </div>
+</div><!--/.block-->
+
 <?php
   return ob_get_clean();
  }

@@ -11,7 +11,7 @@
 .flex-wrap {
     flex-wrap: wrap;
 }
-
+.align-items-center {align-items: center;}
 .column-1-4 {
     flex: 0 0 25%;
 }
