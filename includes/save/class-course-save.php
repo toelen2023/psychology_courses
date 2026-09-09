@@ -85,7 +85,7 @@ class PC_Course_Save {
   
   $lessons = absint( wp_unslash( $_POST['pc_lessons'] ) );
 
-  update_post_meta( $post_id, 'pc_lessons', lessons );
+  update_post_meta( $post_id, 'pc_lessons', $lessons );
 
  }
 

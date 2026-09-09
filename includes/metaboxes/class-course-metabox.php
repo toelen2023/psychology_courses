@@ -109,7 +109,7 @@ class PC_Course_Metabox {
         <?php esc_html_e( 'Lessons', 'psychology-courses' ); ?>
         </label>      
      </th>
-      <th scope="row">     
+      <td scope="row">     
         <input type="number" min="1" step="1"  class="small-text" id="pc_lessons" 
           name="pc_lessons" value="<?php echo esc_attr( $lessons ); ?>">
      </td>     
@@ -132,10 +132,7 @@ class PC_Course_Metabox {
 
   <h3>
 
-   <?php esc_html_e(
-    'Course Price',
-    'psychology-courses'
-   ); ?>
+   <?php esc_html_e('Course Price','psychology-courses'); ?>
 
   </h3>
 
@@ -169,18 +166,14 @@ class PC_Course_Metabox {
         type="number"
         name="pc_prices[<?php echo esc_attr( $code ); ?>][full]"
         value="<?php echo esc_attr( $full_price ); ?>"
-        min="0"
-        step="0.01"
-        class="regular-text">
+        min="0"  step="0.1" class="regular-text">
       </td>
       <td>
        <input
         type="number"
         name="pc_prices[<?php echo esc_attr( $code ); ?>][month]"
         value="<?php echo esc_attr( $month_price ); ?>"
-        min="0"
-        step="10"
-        class="regular-text">
+        min="0"  step="10" class="regular-text">
       </td>
      </tr>
 
@@ -254,6 +247,7 @@ if ( empty( $teachers ) ) {
         if ( 'title' === $key ) {
           $new_columns['course_id'] = __('ID','psychology-courses');
           $new_columns['duration'] = __('Duration','psychology-courses'   );
+          $new_columns['lessons']      = __( 'Lessons', 'psychology-courses' );
         }
     }
 
@@ -284,6 +278,13 @@ if ( empty( $teachers ) ) {
         echo esc_html( $duration . ' мес' );
         return;
     }
-  
- } 
+    if ( 'lessons' === $column ) {
+      $lessons = get_post_meta($post_id,'pc_lessons',true);
+      if ( '' === $lessons ) {
+        echo '—';
+        return;
+      }
+      echo esc_html( (string) $lessons );
+    }
+  } 
 }
