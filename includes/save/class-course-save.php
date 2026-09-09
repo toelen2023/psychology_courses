@@ -36,20 +36,14 @@ class PC_Course_Save {
  public function save( int $post_id, WP_Post $post ): void {
 
   // Nonce.
-  if (
-   ! isset( $_POST['pc_course_nonce'] ) ||
-   ! wp_verify_nonce(
-    sanitize_text_field( wp_unslash( $_POST['pc_course_nonce'] ) ),
-    'pc_course_save'
-   )
-  ) {
-   return;
-  }
+  if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 
-  // Autosave.
-  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-   return;
-  }
+    check_ajax_referer( 'inlineeditnonce', '_inline_edit' );
+
+  } elseif ( ! isset( $_POST['pc_course_nonce'] ) ||
+     ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pc_course_nonce'] ) ),
+      'pc_course_save') )  return;
+    
 
   // Permissions.
   if ( ! current_user_can( 'edit_post', $post_id ) ) {
@@ -85,7 +79,7 @@ class PC_Course_Save {
   
   $lessons = absint( wp_unslash( $_POST['pc_lessons'] ) );
 
-  update_post_meta( $post_id, 'pc_lessons', $lessons );
+  update_post_meta( $post_id, 'pc_lessons', lessons );
 
  }
 
