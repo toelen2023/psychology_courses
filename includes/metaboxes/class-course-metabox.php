@@ -16,16 +16,17 @@ class PC_Course_Metabox {
 
   add_action(
    'add_meta_boxes',
-   array( $this, 'add_meta_boxes' )
-  );
+   array( $this, 'add_meta_boxes' )  );
   add_filter(
     'manage_course_posts_columns',
     array( $this, 'add_admin_columns' ) );
 
    add_action(
      'manage_course_posts_custom_column',
-     array( $this, 'render_admin_column' ),
-     10, 2 );
+     array( $this, 'render_admin_column' ), 10, 2 );
+  
+   add_action('quick_edit_custom_box',
+      array( $this, 'render_quick_edit_fields' ), 10, 2);
 
  }
 
@@ -275,8 +276,10 @@ if ( empty( $teachers ) ) {
             echo '—';
             return;
         }
-        echo esc_html( $duration . ' мес' );
-        return;
+        
+        echo '<span class="pc-course-duration" data-value="' .esc_attr( $duration ) .'">' 
+        . esc_html( $duration  . ' мес' ) . '</span>';
+        //return;
     }
     if ( 'lessons' === $column ) {
       $lessons = get_post_meta($post_id,'pc_lessons',true);
@@ -284,7 +287,57 @@ if ( empty( $teachers ) ) {
         echo '—';
         return;
       }
-      echo esc_html( (string) $lessons );
+      //echo esc_html( (string) $lessons );
+      echo '<span class="pc-course-lessons" data-value="' . esc_attr( $lessons ) . '">' 
+            . esc_html( $lessons ) . '</span>';
     }
   } 
+
+  public function render_quick_edit_fields( string $column_name, string $post_type ): void {
+
+ if ( 'course' !== $post_type || 'title' !== $column_name )  return;
+
+ ?>
+ <fieldset class="inline-edit-col-left">
+  <div class="inline-edit-col">
+
+   <label>
+    <span class="title">
+     <?php esc_html_e( 'Short title', 'psychology-courses' ); ?>
+    </span>
+
+    <span class="input-text-wrap">
+     <input type="text" name="pc_course_short_title"
+      class="pc-quick-edit-short-title">
+    </span>
+   </label>
+
+   <label>
+    <span class="title">
+     <?php esc_html_e( 'Months', 'psychology-courses' ); ?>
+    </span>
+
+    <span class="input-text-wrap">
+     <input
+      type="number" min="1" step="1" name="pc_duration"
+      class="small-text pc-quick-edit-duration">
+    </span>
+   </label>
+
+   <label>
+    <span class="title">
+     <?php esc_html_e( 'Lessons', 'psychology-courses' ); ?>
+    </span>
+
+    <span class="input-text-wrap">
+     <input type="number" min="1" step="1"
+      name="pc_lessons" class="small-text pc-quick-edit-lessons">
+    </span>
+   </label>
+
+  </div>
+ </fieldset>
+ <?php
+}
+
 }
