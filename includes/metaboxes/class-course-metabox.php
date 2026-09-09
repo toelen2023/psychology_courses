@@ -249,6 +249,7 @@ if ( empty( $teachers ) ) {
           $new_columns['course_id'] = __('ID','psychology-courses');
           $new_columns['duration'] = __('Duration','psychology-courses'   );
           $new_columns['lessons']      = __( 'Lessons', 'psychology-courses' );
+          $new_columns['short_title'] = __( 'Short title', 'psychology-courses' );
         }
     }
 
@@ -291,6 +292,13 @@ if ( empty( $teachers ) ) {
       echo '<span class="pc-course-lessons" data-value="' . esc_attr( $lessons ) . '">' 
             . esc_html( $lessons ) . '</span>';
     }
+    if ( 'short_title' === $column ) {
+        $short_title = get_post_meta( $post_id, 'pc_course_short_title', true );
+
+        echo '<span class="pc-course-short-title" data-value="' .  esc_attr( $short_title ) . '">' .
+          esc_html( $short_title ) . '</span>';
+        return;
+      }
   } 
 
   public function render_quick_edit_fields( string $column_name, string $post_type ): void {
