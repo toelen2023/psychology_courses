@@ -69,11 +69,9 @@ class PC_Course_Metabox {
    'pc_course_nonce'
   );
 
-  $duration = get_post_meta(
-   $post->ID,
-   pc_get_duration_meta_key(),
-   true
-  );
+  $duration = get_post_meta( $post->ID, pc_get_duration_meta_key(), true  );
+  
+  $lessons = get_post_meta( $post->ID, 'pc_lessons', true  );
 
   $prices = pc_get_course_prices( $post->ID );
 
@@ -89,41 +87,33 @@ class PC_Course_Metabox {
       <label for="pc_duration">
        <?php esc_html_e( 'Duration', 'psychology-courses' ); ?>
       </label>
-     </th>
+    </th>
+    
      <td>
       <select name="pc_duration" id="pc_duration">
-
        <option value="">
-
         <?php esc_html_e( 'Select duration', 'psychology-courses' ); ?>
-
        </option>
 
        <?php for ( $i = 1; $i <= PC_MAX_MONTHS; $i++ ) : ?>
 
-        <option
-         value="<?php echo esc_attr( $i ); ?>"
-         <?php selected( $duration, $i ); ?>
-        >
-
-         <?php
-         printf(
-          esc_html(
-           _n('%d month','%d months',
-            $i,
-            'psychology-courses')
-          ),
-          $i
-         );
-         ?>
+        <option value="<?php echo esc_attr( $i ); ?>" <?php selected( $duration, $i ); ?>>
+         <?php printf( _n('%d month','%d months', $i, 'psychology-courses'),  $i); ?>
         </option>
 
        <?php endfor; ?>
-
       </select>
-     </td>
+      </td>
+      <th scope="row">
+        <label for="pc_lessons">
+        <?php esc_html_e( 'Lessons', 'psychology-courses' ); ?>
+        </label>      
+     </th>
+      <th scope="row">     
+        <input type="number" min="1" step="1"  class="small-text" id="pc_lessons" 
+          name="pc_lessons" value="<?php echo esc_attr( $lessons ); ?>">
+     </td>     
      <th scope="row">
-
       <label for="pc_course_short_title">
        <?php esc_html_e( 'Course short title', 'psychology-courses' ); ?>
       </label>

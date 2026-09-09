@@ -57,6 +57,7 @@ class PC_Course_Save {
   }
 
   $this->save_duration( $post_id );
+  $this->save_lessons( $post_id );
   $this->save_prices( $post_id );
   $this->save_short_title( $post_id );
   $this->save_teachers( $post_id );
@@ -76,6 +77,16 @@ class PC_Course_Save {
 
   update_post_meta( $post_id, pc_get_duration_meta_key(), $duration );
 
+ } 
+ // save lessons
+ private function save_lessons( int $post_id ): void {
+
+  if ( ! isset( $_POST['pc_lessons'] ) ) return;
+  
+  $lessons = absint( wp_unslash( $_POST['pc_lessons'] ) );
+
+  update_post_meta( $post_id, 'pc_lessons', lessons );
+
  }
 
  /**
@@ -85,9 +96,7 @@ class PC_Course_Save {
   */
  private function save_prices( int $post_id ): void {
 
-  if ( ! isset( $_POST['pc_prices'] ) ) {
-   return;
-  }
+  if ( ! isset( $_POST['pc_prices'] ) )  return;  
 
   $posted_prices = wp_unslash( $_POST['pc_prices'] );
 
@@ -146,10 +155,7 @@ private function save_teachers( int $post_id ): void {
 
  }
 
- $teachers = array_map(
-  'absint',
-  $teachers
- );
+ $teachers = array_map( 'absint', $teachers );
 
  $teachers = array_filter( $teachers );
 
