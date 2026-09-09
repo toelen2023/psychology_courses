@@ -16,12 +16,8 @@ class PC_Course_Save {
   */
  public function register(): void {
 
-  add_action(
-   'save_post_course',
-   array( $this, 'save' ),
-   10,
-   2
-  );
+  add_action('save_post_course',
+   array( $this, 'save' ), 10, 2 );
 
  }
 
@@ -35,20 +31,20 @@ class PC_Course_Save {
   */
  public function save( int $post_id, WP_Post $post ): void {
 
-  // Nonce.
-  if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return; 
+  // Nonce.   
+  $is_valid_nonce = false;
 
-    check_ajax_referer( 'inlineeditnonce', '_inline_edit' );
+    if ( isset( $_POST['pc_course_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pc_course_nonce'] ) ), 'pc_course_save' ) ) {
+        $is_valid_nonce = true;
+    } elseif ( isset( $_POST['_inline_edit'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_inline_edit'] ) ), 'inlineeditnonce' ) ) {
+        $is_valid_nonce = true;
+    }
 
-  } elseif ( ! isset( $_POST['pc_course_nonce'] ) ||
-     ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pc_course_nonce'] ) ),
-      'pc_course_save') )  return;
-    
-
+    if ( ! $is_valid_nonce ) return;
+  
   // Permissions.
-  if ( ! current_user_can( 'edit_post', $post_id ) ) {
-   return;
-  }
+  if ( ! current_user_can( 'edit_post', $post_id ) )  return;
 
   $this->save_duration( $post_id );
   $this->save_lessons( $post_id );
@@ -79,7 +75,7 @@ class PC_Course_Save {
   
   $lessons = absint( wp_unslash( $_POST['pc_lessons'] ) );
 
-  update_post_meta( $post_id, 'pc_lessons', lessons );
+  update_post_meta( $post_id, 'pc_lessons', $lessons );
 
  }
 

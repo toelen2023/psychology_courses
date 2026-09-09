@@ -64,11 +64,8 @@ class PC_Course_Metabox {
   * @return void
   */
  public function render_course_details( WP_Post $post ): void {
-
-  wp_nonce_field(
-   'pc_course_save',
-   'pc_course_nonce'
-  );
+  //nonce
+  wp_nonce_field( 'pc_course_save', 'pc_course_nonce' );
 
   $duration = get_post_meta( $post->ID, pc_get_duration_meta_key(), true  );
   
@@ -303,10 +300,10 @@ if ( empty( $teachers ) ) {
 
   public function render_quick_edit_fields( string $column_name, string $post_type ): void {
 
- if ( 'course' !== $post_type || 'title' !== $column_name )  return;
-
+ if ( 'course' !== $post_type || $column_name !== 'duration')  return;
+  wp_nonce_field( 'pc_course_save', 'pc_course_nonce' );
  ?>
- <fieldset class="inline-edit-col-left">
+ <fieldset class="inline-edit-col-right">
   <div class="inline-edit-col">
 
    <label>
