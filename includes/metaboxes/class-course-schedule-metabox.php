@@ -310,34 +310,41 @@ class PC_Schedule_Metabox {
     public function add_shortcode_column( $columns ): array {
 
         $columns['pc_shortcode'] = __( 'Shortcode', 'psychology-courses' );
+        $columns['pc_main_shortcode'] = __( 'Main shortcode', 'psychology-courses' );
 
         return $columns;
     }
 
-   public function render_shortcode_column( $column, $post_id): void {
+   public function render_shortcode_column( $column, $post_id ): void {
 
-    if ( 'pc_shortcode' !== $column ) return;
-    
+ if ( ! in_array( $column, array( 'pc_shortcode', 'pc_main_shortcode' ), true ) ) return;
+ 
 
-    $month = absint(get_post_meta( $post_id, '_pc_schedule_month', true));
+ $month = absint( get_post_meta( $post_id, '_pc_schedule_month', true ));
 
-    $year = absint(get_post_meta( $post_id, '_pc_schedule_year', true ) );
+ $year = absint( get_post_meta( $post_id, '_pc_schedule_year', true ) );
 
-    if ( ! $month || ! $year ) {
-        echo '&mdash;';
-        return;
-    }
+ if ( ! $month || ! $year ) { echo '&mdash;'; return; }
 
-    $shortcode = sprintf('[schedule month="%d" year="%d"]', $month, $year );
+ if ( 'pc_shortcode' === $column ) {
 
-    ?>
-    <div class="pc-shortcode-copy">
+  $shortcode = sprintf('[schedule month="%d" year="%d"]', $month, $year );
 
-        <input type="text" readonly class="pc-shortcode-copy__input"
-            value="<?php echo esc_attr( $shortcode ); ?>" onclick="this.select();if ( document.execCommand( 'copy' ) ) this.nextElementSibling.textContent ='✔️ copied';"> <span class="info"></span>
+ } else {
 
-    </div>
-    <?php
-  }
+  $shortcode = sprintf('[main_schedule month="%d" year="%d"]',  $month, $year );
+ }
+
+ ?>
+ <div class="pc-shortcode-copy">
+
+  <input type="text" readonly class="pc-shortcode-copy__input"
+   value="<?php echo esc_attr( $shortcode ); ?>"
+   onclick="this.select();if ( document.execCommand( 'copy' ) ) this.nextElementSibling.textContent ='✔️ copied';">
+  <span class="info"></span>
+
+ </div>
+ <?php
+}
 
 }

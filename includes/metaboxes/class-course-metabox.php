@@ -91,9 +91,7 @@ class PC_Course_Metabox {
       </label>
      </th>
      <td>
-      <select
-       name="pc_duration"
-       id="pc_duration">
+      <select name="pc_duration" id="pc_duration">
 
        <option value="">
 

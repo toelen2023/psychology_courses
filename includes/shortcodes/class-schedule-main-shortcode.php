@@ -59,11 +59,13 @@ class PC_Main_Schedule_Shortcode {
   $rows = get_post_meta( $stream_id,'pc_schedule_rows', true);
 
   if ( empty( $rows ) || ! is_array( $rows ) ) return '';
+
+
   
   ob_start();
   ?>
   
-  <div class="wp-block-group__inner-container pc-block">
+  <div class="pc-block">
     <h2><?php echo $stream_title ?></h2>
     <div class="wp-block-group schedule-main__group">
         <div class="wp-block-columns schedule-main__header">
@@ -83,8 +85,8 @@ class PC_Main_Schedule_Shortcode {
     </div>
 <?php
   foreach ( $rows as $row ) {
-   // Здесь пока просто выводим данные.
-   // Потом подключим шаблон строки.
+   $course_url = get_permalink( $row['course_id'] );
+   $teacher_url = get_permalink( $row['teacher_id'] );
    ?>
    <div class="schedule-main__card align-items-center  <?php echo $row["icon_class"]; ?>">  
     <?php if ( ! empty( $row['date'] ) ) : ?>
@@ -100,12 +102,12 @@ class PC_Main_Schedule_Shortcode {
     <div class="d-flex-between schedule-main__content">
     <?php if ( ! empty( $row['course_name'] ) ) : ?>
       <div class="schedule-main__title">
-       <strong><?php echo esc_html( $row['course_name'] ); ?> </strong>
+       <strong><a href="<?php echo $course_url; ?>"><?php echo esc_html( $row['course_name'] ); ?></a> </strong>
       </div>
      <?php endif; ?>
     <?php if ( ! empty( $row['teacher_name'] ) ) : ?>
       <div class="schedule-main__teacher">
-       <?php echo esc_html( $row['teacher_name'] ); ?>
+       <a href="<?php echo $teacher_url; ?>"><?php echo esc_html( $row['teacher_name'] ); ?></a>
       </div>
      <?php endif; ?>
      

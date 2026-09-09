@@ -79,8 +79,8 @@ class PC_Schedule_Shortcode {
   </div>
 <?php
   foreach ( $rows as $row ) {
-   // Здесь пока просто выводим данные.
-   // Потом подключим шаблон строки.
+   $course_url = get_permalink( $row['course_id'] );
+   $teacher_url = get_permalink( $row['teacher_id'] );
    ?>
    <div class="wp-block-columns is-layout-flex schedule-list__card <?php echo $row["icon_class"]; ?>">
    
@@ -94,9 +94,9 @@ class PC_Schedule_Shortcode {
 
      <?php if ( ! empty( $row['course_name'] ) ) : ?>
       <div class="wp-block-column schedule-list__title ">
-       <strong><?php echo esc_html( $row['course_name'] ); ?>
+       <strong><a href="<?php echo $course_url; ?>"><?php echo esc_html( $row['course_name'] ); ?>
         <?php if ( ! empty( $row['stream'] ) ) : ?>
-            - <?php echo esc_html( $row['stream'] ); ?>
+            - <?php echo esc_html( $row['stream'] ) . " ". __("stream", 'psychology-courses'); ?></a>
         <?php endif; ?>
         </strong>
       </div>
@@ -119,7 +119,7 @@ class PC_Schedule_Shortcode {
 
      <?php if ( ! empty( $row['teacher_name'] ) ) : ?>
       <div class="wp-block-column schedule-list__teacher">
-       <?php echo esc_html( $row['teacher_name'] ); ?>
+       <a href="<?php echo $teacher_url; ?>"><?php echo esc_html( $row['teacher_name'] ); ?></a>
       </div>
      <?php endif; ?>
 

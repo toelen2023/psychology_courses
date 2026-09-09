@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: psychology_courses\n"
-"POT-Creation-Date: 2026-09-08 14:09+0300\n"
-"PO-Revision-Date: 2026-09-08 21:07+0300\n"
+"POT-Creation-Date: 2026-09-08 23:53+0300\n"
+"PO-Revision-Date: 2026-09-08 23:53+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -72,7 +72,7 @@ msgstr "Інформація про курс"
 
 #: includes/metaboxes/class-course-metabox.php:90
 #: includes/metaboxes/class-course-metabox.php:268
-#: includes/shortcodes/class-schedule-main-shortcode.php:74
+#: includes/shortcodes/class-schedule-main-shortcode.php:82
 #: includes/shortcodes/class-schedule-shortcode.php:73
 msgid "Duration"
 msgstr "Тривалість"
@@ -82,7 +82,7 @@ msgid "Select duration"
 msgstr "Виберіть тривалість"
 
 #: includes/metaboxes/class-course-metabox.php:114
-#: includes/shortcodes/class-schedule-main-shortcode.php:115
+#: includes/shortcodes/class-schedule-main-shortcode.php:118
 #: includes/shortcodes/class-schedule-shortcode.php:116
 #: templates/course/parts/course-card.php:37
 #: templates/course/single-course.php:35
@@ -159,7 +159,7 @@ msgid "Remove"
 msgstr "Видалити"
 
 #: includes/metaboxes/class-course-schedule-metabox.php:217
-#: includes/shortcodes/class-schedule-main-shortcode.php:71
+#: includes/shortcodes/class-schedule-main-shortcode.php:73
 #: includes/shortcodes/class-schedule-shortcode.php:70
 msgid "Start date"
 msgstr "Дата початку"
@@ -178,7 +178,7 @@ msgstr "Заняття"
 
 #: includes/metaboxes/class-course-schedule-metabox.php:255
 #: includes/post-types/class-teacher-post-type.php:15
-#: includes/shortcodes/class-schedule-main-shortcode.php:77
+#: includes/shortcodes/class-schedule-main-shortcode.php:79
 #: includes/shortcodes/class-schedule-shortcode.php:76
 msgid "Teacher"
 msgstr "Викладач"
@@ -202,6 +202,12 @@ msgstr "Видалити"
 #: includes/metaboxes/class-course-schedule-metabox.php:312
 msgid "Shortcode"
 msgstr "Шорткод"
+
+#: includes/metaboxes/class-course-schedule-metabox.php:313
+#, fuzzy
+#| msgid "Registration shortcode"
+msgid "Main shortcode"
+msgstr "Шорткод форми"
 
 #: includes/metaboxes/class-teacher-metabox.php:40
 #: templates/teacher/content-teacher.php:35
@@ -334,20 +340,24 @@ msgstr ""
 msgid "Згорнути"
 msgstr ""
 
-#: includes/shortcodes/class-schedule-main-shortcode.php:68
+#: includes/shortcodes/class-schedule-main-shortcode.php:76
 #: includes/shortcodes/class-schedule-shortcode.php:67
 msgid "Course title"
 msgstr "Назва курсу"
 
-#: includes/shortcodes/class-schedule-main-shortcode.php:93
+#: includes/shortcodes/class-schedule-main-shortcode.php:99
 #: includes/shortcodes/class-schedule-shortcode.php:107
 msgid " from"
 msgstr " з"
 
-#: includes/shortcodes/class-schedule-main-shortcode.php:115
+#: includes/shortcodes/class-schedule-main-shortcode.php:118
 #: includes/shortcodes/class-schedule-shortcode.php:116
 msgid " lessons"
 msgstr "занять"
+
+#: includes/shortcodes/class-schedule-shortcode.php:99
+msgid "stream"
+msgstr "потік"
 
 #: includes/taxonomies/class-course-category-taxonomy.php:29
 msgid "Course Categories"
