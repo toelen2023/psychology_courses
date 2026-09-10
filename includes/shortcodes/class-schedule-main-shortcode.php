@@ -115,11 +115,10 @@ class PC_Main_Schedule_Shortcode {
         $duration = esc_html( $row['duration'] );
         $lessons  = ! empty( $row['lessons'] ) ?  esc_html( $row['lessons'] ) : "10"; ?>
       <div class="schedule-main__duration">
-       <?php printf( _n('%d month','%d months', $duration, 'psychology-courses'), $duration); ?> | <?php echo $lessons; ?> <?php  _e (' lessons', 'psychology-courses' );   ?>
+       <?php printf( _n('%d month','%d months', $duration, 'psychology-courses'), $duration); ?>
+        | <?php echo $lessons; ?> <?php  _e (' lessons', 'psychology-courses' );   ?>
       </div>
      <?php endif; ?>
-
-     
 
      <?php if ( ! empty( $row['registration'] ) ) : ?>
       <div class="schedule-main__button">

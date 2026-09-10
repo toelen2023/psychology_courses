@@ -36,6 +36,7 @@ class PC_Loader {
         require_once PC_PLUGIN_PATH . 'includes/metaboxes/class-course-metabox.php';
         require_once PC_PLUGIN_PATH . 'includes/save/class-course-save.php';
         require_once PC_PLUGIN_PATH . 'includes/shortcodes/class-course-cards-shortcode.php';
+        require_once PC_PLUGIN_PATH . 'includes/shortcodes/class-course-prices-shortcode.php';
         //stream & schedule
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-course-stream-post-types.php';
         require_once PC_PLUGIN_PATH . 'includes/metaboxes/class-course-schedule-metabox.php';
@@ -69,6 +70,8 @@ class PC_Loader {
         ( new PC_Course_Metabox())->register();
         ( new PC_Course_Save() )->register();
         $course_card_shortcode =  new PC_Course_Cards_Shortcode();
+        ( new PC_Course_Prices_Shortcode() )->register();
+        
         ( new PC_Course_Stream_Post_Type() )->register();
         ( new PC_Schedule_Metabox() )->register();
         ( new PC_Course_Schedule_Save() )->register();

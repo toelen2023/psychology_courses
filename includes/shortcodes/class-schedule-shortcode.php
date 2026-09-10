@@ -93,7 +93,7 @@ class PC_Schedule_Shortcode {
     
 
      <?php if ( ! empty( $row['course_name'] ) ) : ?>
-      <div class="wp-block-column schedule-list__title ">
+      <div class="wp-block-column schedule-list__title">
        <strong><a href="<?php echo $course_url; ?>"><?php echo esc_html( $row['course_name'] ); ?>
         <?php if ( ! empty( $row['stream'] ) ) : ?>
             - <?php echo esc_html( $row['stream'] ) . " ". __("stream", 'psychology-courses'); ?></a>
