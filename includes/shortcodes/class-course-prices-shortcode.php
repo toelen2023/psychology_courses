@@ -98,9 +98,8 @@ class PC_Course_Prices_Shortcode {
                else $extraClass = str_contains($categories[0]->slug, "begin") ? "color-beginner" : "color-psychologist";
              endif; 
               
-             $icon_id = get_post_meta( $post->ID, 'pc_course_icon', true);
-             if ( $icon_id ) $icon_src= wp_get_attachment_image( $icon_id,'thumbnail', false,
-                        array( 'style' => 'max-width:60px; height:auto;',)   );  
+             $icon_id = get_post_meta( $course_id, 'pc_course_icon', true);
+             if ( $icon_id ) $icon_src= wp_get_attachment_image( $icon_id,'thumbnail', false );  
          
                //  Duration.            
                $duration = get_post_meta( $course_id, pc_get_duration_meta_key(), true );

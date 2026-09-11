@@ -76,7 +76,7 @@ class PC_Schedule_Shortcode {
             <?php _e ('Teacher', 'psychology-courses' ); ?>
         </div>
         <div class="wp-block-column"></div>
-  </div>
+    </div><!--/.schedule-list__header-->
 <?php
   foreach ( $rows as $row ) {
    $course_url = get_permalink( $row['course_id'] );
@@ -133,7 +133,7 @@ class PC_Schedule_Shortcode {
    </div>
    <?php  } ?>
  </div>
-</div>
+
 <?php
   return ob_get_clean();
  }

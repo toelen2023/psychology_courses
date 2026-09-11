@@ -30,7 +30,7 @@
 
 .pc-courses-grid {
  display: grid;
- grid-template-columns: repeat(3, 1fr);
+ grid-template-columns: repeat(2, 1fr);
  gap: 20px;
 }
 
@@ -59,7 +59,8 @@
 
 .pc-course-card {
     background-color: #ffffffd3;
-    box-shadow: var(--olvia-long-shadow);
+    /* box-shadow: var(--olvia-long-shadow); */
+    box-shadow: 0.063em 0.75em 1.563em rgba(132, 212, 171, 0.4);
     border: 2px solid var( --main-accent-color);
     border-radius: 10px;
     overflow: hidden;
