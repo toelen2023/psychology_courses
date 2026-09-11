@@ -97,6 +97,10 @@ class PC_Course_Prices_Shortcode {
                if( $categoriesNum>1) $extraClass="color-universal";
                else $extraClass = str_contains($categories[0]->slug, "begin") ? "color-beginner" : "color-psychologist";
              endif; 
+              
+             $icon_id = get_post_meta( $post->ID, 'pc_course_icon', true);
+             if ( $icon_id ) $icon_src= wp_get_attachment_image( $icon_id,'thumbnail', false,
+                        array( 'style' => 'max-width:60px; height:auto;',)   );  
          
                //  Duration.            
                $duration = get_post_meta( $course_id, pc_get_duration_meta_key(), true );
@@ -135,7 +139,10 @@ class PC_Course_Prices_Shortcode {
                ?>
 
                <div class="wp-block-columns is-layout-flex schedule-list__card course-price__card <?php echo $extraClass; ?>">
-            
+                  
+                  <div class="wp-block-column schedule-list__logo">
+                     <?php echo  $icon_src ; ?>
+                  </div>
                   <div class="wp-block-column schedule-list__title">
                         <a href="<?php echo esc_url( get_permalink( $course_id ) ); ?>">
                            <?php echo esc_html( $course_title ); ?>
