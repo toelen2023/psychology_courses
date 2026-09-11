@@ -51,6 +51,7 @@ class PC_Course_Save {
   $this->save_prices( $post_id );
   $this->save_short_title( $post_id );
   $this->save_teachers( $post_id );
+  $this->save_icon( $post_id );
 
  }
 
@@ -159,5 +160,14 @@ private function save_teachers( int $post_id ): void {
  update_post_meta( $post_id,  pc_get_course_teachers_meta_key(), $teachers  );
 
 }
+  private function save_icon( int $post_id ): void {
+
+      if ( ! isset( $_POST['pc_course_icon'] ) )  return;
+
+      $icon_id = absint( wp_unslash( $_POST['pc_course_icon'] ));
+
+      if ( $icon_id )  update_post_meta( $post_id, 'pc_course_icon', $icon_id );
+      else delete_post_meta( $post_id,'pc_course_icon');     
+  }
 
 }

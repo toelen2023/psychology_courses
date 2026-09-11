@@ -74,6 +74,8 @@ class PC_Course_Metabox {
   $prices = pc_get_course_prices( $post->ID );
 
   $short_title = get_post_meta( $post->ID, 'pc_course_short_title', true );
+ 
+  $icon_id = get_post_meta( $post->ID, 'pc_course_icon', true);
 
   ?>
 
@@ -117,13 +119,45 @@ class PC_Course_Metabox {
       </label>
      </th>
      <td>
-      <input type="text" 
-        id="pc_course_short_title" 
-        name="pc_course_short_title"
-        class="regular-text"
+      <input type="text" id="pc_course_short_title" 
+        name="pc_course_short_title" class="regular-text"
         placeholder="КПТ, Практична психологія"
         value="<?php echo esc_html( $short_title ); ?>">
     </td>
+    </tr>
+    <tr>
+    <th scope="row">
+        <label for="pc_course_icon">
+            <?php esc_html_e( 'Course icon', 'psychology-courses' ); ?>
+        </label>
+    </th>
+
+    <td colspan="3">
+
+        <div class="pc-course-icon-field">
+
+            <input type="hidden" class="pc-course-icon-id" name="pc_course_icon"
+              value="<?php echo esc_attr( $icon_id ); ?>">
+
+            <div class="pc-course-icon-preview">
+             <?php
+                if ( $icon_id ) echo wp_get_attachment_image( $icon_id,'thumbnail', false,
+                        array( 'style' => 'max-width:60px;height:auto;',)   );               
+              ?>
+            </div>
+
+            <button type="button"class="button pc-course-icon-upload">
+                <?php esc_html_e( 'Choose icon', 'psychology-courses' ); ?>
+            </button>
+
+            <button type="button" class="button pc-course-icon-remove"
+                <?php echo $icon_id ? '' : 'style="display:none;"'; ?>>
+                <?php esc_html_e( 'Remove', 'psychology-courses' ); ?>
+            </button>
+
+        </div>
+
+      </td>
     </tr>
    </tbody>
   </table>
