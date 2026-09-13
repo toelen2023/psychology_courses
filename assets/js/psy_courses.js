@@ -78,8 +78,9 @@ const swiper = new Swiper('.pc-teacher-slider-swiper', {
  
    filters.forEach( (button) =>  button.classList.remove('is-active') );
    this.classList.add('is-active');
-   toggleCards(true);
-   updateCards(true, selectedFilter);
+
+    cardsExpanded = !cardsExpanded;
+    updateCards();
   });
  });
 };
