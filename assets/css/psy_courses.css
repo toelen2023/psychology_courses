@@ -100,6 +100,7 @@
 .pc-course-card__badge {
     display: inline-block;
     border: 1px solid var(--main-accent-color);
+    background-color: var(--olvia-biege);
     border-radius: 10px;
     padding: 4px 6px;  
     font-size: 0.7em;
@@ -110,21 +111,37 @@
 .course-card__main {flex-grow: 1;}
 .pc-course-card__icon {flex: 0 0 120px; margin-left: 10px; position: relative; z-index: 3;}
 .pc-course-card__icon img {border-radius: 50%;box-shadow: var(--grey-box-shadow);}
+.pc-course-card__content {transition: all .3s ease-out;}
 .pc-course-card__deco {
     width: 280px;
     height: calc(150% + 50px);
     transform: translate(21px, 3%) rotate(28deg);
-    background-color: var(--light-accent-color);
+    background-color: var(--step-accent-color);
     position: absolute;
     z-index: -1;
     right: -100px;
     transition: all ease-in-out .35s;
 }
+ [class*="color-begin"].pc-course-card__deco{
+    background-color: var(--step-accent-color);
+ }
+ [class*="color-universal"].pc-course-card__deco{
+    background-color: var(--light-accent-color);
+ }
+ [class*="color-psycho"].pc-course-card__deco{
+    background-color: var(--deep-accent-color);
+ }
 .pc-course-card:hover .pc-course-card__deco{
   width: calc(100% + 100px);
     border-radius: unset;
     height: calc(100% + 50px);
     transform: none;
+}
+.pc-course-card:has([class*="color-psycho"].pc-course-card__deco):hover .pc-course-card__content,
+.pc-course-card:has([class*="color-begin"].pc-course-card__deco):hover .pc-course-card__content,
+.pc-course-card:has([class*="color-begin"].pc-course-card__deco):hover h4,
+.pc-course-card:has([class*="color-psycho"].pc-course-card__deco):hover h4{
+    color: var(--main-bg-color);
 }
 .pc-course-filter {
     margin: 0 10px 10px 0;
@@ -229,6 +246,32 @@ button.pc-course-cards__toggle.is-open  {
     height: 250px;
     object-fit: cover;
 }
+.pc-teacher-horizontal-card-image img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.pc-teacher__more {
+    display: block;  margin: 1rem 0;
+    text-decoration: none; font-weight: bold;
+}
+.pc-teacher__more::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: none;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    border-color: currentColor;
+    transform-origin: bottom left;
+    margin: 0 4px 0 0;
+    transform: rotate(315deg);
+    transition: .3s;
+}
+.pc-teacher__more:hover { color: var(--main-text-color); }
+.pc-teacher__more:hover::before { transform: translate(4px) rotate(315deg);}
 .swiper-pagination-bullet-active {
     background: var(--main-accent-color);
 }

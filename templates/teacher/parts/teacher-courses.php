@@ -11,9 +11,7 @@ $teacher_id = get_the_ID();
 
 <div class="pc-teacher-courses">
 
-    <h3>
-        <?php esc_html_e( 'Courses', 'psychology-courses' ); ?>
-    </h3>
+    <h4> <?php esc_html_e( 'Courses', 'psychology-courses' ); ?></h4>
 
     <?php
     $courses = new WP_Query(
@@ -37,7 +35,7 @@ $teacher_id = get_the_ID();
 
     <?php if ( $courses->have_posts() ) : ?>
 
-     <ul class="pc-teacher__course-list">
+     <ul class="pc-teacher promo-list">
 
        <?php while ( $courses->have_posts() ) : ?>
 

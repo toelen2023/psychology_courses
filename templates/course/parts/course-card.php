@@ -18,8 +18,11 @@ $duration = get_post_meta($course_id, pc_get_duration_meta_key(), true  );
 
 <?php  $categories = get_the_terms( $course_id,'course_category');  ?>
 
-    <?php if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) : ?>
-
+    <?php if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
+      $categoriesNum = count( $categories );
+      if( $categoriesNum>1) $extraClass="color-universal";
+      else $extraClass = str_contains($categories[0]->slug, "begin") ? "color-beginner" : "color-psychologist";
+    ?>
     <div class="pc-course-card__categories d-flex-between flex-wrap">
 
           <?php foreach ( $categories as $category ) : ?>
@@ -68,7 +71,7 @@ $duration = get_post_meta($course_id, pc_get_duration_meta_key(), true  );
     
     <?php $icon_id = get_post_meta( $course_id,'pc_course_icon', true); ?>
     <?php if ( $icon_id ) : ?>
-      <div class="pc-course-card__deco"></div>
+      <div class="pc-course-card__deco <?php echo $extraClass; ?>"></div>
       <div class="pc-course-card__icon">
           <?php  echo wp_get_attachment_image( (int) $icon_id, 'thumbnail',
               false,  array( 'class' => 'pc-course-card__icon-image', ) ); ?>

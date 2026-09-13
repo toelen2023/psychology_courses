@@ -182,7 +182,7 @@ public function render_cf7_field(): void {
    * @return void
    */
   public function render_course_shortcode(): void {
-   $this->render_copy_field('[course_cards ids="ID1,ID2,ID3"]' );
+   $this->render_copy_field('[course_cards ids="ID1,ID2,ID3" show_filter="yes"]' );
   }
 
   /**
@@ -191,7 +191,7 @@ public function render_cf7_field(): void {
    * @return void
    */
   public function render_teacher_shortcode(): void {
-   $this->render_copy_field('[teacher_slider ids="ID1,ID2,ID3"]');
+   $this->render_copy_field('[pc_teacher_slider ids="ID1,ID2,ID3"]');
   }
 
   /**
