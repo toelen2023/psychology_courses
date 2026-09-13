@@ -11,7 +11,7 @@ $teacher_id = get_the_ID();
 
 <div class="pc-teacher-courses">
 
-    <h4> <?php esc_html_e( 'Courses', 'psychology-courses' ); ?></h4>
+    <h4> <?php esc_html_e( 'Teaches courses:', 'psychology-courses' ); ?></h4>
 
     <?php
     $courses = new WP_Query(

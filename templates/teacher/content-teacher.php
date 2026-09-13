@@ -32,7 +32,7 @@ $consult_price = get_post_meta( $teacher_id, pc_get_consultation_price_meta_key(
             </div>
         <?php endif; ?>
     
-            <p><strong><?php  _e( 'Consultation Price', 'psychology-courses' ) ?> <?php echo  $consult_price ?> грн.</strong></p>
+            <p class="pt-20"><strong><?php  _e( 'Consultation Price', 'psychology-courses' ) ?> <?php echo  $consult_price ?> грн.</strong></p>
     
             <?php pc_get_template_part('teacher/parts/teacher-courses'); ?>
             <?php
