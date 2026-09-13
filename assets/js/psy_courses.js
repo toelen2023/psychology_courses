@@ -86,37 +86,80 @@ const swiper = new Swiper('.pc-teacher-slider-swiper', {
 
 courseFilter();
 
-let getVisibleLimit = () => window.innerWidth < 600?  4: 6;
+let getVisibleLimit = () => window.innerWidth < 600 ? 4 : 6;
 
-function toggleCards(expanded = false){
-    const toggle = document.querySelector('.pc-course-cards__toggle');
-    if (!toggle) return; 
-    updateCards(expanded);
+let cardsExpanded = false;
 
-    toggle.addEventListener('click', toggleBtnHandler);
-    function toggleBtnHandler(){
-        expanded = !expanded;
-        toggle.textContent = expanded ? toggle.dataset.hideText : toggle.dataset.showText;
-        toggle.classList.toggle('is-open');
-        updateCards(expanded);
-    }
+const toggle = document.querySelector('.pc-course-cards__toggle');
+
+
+function updateToggleButton() {
+
+    if (!toggle) return;
+
+    toggle.textContent = cardsExpanded
+        ? toggle.dataset.hideText
+        : toggle.dataset.showText;
+
+    toggle.classList.toggle('is-open', cardsExpanded);
 }
 
-toggleCards();
 
+function updateCards() {
 
-function updateCards(expanded, selectedFilter = "all") {
-    let cards = Array.from(document.querySelectorAll('.pc-course-card'));
-    let visibleLimit = getVisibleLimit(),  visibleCount = 0; 
-    cards.forEach( (card) => {
-        if (expanded) {
+    const cards = Array.from(
+        document.querySelectorAll('.pc-course-card')
+    );
+
+    const visibleLimit = getVisibleLimit();
+    let visibleCount = 0;
+
+    cards.forEach(function (card) {
+
+        /*
+         * Cards excluded by the selected filter
+         * remain hidden.
+         */
+        if (card.classList.contains('is-hidden')) {
+            card.classList.add('is-removed');
+            return;
+        }
+
+        /*
+         * Filter is selected:
+         * show all matching cards.
+         */
+        if (cardsExpanded) {
             card.classList.remove('is-removed');
             return;
         }
+
+        /*
+         * Normal state:
+         * show only the first 4/6 matching cards.
+         */
         if (visibleCount < visibleLimit) {
             card.classList.remove('is-removed');
             visibleCount++;
-        } else  card.classList.add('is-removed');
+        } else {
+            card.classList.add('is-removed');
+        }
+    });
+
+    updateToggleButton();
+}
+
+
+if (toggle) {
+
+    toggle.addEventListener('click', function () {
+
+        cardsExpanded = !cardsExpanded;
+
+        updateCards();
     });
 }
+
+
+updateCards();
 

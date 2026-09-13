@@ -58,16 +58,18 @@
 /* Courses */
 
 .pc-course-card {
-    background-color: #ffffffd3;
-    /* box-shadow: var(--olvia-long-shadow); */
-    box-shadow: 0.063em 0.75em 1.563em rgba(132, 212, 171, 0.4);
+    background-color: var(--olvia-biege);
+    box-shadow: var(--olvia-long-shadow);
+    /* box-shadow: 0.063em 0.75em 1.563em rgba(132, 212, 171, 0.4); */
     border: 2px solid var( --main-accent-color);
     border-radius: 10px;
     overflow: hidden;
     padding: 15px;
     animation: fadeIn .3s ease forwards; 
     opacity: 1;
+    position: relative;
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0; /* Начальная точка: полная прозрачность */
@@ -104,8 +106,25 @@
     font-weight: bold;
     text-align: center;
 }
-.pc-course-card__buttons {
-    margin-top: auto;
+.pc-course-card__buttons {  flex-grow: 1;margin-top: auto; }
+.course-card__main {flex-grow: 1;}
+.pc-course-card__icon {flex: 0 0 120px; margin-left: 10px; position: relative; z-index: 3;}
+.pc-course-card__icon img {border-radius: 50%;box-shadow: var(--grey-box-shadow);}
+.pc-course-card__deco {
+    width: 280px;
+    height: calc(150% + 50px);
+    transform: translate(21px, 3%) rotate(28deg);
+    background-color: var(--light-accent-color);
+    position: absolute;
+    z-index: -1;
+    right: -100px;
+    transition: all ease-in-out .35s;
+}
+.pc-course-card:hover .pc-course-card__deco{
+  width: calc(100% + 100px);
+    border-radius: unset;
+    height: calc(100% + 50px);
+    transform: none;
 }
 .pc-course-filter {
     margin: 0 10px 10px 0;
