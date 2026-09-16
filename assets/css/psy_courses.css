@@ -8,6 +8,8 @@
     justify-content: space-between;
     gap: 10px;
 }
+.gap-20 {gap: 20px;}
+.gap-30 {gap: 30px;}
 .flex-wrap {
     flex-wrap: wrap;
 }
@@ -32,22 +34,6 @@
  display: grid;
  grid-template-columns: repeat(2, 1fr);
  gap: 20px;
-}
-
-@media (max-width: 900px) {
- .pc-courses-grid {
-  grid-template-columns: repeat(2, 1fr);
- }
- 
-}
-
-@media (max-width: 576px) {
-  .d-flex-between {
-    flex-direction: column;
-  }
- .pc-courses-grid {
-  grid-template-columns: 1fr;
- }
 }
 
 /* common styles */
@@ -107,6 +93,7 @@
     font-weight: bold;
     text-align: center;
 }
+.badge-months-mobile {display: none;}
 .pc-course-card__buttons {  flex-grow: 1;margin-top: auto; }
 .course-card__main {flex-grow: 1;}
 .pc-course-card__icon {flex: 0 0 120px; margin-left: 10px; position: relative; z-index: 3;}
@@ -135,7 +122,7 @@
   width: calc(100% + 100px);
     border-radius: unset;
     height: calc(100% + 50px);
-    transform: none;
+    transform: translate(-10px, -20px);
 }
 .pc-course-card:has([class*="color-psycho"].pc-course-card__deco):hover .pc-course-card__content,
 .pc-course-card:has([class*="color-begin"].pc-course-card__deco):hover .pc-course-card__content,
@@ -186,6 +173,7 @@ button.pc-course-cards__toggle.is-open  {
     border-radius: 10px;
     border: 1px solid var(--main-accent-color);
     overflow: hidden;
+    height: 100%;
 }
 .pc-teacher-item {
     margin-bottom: 30px;
@@ -209,11 +197,15 @@ button.pc-course-cards__toggle.is-open  {
     text-decoration: none;
 }
 /* Sliders */
-
-.pc-teacher-slider .swiper-wrapper {
+.pc-teacher-list__mobile {
+    display: none;
+}
+.pc-teacher-slider .swiper-wrapper, 
+.pc-teacher-list__mobile .swiper-wrapper {
  align-items: stretch;
 }
 
+.pc-teacher-list__mobile .swiper-slide,
 .pc-teacher-slider .swiper-slide {
  height: auto;
  display: flex;
@@ -225,9 +217,12 @@ button.pc-course-cards__toggle.is-open  {
  max-width: 100%;
  min-width: 0;
 }
-
+.pc-teacher-list__mobile {
+    padding: 20px 10px 50px;
+    margin-bottom: 40px;
+}
 .pc-teacher-slider .swiper {
- width: 1400px;
+ width: 1300px;
  max-width: 100%;
  min-width: 0;
  padding: 20px 10px 50px;
@@ -246,6 +241,7 @@ button.pc-course-cards__toggle.is-open  {
     height: 250px;
     object-fit: cover;
 }
+.pc-teacher-horizontal-card {height: 100%;}
 .pc-teacher-horizontal-card-image img{
     display: block;
     width: 100%;
@@ -295,4 +291,21 @@ button.pc-course-cards__toggle.is-open  {
 .pc-teacher-slider-next {
     left: auto;
     right: 2px;
+}
+
+
+
+@media (max-width: 780px) {
+    .pc-teacher-list__desktop {  display: none; }
+    .pc-teacher-list__mobile {  display: block;  }
+}
+
+@media (max-width: 576px) {
+  .d-flex-between { flex-direction: column;  }
+  .pc-courses-grid { grid-template-columns: 1fr; }
+  .pc-course-card__categories {display: none;}
+  .badge-months-mobile {display: inline-block; float: right; color: var(--main-text-color); font-weight: normal;}
+  .pc-course-card:has([class*="color-psycho"].pc-course-card__deco):hover h4 .badge-months-mobile {
+    color: var(--main-text-color);
+}
 }

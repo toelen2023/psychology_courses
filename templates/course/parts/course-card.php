@@ -12,6 +12,7 @@ $course_id = get_the_ID();
 $course_url = get_permalink( $course_id );
 
 $duration = get_post_meta($course_id, pc_get_duration_meta_key(), true  );
+$extraClass="color-universal";
 ?>
 
 <article class="pc-course-card d-flex-column">
@@ -33,12 +34,8 @@ $duration = get_post_meta($course_id, pc_get_duration_meta_key(), true  );
 
           <?php endforeach; ?>
           <span class="pc-course-card__badge">  
-              <?php
-                  printf(
-                      esc_html( _n('%d month', '%d months',
-                      (int) $duration, 'psychology-courses' )
-                      ), (int) $duration  );
-              ?>
+              <?php printf( esc_html( _n('%d month', '%d months',
+                      (int) $duration, 'psychology-courses' )), (int) $duration  ); ?>
           </span>
     </div>  
     <?php endif; ?>
@@ -46,7 +43,12 @@ $duration = get_post_meta($course_id, pc_get_duration_meta_key(), true  );
     <div class="d-flex-column">
       <div class="pc-course-card__content">
         <a href="<?php echo esc_url( $course_url ); ?>">
-          <h4 class="pc-course-card-title"><?php the_title(); ?></h4>
+          <h4 class="pc-course-card-title"><?php the_title(); ?>
+          <span class="pc-course-card__badge badge-months-mobile">  
+              <?php printf( esc_html( _n('%d month', '%d months',
+                      (int) $duration, 'psychology-courses' )), (int) $duration  ); ?>
+          </span>
+        </h4>
         </a>
       <?php if ( has_excerpt() ) : ?>
         <div class="pc-course-card__excerpt">

@@ -154,9 +154,6 @@ class PC_Course_Prices_Shortcode {
                         if ( $duration )  {
                            printf( esc_html( _n('%d month', '%d months',
                            (int) $duration, 'psychology-courses' ) ), (int) $duration  );
-                           echo " | ";
-                           printf( esc_html( _n('%d lesson', '%d lessons',
-                           (int)  $lessons, 'psychology-courses' ) ), (int)  $lessons  );
                         } else  echo '';
                         ?>
                   </div>

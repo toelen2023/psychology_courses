@@ -36,20 +36,15 @@ if ( 1 === $teacher_count ) :
 <?php elseif ( $teacher_count <= 3 ) : ?>
 
     <section class="pc-teacher-list pc-teacher-list--small"
-        data-teachers-count="<?php echo esc_attr( $teacher_count ); ?>">
-
-        <div class="pc-teacher-list__desktop">
-
+        data-teachers-count="<?php echo esc_attr( $teacher_count ); ?>">    
+        <div class="pc-teacher-list__desktop d-flex-between gap-30">
             <?php while ( $teachers->have_posts() ) : ?>
-
-                <?php $teachers->the_post(); ?>
-
-                <div class="pc-teacher-list__item">
-
-                  <?php pc_get_template_part('teacher/parts/teacher-card'); ?>
-
+                <?php $teachers->the_post(); ?>            
+                <div class="pc-teacher-list__item mb-30 column-1-<?php echo $teacher_count; ?>">
+                  <?php 
+                  pc_get_template_part('teacher/parts/teacher'. ($teacher_count == 2 ? '-horizontal' : '') . '-card'); 
+                  ?>
                 </div>
-
             <?php endwhile; ?>
         </div>
         <div class="pc-teacher-list__mobile swiper">
@@ -65,33 +60,18 @@ if ( 1 === $teacher_count ) :
                 ?>
 
                 <?php while ( $teachers->have_posts() ) : ?>
-
                     <?php $teachers->the_post(); ?>
 
                     <div class="swiper-slide">
-
-                      <?php pc_get_template_part('teacher/parts/teacher-card'); ?>
-
-                        <a class="pc-teacher-list__more" href="<?php the_permalink(); ?>">
-                            <?php esc_html_e( 'More', 'psychology-courses' ); ?>
-                        </a>
-
+                      <?php pc_get_template_part('teacher/parts/teacher-card'); ?> 
                     </div>
 
                 <?php endwhile; ?>
-
             </div>
-            <button class="pc-teacher-list__prev" type="button"
-                aria-label="<?php esc_attr_e( 'Previous teacher', 'psychology-courses' ); ?>">
-                ←
-            </button>
-
-            <button class="pc-teacher-list__next" type="button"
-                aria-label="<?php esc_attr_e( 'Next teacher', 'psychology-courses' ); ?>">
-                →
-            </button>
-
-            <div class="pc-teacher-list__pagination"></div>
+            <button class="pc-teacher-slider-prev" type="button" aria-label="<?php _e('Previous teacher', 'psychology-courses'); ?>">←</button>
+            <button
+            class="pc-teacher-slider-next" type="button" aria-label="<?php _e('Next teacher', 'psychology-courses') ?>">→</button>
+            <div class="swiper-pagination pc-teacher-slider-pagination">→</div>
 
         </div>
 </section>
@@ -121,10 +101,8 @@ if ( 1 === $teacher_count ) :
   </div>
 
   <button class="pc-teacher-slider-prev" type="button" aria-label="<?php _e('Previous teacher', 'psychology-courses'); ?>">←</button>
-
   <button
    class="pc-teacher-slider-next" type="button" aria-label="<?php _e('Next teacher', 'psychology-courses') ?>">→</button>
-
   <div class="swiper-pagination pc-teacher-slider-pagination">→</div>
 
  </div>

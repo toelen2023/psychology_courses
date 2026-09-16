@@ -33,7 +33,7 @@ $teacher_excerpt = get_the_excerpt($teacher_id);
  <div class="pc-teacher-card-content">
 
     <h3><?php the_title(); ?></h3>
-    <p><?php pc_get_template_part('teacher/parts/teacher-courses-shortlist'); ?></p>
+    <!-- <p><?php //pc_get_template_part('teacher/parts/teacher-courses-shortlist'); ?></p> -->
     <div>
         <?php echo wp_kses_post($teacher_excerpt); ?>
     </div>
