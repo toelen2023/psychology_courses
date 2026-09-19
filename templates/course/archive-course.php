@@ -19,7 +19,7 @@ get_header();
 
         if ( ! empty( $options['course_shortcode'] ) ) {
             echo do_shortcode( $options['course_shortcode'] );
-        } else : ?>
+        } else { ?>
 
           <?php pc_get_template_part( 'course/parts/course-card-filter' ); ?>
           <section class="pc-courses-grid">
@@ -47,7 +47,7 @@ get_header();
                 </button>
             </p>
             <?php  endif; ?>
-        <?php  endif; ?>
+        <?php  }  ?>
      </div>
     </div>
   </article>
