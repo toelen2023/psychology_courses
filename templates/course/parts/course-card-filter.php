@@ -15,7 +15,7 @@ $course_categories = get_terms(
 );
 
 ?>
-<div class="pc-course-filters" style="margin-bottom: 15px;">
+<div class="pc-course-filters" id="pc-course-filters" style="margin-bottom: 15px;">
     <button type="button" class="pc-course-filter is-active" data-filter="all">
     <?php _e( 'All courses', 'psychology-courses' ); ?></button>
 

@@ -146,9 +146,15 @@ public function sanitize_settings( $input ): array {
       );
    }
 
-   return array(
-      'cf7_form_id' => isset( $input['cf7_form_id'] ) ? 
-      sanitize_text_field( $input['cf7_form_id'] ) : '', );
+
+    return array(
+    'cf7_form_id'      => isset( $input['cf7_form_id'] )
+        ? sanitize_text_field( $input['cf7_form_id'] )
+        : '',
+    'course_shortcode' => isset( $input['course_shortcode'] )
+        ? sanitize_text_field( $input['course_shortcode'] )
+        : '',
+      );
 }
 
 /**
@@ -181,10 +187,38 @@ public function render_cf7_field(): void {
    * Render course shortcode.
    * @return void
    */
-  public function render_course_shortcode(): void {
+ /*  public function render_course_shortcode(): void {
    $this->render_copy_field('[course_cards ids="ID1,ID2,ID3" show_filter="yes"]' );
-  }
+  } */
+  public function render_course_shortcode(): void {
 
+    $options = get_option( self::OPTION_NAME, array() );
+
+    $shortcode = isset( $options['course_shortcode'] )
+        ? $options['course_shortcode']
+        : '[course_cards ids="63,84,91,111,129,116,130,133,113,136,134,118" show_filter="yes"]';
+
+    $this->render_editable_shortcode_field( $shortcode );
+  }
+  private function render_editable_shortcode_field( string $shortcode ): void {
+    ?>
+    <input
+        type="text"
+        class="regular-text"
+        name="<?php echo esc_attr( self::OPTION_NAME ); ?>[course_shortcode]"
+        value="<?php echo esc_attr( $shortcode ); ?>"
+    >
+
+    <p class="description">
+        <?php
+        esc_html_e(
+            'Шорткод курсів для сторінки архіву та головної сторінки. Змініть ID та їх порядок за потреби.',
+            'psychology-courses'
+        );
+        ?>
+    </p>
+    <?php
+   }
   /**
    * Render teacher shortcode.
    *

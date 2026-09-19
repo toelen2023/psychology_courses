@@ -57,7 +57,7 @@ $extraClass="color-universal";
       <?php endif; ?>
       </div> <!--/.content-->
       <div class="pc-course-card__buttons d-flex-between flex-wrap">
-          <?php echo do_shortcode('[cf7ip_button form_id="'.pc_get_cf7_form_id().'" text="'. __('Sign up for a course','psychology-courses'). '" title="'. __('Sign up for a course '.get_the_title(),'psychology-courses'). '" animation="slide-left" course="'.get_the_title().'"] ');
+          <?php echo do_shortcode('[cf7ip_button form_id="'.pc_get_cf7_form_id().'" text="'. __('Sign up for a course','psychology-courses'). '" title="'. __('Sign up for','psychology-courses'). ' '.get_the_title(). '" animation="slide-left" course="'.get_the_title().'"] ');
           ?>
         <a class="button pc-course-btn-more" href="<?php echo esc_url( $course_url ); ?>" >
           <?php esc_html_e('More', 'psychology-courses');  ?>

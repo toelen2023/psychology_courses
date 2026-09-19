@@ -85,17 +85,15 @@ if ( ! class_exists( 'PC_Course_Cards_Shortcode' ) ) {
       $courses->the_post();
 
       pc_get_template_part( 'course/parts/course-card',
-       array( 'course_id' => get_the_ID(), )  );
-
+       array( 'course_id' => get_the_ID(), )  );  
      endwhile;
      ?>
     </div>
     <?php if ( $has_more_courses ) : ?>
         <button type="button" class="pc-course-cards__toggle"
-        data-show-text="<?php esc_attr_e( 'Дивитись ще', 'psychology-courses' ); ?>"
-        data-hide-text="<?php esc_attr_e( 'Згорнути', 'psychology-courses' ); ?>"
-        >
-        <?php esc_html_e( 'Дивитись ще', 'psychology-courses' ); ?>
+        data-show-text="<?php esc_attr_e( 'Show more', 'psychology-courses' ); ?>"
+        data-hide-text="<?php esc_attr_e( 'Collapse', 'psychology-courses' ); ?>">
+        <?php esc_html_e( 'Show more', 'psychology-courses' ); ?>
         </button>
 
         <?php endif; ?>

@@ -55,7 +55,7 @@ class PC_Schedule_Metabox {
 
     <p>
         <label for="pc-schedule-month">
-        <strong><?php esc_html_e( 'Месяц:', 'psychology-courses' ); ?></strong>
+        <strong><?php esc_html_e( 'Month:', 'psychology-courses' ); ?></strong>
         </label>
 
         <input type="number" min="1" max="12" step="1"
@@ -65,7 +65,7 @@ class PC_Schedule_Metabox {
 
     <p>
         <label for="pc-schedule-year">
-            <strong><?php esc_html_e( 'Год:', 'psychology-courses' ); ?></strong>
+            <strong><?php esc_html_e( 'Year:', 'psychology-courses' ); ?></strong>
         </label>
 
         <input
