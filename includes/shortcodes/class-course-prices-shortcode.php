@@ -143,33 +143,26 @@ class PC_Course_Prices_Shortcode {
                      <?php echo  $icon_src ; ?>
                   </div>
                   <div class="wp-block-column schedule-list__title">
-                        <a href="<?php echo esc_url( get_permalink( $course_id ) ); ?>">
+                        <a href="<?php echo esc_url( get_permalink( $course_id ) ); ?>" class="text-bold">
                            <?php echo esc_html( $course_title ); ?>
-                           </a>
-                     </div>
+                        </a>
+                  </div>
 
                   <div class="wp-block-column schedule-list__duration">
-                        <?php
-                       
-                        if ( $duration )  {
-                           printf( esc_html( _n('%d month', '%d months',
-                           (int) $duration, 'psychology-courses' ) ), (int) $duration  );
-                        } else  echo '';
-                        ?>
+                  <?php                     
+                     if ( $duration )  {
+                        printf( esc_html( _n('%d month', '%d months',
+                        (int) $duration, 'psychology-courses' ) ), (int) $duration  );
+                     } else  echo '';
+                  ?>
                   </div>
 
                   <div class="wp-block-column schedule-list__price">
-                        <?php
-                        if ( '' !== $monthly_price )  echo esc_html( $monthly_price ) . ' грн.';
-                        else   echo '';
-
-                        ?>
+                     <?php  echo  ''!== $monthly_price ?  esc_html( $monthly_price ) . ' грн.' : ''; ?>
                   </div>
 
                   <div class="wp-block-column schedule-list__button">
-                        <?php
-                        echo $button; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        ?>
+                     <?php echo $button;  ?>
                   </div>
 
                </div>

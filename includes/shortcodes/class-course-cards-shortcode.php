@@ -84,10 +84,10 @@ if ( ! class_exists( 'PC_Course_Cards_Shortcode' ) ) {
      while ( $courses->have_posts() ) :
       $courses->the_post();
 
-      pc_get_template_part( 'course/parts/course-card',
-       array( 'course_id' => get_the_ID(), )  );  
+      pc_get_template_part( 'course/parts/course-card', array( 'course_id' => get_the_ID(), )  );  
      endwhile;
      ?>
+      <?php PC_Course_Schema::output_course_list( $course_ids ); ?>
     </div>
     <?php if ( $has_more_courses ) : ?>
         <button type="button" class="pc-course-cards__toggle"

@@ -64,6 +64,6 @@ while ( have_posts() ) :
 <?php
 
 endwhile;
-( new PC_Course_Schema() )-output_course(get_the_ID());
+PC_Course_Schema::output_course( get_the_ID() );
 
 get_footer();

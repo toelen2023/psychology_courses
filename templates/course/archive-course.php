@@ -4,6 +4,10 @@
  *
  * @package Psychology_Courses
  */
+global $wp_query;
+
+$course_ids = wp_list_pluck( $wp_query->posts, 'ID' );
+
 get_header();
 
 ?>
@@ -33,8 +37,9 @@ get_header();
                     pc_get_template_part( 'course/parts/course-card' );
 
                 endwhile;
-
+                
                 the_posts_pagination();
+                PC_Course_Schema::output_course_list( $course_ids ); 
             endif;
             ?>
           </section>
@@ -53,4 +58,5 @@ get_header();
   </article>
 </main>
 <?php  
+PC_Course_Schema::output_course_list( $course_ids );
 get_footer();
