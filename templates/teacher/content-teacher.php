@@ -33,7 +33,8 @@ $content = get_the_content(null, null, $teacher_id);
             </header>          
         </div><!--/end .column-1-4-->
         <div class="pc-teacher-content column-3-4" itemprop="text">
-            <?php echo $content; ?>
+            <?php //echo $content; ?>
+            <?php the_content(); ?>
         
             <div class="pc-teacher-info d-flex-between" itemprop="text">         
                 <div class="column-1-2">
