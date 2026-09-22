@@ -85,15 +85,15 @@ class PC_Loader {
         ( new PC_Teacher_Slider_Shortcode() )->register();
 
     
-        // ( new PC_Review_Post_Type() )->register(); 
+        ( new PC_Review_Post_Type() )->register(); 
 
         //load & show templates
-       ( new PC_Template_Loader() )->register();
-
-       ( new PC_Assets() )->register();
-       ( new PC_Admin_Assets() )->register();
-       //Plugin settings
-       new PC_Plugin_Settings();
+        ( new PC_Template_Loader() )->register();
+ 
+        ( new PC_Assets() )->register();
+        ( new PC_Admin_Assets() )->register();
+        //Plugin settings
+        new PC_Plugin_Settings();
 
     }
 

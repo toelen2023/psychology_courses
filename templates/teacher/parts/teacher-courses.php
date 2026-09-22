@@ -35,7 +35,7 @@ $teacher_id = get_the_ID();
 
     <?php if ( $courses->have_posts() ) : ?>
 
-     <ul class="pc-teacher promo-list">
+     <ul class="pc-teacher dash-list">
 
        <?php while ( $courses->have_posts() ) : ?>
 
