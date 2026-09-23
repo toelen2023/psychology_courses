@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
 
 $teacher_id = get_the_ID();
 $consult_price = get_post_meta( $teacher_id, pc_get_consultation_price_meta_key(), true );
-$content = get_the_content(null, null, $teacher_id);
+//$content = get_the_content(null, null, $teacher_id);
 ?>
 
 <section class="pc-teacher-item">
@@ -30,11 +30,19 @@ $content = get_the_content(null, null, $teacher_id);
                 <?php else: ?>
                 <h2 class="entry-title"><?php the_title(); ?></h2>
                 <?php endif; ?>
-            </header>          
+            </header>   
+                 
         </div><!--/end .column-1-4-->
         <div class="pc-teacher-content column-3-4" itemprop="text">
             <?php //echo $content; ?>
-            <?php the_content(); ?>
+            <?php
+                $content = get_the_content( null, false, $teacher_id );
+                echo apply_filters( 'the_content', $content );
+            ?>
+            <?php
+            //echo 'POST ID: ' . get_the_ID() . ' ';
+           // echo 'POST TYPE: ' . get_post_type() . ' ';
+            ?>
         
             <div class="pc-teacher-info d-flex-between" itemprop="text">         
                 <div class="column-1-2">

@@ -52,6 +52,10 @@ class PC_Loader {
 
         //Reviews
         require_once PC_PLUGIN_PATH . 'includes/post-types/class-review-post-type.php';
+        require_once PC_PLUGIN_PATH . 'includes/metaboxes/class-review-metabox.php';
+        require_once PC_PLUGIN_PATH . 'includes/save/class-review-save.php';
+        require_once PC_PLUGIN_PATH . 'includes/shortcodes/review-form/class-review-form-shortcode.php';
+        require_once PC_PLUGIN_PATH . 'includes/shortcodes/review-form/class-review-form-handler.php';
 
         //all templates pathes
         require_once PC_PLUGIN_PATH . 'includes/template/class-template-loader.php';
@@ -84,8 +88,12 @@ class PC_Loader {
         ( new PC_Teacher_Save() )->register();
         ( new PC_Teacher_Slider_Shortcode() )->register();
 
-    
+        //Rewies
         ( new PC_Review_Post_Type() )->register(); 
+        ( new PC_Review_Metabox() )->register();
+        ( new PC_Review_Save() )->register();
+        ( new PC_Review_Form() )->register();
+        ( new PC_Review_Form_Handler() )->register();
 
         //load & show templates
         ( new PC_Template_Loader() )->register();
