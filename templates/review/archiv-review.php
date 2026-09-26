@@ -32,7 +32,7 @@ get_header();
    <?php else : ?>
 
     <p>
-     <?php  esc_html_e('Your real reviews will appear here soon.','psychology-courses');//Незабаром, тут будуть ваші реальні, відгуки  ?>
+     <?php  esc_html_e('Your real reviews will appear here soon.','psychology-courses');  ?>
     </p>
 
    <?php endif; ?>

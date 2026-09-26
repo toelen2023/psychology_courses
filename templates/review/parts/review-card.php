@@ -11,10 +11,9 @@ $review_id = get_the_ID();
 
 $rating = get_post_meta( $review_id, 'pc_review_rating', true);
 
-$teacher_ids = get_post_meta( $review_id, 'pc_review_teachers', true);
-
 $course_ids = get_post_meta( $review_id, 'pc_review_courses', true);
 
+$teacher_ids = get_post_meta( $review_id, 'pc_review_teachers', true);
 $teacher_ids = is_array( $teacher_ids ) ? $teacher_ids : array();
 $course_ids  = is_array( $course_ids ) ? $course_ids : array();
 ?>
@@ -30,7 +29,9 @@ $course_ids  = is_array( $course_ids ) ? $course_ids : array();
   <?php if ( $rating ) : ?>
 
    <div class="pc-review-card-rating">
-    <?php echo esc_html( $rating ); ?>/5
+    <?php for($i=0;  $i< $rating; $i++) : ?>
+        <span class="star"></span>
+    <?php endfor;?>
    </div>
 
   <?php endif; ?>
@@ -39,7 +40,10 @@ $course_ids  = is_array( $course_ids ) ? $course_ids : array();
 
  <div class="pc-review-card-content">
 
-  <?php the_content(); ?>
+  <?php
+    $content = get_the_content( null, false, $review_id );
+    echo apply_filters( 'the_content', $content );
+  ?>
 
  </div>
 

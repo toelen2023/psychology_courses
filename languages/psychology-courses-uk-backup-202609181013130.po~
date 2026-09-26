@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psychology_courses\n"
 "POT-Creation-Date: 2026-09-08 23:53+0300\n"
-"PO-Revision-Date: 2026-09-26 21:30+0000\n"
+"PO-Revision-Date: 2026-09-13 23:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: Українська\n"
 "Language: uk\n"
@@ -36,14 +36,20 @@ msgstr "занять"
 msgid " per month"
 msgstr " за місяць"
 
+#: includes/shortcodes/class-course-prices-shortcode.php:158
+msgid "%d lesson"
+msgid_plural "%d lessons"
+msgstr[0] "%d заняття"
+msgstr[1] "%d заняття"
+msgstr[2] "%d занять"
+
 #: includes/metaboxes/class-course-metabox.php:101
-#: includes/shortcodes/class-course-prices-shortcode.php:154
+#: includes/shortcodes/class-course-prices-shortcode.php:155
 #: includes/shortcodes/class-schedule-main-shortcode.php:118
 #: includes/shortcodes/class-schedule-shortcode.php:116
 #: templates/parts/course-card.php:71 templates/course/single-course.php:35
 #: templates/course/parts/course-simple-card.php:37
-#: templates/course/parts/course-card.php:37
-#: templates/course/parts/course-card.php:48
+#: templates/course/parts/course-card.php:38
 msgid "%d month"
 msgid_plural "%d months"
 msgstr[0] "%d місяць"
@@ -66,17 +72,9 @@ msgstr "Додати нову категорію"
 msgid "Add New Course"
 msgstr "Додати новий курс"
 
-#: includes/post-types/class-review-post-type.php:34
-msgid "Add New Review"
-msgstr ""
-
 #: includes/post-types/class-teacher-post-type.php:17
 msgid "Add New Teacher"
 msgstr "Додати нового викладача"
-
-#: includes/post-types/class-review-post-type.php:33
-msgid "Add Review"
-msgstr "Додати відгук"
 
 #: includes/post-types/class-teacher-post-type.php:16
 msgid "Add Teacher"
@@ -98,26 +96,13 @@ msgstr "Всі курси"
 msgid "Categories"
 msgstr "Категорії"
 
-#: includes/shortcodes/review-form/class-review-form-shortcode.php:76
-msgid "Choose a course"
-msgstr "Оберіть курс"
-
-#: includes/shortcodes/review-form/class-review-form-shortcode.php:68
-msgid "Choose a teacher"
-msgstr "Оберіть викладача"
-
 #: includes/metaboxes/class-course-schedule-metabox.php:206
 #: includes/metaboxes/class-course-metabox.php:150
 msgid "Choose icon"
 msgstr "Обрати іконку"
 
-#: includes/shortcodes/class-course-cards-shortcode.php:95
-#: templates/course/archive-course.php:50
-msgid "Collapse"
-msgstr "Згорнути"
-
 #: includes/metaboxes/class-teacher-metabox.php:40
-#: templates/teacher/content-teacher.php:49
+#: templates/teacher/content-teacher.php:35
 msgid "Consultation Price"
 msgstr "Ціна консультаціі"
 
@@ -129,12 +114,11 @@ msgstr "Вартість  консультаціі"
 msgid "Consultation price (UAH):"
 msgstr "Вартість консультаціі (грн)"
 
-#: includes/admin/class-plugin-settings.php:247
+#: includes/admin/class-plugin-settings.php:213
 msgid "Copy"
 msgstr "Копіювати"
 
 #: includes/post-types/class-course-post-type.php:15
-#: includes/metaboxes/class-review-metabox.php:162
 #: includes/metaboxes/class-course-schedule-metabox.php:161
 msgid "Course"
 msgstr "Курс"
@@ -169,26 +153,17 @@ msgstr "Коротка назва курсу"
 msgid "Course title"
 msgstr "Назва курсу"
 
-#: templates/review/parts/review-card.php:80
-msgid "Course:"
-msgstr "Курс:"
-
 #: includes/post-types/class-course-post-type.php:14
 #: includes/post-types/class-course-post-type.php:24
 #: includes/admin/class-plugin-settings.php:114
 #: includes/metaboxes/class-teacher-metabox.php:49
-#: includes/metaboxes/class-review-metabox.php:117
-#: templates/course/archive-course.php:18
+#: templates/course/archive-course.php:19
 msgid "Courses"
 msgstr "Курси"
 
 #: templates/teacher/parts/teacher-courses.php:66
 msgid "Courses are not available yet."
 msgstr "Курсів немає."
-
-#: includes/metaboxes/class-review-metabox.php:137
-msgid "Courses not found"
-msgstr "Курси не знайдені"
 
 #: includes/metaboxes/class-course-metabox.php:175
 msgid "Currency"
@@ -218,15 +193,11 @@ msgstr "Редагувати категорію"
 msgid "Edit Course"
 msgstr "Редагувати курс"
 
-#: includes/post-types/class-review-post-type.php:35
-msgid "Edit Review"
-msgstr "Редагувати відгук"
-
 #: includes/post-types/class-teacher-post-type.php:18
 msgid "Edit Teacher"
 msgstr "Редагувати викладача"
 
-#: templates/teacher/archive-teacher.php:47
+#: templates/teacher/archive-teacher.php:41
 msgid ""
 "Fill out the application, and we will contact you to provide more details "
 "about the training format and courses, as well as help you reserve a spot in "
@@ -239,21 +210,13 @@ msgstr ""
 msgid "Full price"
 msgstr "Повна вартість"
 
-#: templates/teacher/archive-teacher.php:46
+#: templates/teacher/archive-teacher.php:40
 msgid "Have you any question <strong>about the training?</strong>"
 msgstr "Маєте запитання <strong>щодо навчання?</strong>"
 
 #. URI of the plugin
 msgid "https://github.com/toelen2023/psychology_courses"
 msgstr ""
-
-#: includes/shortcodes/review-form/class-review-form-shortcode.php:92
-msgid ""
-"I consent to the processing of my personal data in accordance with the Law "
-"of Ukraine No. 2297-VI dated June 1, 2010, \"On Personal Data Protection.\""
-msgstr ""
-"Я даю свою згоду на обробку моїх персональних даних відповідно до Закону "
-"України від 01.06.2010 № 2297-VI \"Про захист персональних даних\""
 
 #: includes/metaboxes/class-course-schedule-metabox.php:278
 msgid "Icon class"
@@ -268,7 +231,7 @@ msgstr "ID"
 msgid "ID форми Contact Form 7"
 msgstr "ID форми Contact Form 7"
 
-#: includes/admin/class-plugin-settings.php:178
+#: includes/admin/class-plugin-settings.php:172
 msgid "ID форми Contact Form 7, яка використовується для запису на курс."
 msgstr "ID форми Contact Form 7, яка використовується для запису на курс."
 
@@ -284,13 +247,10 @@ msgid "Main Settings"
 msgstr "Основні налаштування"
 
 #: includes/metaboxes/class-course-schedule-metabox.php:313
+#, fuzzy
 #| msgid "Registration shortcode"
 msgid "Main shortcode"
-msgstr "Короткий код форми"
-
-#: includes/metaboxes/class-course-schedule-metabox.php:58
-msgid "Month:"
-msgstr "Місяць"
+msgstr "Шорткод форми"
 
 #: includes/metaboxes/class-course-metabox.php:177
 msgid "Monthly payment"
@@ -300,8 +260,9 @@ msgstr "Щомісячний платіж"
 msgid "Months"
 msgstr "Місяці"
 
+#: templates/teacher/teacher-slider.php:76
 #: templates/course/parts/course-simple-card.php:68
-#: templates/course/parts/course-card.php:63
+#: templates/course/parts/course-card.php:61
 #: templates/teacher/parts/teacher-horizontal-card.php:23
 #: templates/teacher/parts/teacher-horizontal-card.php:41
 #: templates/teacher/parts/teacher-card.php:22
@@ -316,16 +277,12 @@ msgstr "Назва нової категорії"
 msgid "New Course"
 msgstr "Новий курс"
 
-#: includes/post-types/class-review-post-type.php:36
-msgid "New Review"
-msgstr "Новий відгук"
-
 #: includes/post-types/class-teacher-post-type.php:19
 msgid "New Teacher"
 msgstr "Новий викладач"
 
-#: templates/teacher/teacher-slider.php:73
-#: templates/teacher/teacher-slider.php:105
+#: templates/teacher/teacher-slider.php:90
+#: templates/teacher/teacher-slider.php:126
 msgid "Next teacher"
 msgstr "Наступний викладач"
 
@@ -340,14 +297,6 @@ msgstr "Не знайдено жодного курса"
 #: includes/post-types/class-course-post-type.php:23
 msgid "No courses found in Trash"
 msgstr "Не знайдено курсів у кошику"
-
-#: includes/post-types/class-review-post-type.php:39
-msgid "No reviews found"
-msgstr "Відгуків не знайдено"
-
-#: includes/post-types/class-review-post-type.php:40
-msgid "No reviews found in Trash"
-msgstr "Відгуків у кошику не знайдено"
 
 #: includes/post-types/class-teacher-post-type.php:22
 msgid "No teacher found"
@@ -377,8 +326,8 @@ msgstr "Батьківська категорія:"
 msgid "Plugin for managing psychology courses."
 msgstr "Плагін для управління психологічними курсами"
 
-#: templates/teacher/teacher-slider.php:71
-#: templates/teacher/teacher-slider.php:103
+#: templates/teacher/teacher-slider.php:85
+#: templates/teacher/teacher-slider.php:123
 msgid "Previous teacher"
 msgstr "Попередній викладач"
 
@@ -397,14 +346,9 @@ msgstr "Вартість за 1 місяць"
 msgid "Psychology Courses"
 msgstr "Курси психології"
 
-#: includes/admin/class-plugin-settings.php:265
+#: includes/admin/class-plugin-settings.php:231
 msgid "Psychology Courses — налаштування"
 msgstr "Курси психології — налаштування"
-
-#: includes/metaboxes/class-review-metabox.php:163
-#: includes/shortcodes/review-form/class-review-form-shortcode.php:54
-msgid "Rating"
-msgstr "Рейтинг"
 
 #: includes/metaboxes/class-course-schedule-metabox.php:288
 msgid "Registration shortcode"
@@ -421,19 +365,6 @@ msgstr "Видалити"
 msgid "Remove stream"
 msgstr "Видалити"
 
-#: includes/post-types/class-review-post-type.php:32
-msgid "Review"
-msgstr "Відгук"
-
-#: includes/metaboxes/class-review-metabox.php:34
-msgid "Review Parameters"
-msgstr "Параметри відгуку"
-
-#: includes/post-types/class-review-post-type.php:31
-#: includes/post-types/class-review-post-type.php:41
-msgid "Reviews"
-msgstr "Відгуки"
-
 #: includes/metaboxes/class-course-schedule-metabox.php:26
 msgid "Schedule"
 msgstr "Розклад"
@@ -446,17 +377,9 @@ msgstr "Пошук категорій"
 msgid "Search Courses"
 msgstr "Пошук курсів"
 
-#: includes/post-types/class-review-post-type.php:38
-msgid "Search Reviews"
-msgstr "Пошук відгуків"
-
 #: includes/post-types/class-teacher-post-type.php:21
 msgid "Search Teachers"
 msgstr "Пошук викладачів"
-
-#: templates/teacher/archive-teacher.php:41
-msgid "See courses schedule"
-msgstr "Дивитися розклад курсів"
 
 #: includes/metaboxes/class-course-schedule-metabox.php:164
 msgid "Select course"
@@ -469,10 +392,6 @@ msgstr "Виберіть тривалість"
 #: includes/metaboxes/class-course-schedule-metabox.php:260
 msgid "Select teacher"
 msgstr "Обрати викладач"
-
-#: includes/shortcodes/review-form/class-review-form-shortcode.php:102
-msgid "Send review"
-msgstr "Надіслати відгук"
 
 #: includes/admin/class-plugin-settings.php:51
 msgid "Settings"
@@ -491,29 +410,14 @@ msgstr "Шорткод"
 msgid "Shortcodes"
 msgstr "Шорткоди"
 
-#: includes/shortcodes/class-course-cards-shortcode.php:94
-#: includes/shortcodes/class-course-cards-shortcode.php:96
-#: templates/course/archive-course.php:49
-#: templates/course/archive-course.php:51
-msgid "Show more"
-msgstr "Дивитись ще"
-
-#: templates/course/parts/course-card.php:60
-msgid "Sign up for"
-msgstr "Записатися на"
-
-#: templates/teacher/content-teacher.php:51
+#: templates/teacher/content-teacher.php:39
 msgid "Sign Up for a consultation"
 msgstr "Записатися на консультацію"
 
 #: templates/course/parts/course-simple-card.php:64
-#: templates/course/parts/course-card.php:60
+#: templates/course/parts/course-card.php:58
 msgid "Sign up for a course"
 msgstr "Записатися на курс"
-
-#: includes/shortcodes/review-form/class-review-form-shortcode.php:99
-msgid "Sorry. An error occurred."
-msgstr "Вибачте. Сталася помилка."
 
 #: includes/metaboxes/class-course-schedule-metabox.php:217
 #: includes/shortcodes/class-schedule-main-shortcode.php:73
@@ -534,16 +438,11 @@ msgid "stream"
 msgstr "потік"
 
 #: includes/post-types/class-teacher-post-type.php:15
-#: includes/metaboxes/class-review-metabox.php:161
 #: includes/metaboxes/class-course-schedule-metabox.php:255
 #: includes/shortcodes/class-schedule-main-shortcode.php:79
 #: includes/shortcodes/class-schedule-shortcode.php:76
 msgid "Teacher"
 msgstr "Викладач"
-
-#: templates/review/parts/review-card.php:59
-msgid "Teacher:"
-msgstr "Викладач:"
 
 #: includes/post-types/class-teacher-post-type.php:14
 #: includes/post-types/class-teacher-post-type.php:24
@@ -552,18 +451,10 @@ msgstr "Викладач:"
 msgid "Teachers"
 msgstr "Викладачі"
 
-#: includes/metaboxes/class-review-metabox.php:111
-msgid "Teachers not found."
-msgstr "Викладачів не знайдено"
-
 #: templates/teacher/parts/teacher-courses.php:14
 #| msgid "Teaches courses"
 msgid "Teaches courses:"
 msgstr "Курси, які веде:"
-
-#: includes/shortcodes/review-form/class-review-form-shortcode.php:96
-msgid "Thanks for your review!"
-msgstr "Дякуємо вам за ваш відгук!"
 
 #: includes/taxonomies/class-course-category-taxonomy.php:36
 msgid "Update Category"
@@ -573,29 +464,18 @@ msgstr "Оновити категорію"
 msgid "View Course"
 msgstr "Подивитися курс"
 
-#: includes/post-types/class-review-post-type.php:37
-msgid "View Review"
-msgstr "Подивитися відгук"
-
 #: includes/post-types/class-teacher-post-type.php:20
 msgid "View Teacher"
 msgstr "Показати викладача"
 
 #: includes/metaboxes/class-course-schedule-metabox.php:68
-msgid "Year:"
-msgstr "Рік"
+msgid "Год:"
+msgstr ""
 
-#: includes/shortcodes/review-form/class-review-form-shortcode.php:65
-msgid "Your name"
-msgstr "Ваше ім'я"
-
-#: templates/review/archiv-review.php:35
-msgid "Your real reviews will appear here soon."
-msgstr "Незабаром тут будуть ваші реальні відгуки "
-
-#: includes/shortcodes/review-form/class-review-form-shortcode.php:85
-msgid "Your review"
-msgstr "Ваш відгук"
+#: includes/shortcodes/class-course-cards-shortcode.php:95
+#: includes/shortcodes/class-course-cards-shortcode.php:98
+msgid "Дивитись ще"
+msgstr ""
 
 #: includes/post-types/class-course-stream-post-types.php:32
 msgid "Додати новий потік"
@@ -603,6 +483,14 @@ msgstr ""
 
 #: includes/post-types/class-course-stream-post-types.php:31
 msgid "Додати потік"
+msgstr ""
+
+#: includes/shortcodes/class-course-cards-shortcode.php:96
+msgid "Згорнути"
+msgstr ""
+
+#: includes/metaboxes/class-course-schedule-metabox.php:58
+msgid "Месяц:"
 msgstr ""
 
 #: includes/post-types/class-course-stream-post-types.php:34
@@ -634,24 +522,10 @@ msgstr ""
 msgid "Пошук потоків"
 msgstr ""
 
-#: includes/metaboxes/class-review-metabox.php:91
-msgid "Преподаватели"
-msgstr ""
-
 #: includes/post-types/class-course-stream-post-types.php:33
 msgid "Редагувати потік"
 msgstr ""
 
-#: includes/metaboxes/class-review-metabox.php:82
-msgid "Рейтинг"
-msgstr ""
-
 #: includes/post-types/class-course-stream-post-types.php:38
 msgid "У кошику потоків не знайдено"
-msgstr ""
-
-#: includes/admin/class-plugin-settings.php:214
-msgid ""
-"Шорткод курсів для сторінки архіву та головної сторінки. Змініть ID та їх "
-"порядок за потреби."
 msgstr ""

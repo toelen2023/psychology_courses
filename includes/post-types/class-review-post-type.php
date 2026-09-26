@@ -43,7 +43,8 @@ class PC_Review_Post_Type {
 
   $args = array(
    'labels'             => $labels,
-   'public'             => false,
+   'public'             => true,
+   'publicly_queryable' => true,
    'show_ui'            => true,
    'show_in_menu'       => true,
    'menu_position'      => 25,
@@ -52,6 +53,7 @@ class PC_Review_Post_Type {
    'show_in_rest'       => true,
    'has_archive'        => false,
    'rewrite'            => false,
+   
   );
 
   register_post_type( 'review', $args );

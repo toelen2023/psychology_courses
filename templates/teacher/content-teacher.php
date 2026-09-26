@@ -39,10 +39,6 @@ $consult_price = get_post_meta( $teacher_id, pc_get_consultation_price_meta_key(
                 $content = get_the_content( null, false, $teacher_id );
                 echo apply_filters( 'the_content', $content );
             ?>
-            <?php
-            //echo 'POST ID: ' . get_the_ID() . ' ';
-           // echo 'POST TYPE: ' . get_post_type() . ' ';
-            ?>
         
             <div class="pc-teacher-info d-flex-between" itemprop="text">         
                 <div class="column-1-2">

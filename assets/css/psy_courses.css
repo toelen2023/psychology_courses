@@ -1,3 +1,9 @@
+:root {
+    /*-- Reviews rating --*/
+	--star_width: 22px;
+	--star_bg: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" %3E%3Cpath style="fill:%23C0B099" d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/%3E%3C/svg%3E');
+	--star_bg_fill: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" %3E%3Cpath style="fill:%233f6c45" d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/%3E%3C/svg%3E');
+}
 /* Grid  */
 .d-flex-column {
   display: flex;
@@ -288,12 +294,83 @@ button.pc-course-cards__toggle.is-open  {
     /* cursor: pointer; */
     transition: all .3s ease-in-out;
 }
-.pc-teacher-slider-next {
-    left: auto;
-    right: 2px;
+.pc-teacher-slider-next { left: auto; right: 2px;}
+/* Rating */
+.pc-rating__group {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(var(--star_width) * 5);
+    height: var(--star_width);
+    background-image: var(--star_bg);
+    background-size: var(--star_width) auto;
+    background-repeat: repeat-x;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.rating__star {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: var(--star_width);
+	margin: 0;
+	font-size: inherit;
+	background-size: var(--star_width) auto;
+	background-repeat: repeat-x;
+	background-color: transparent;
+	cursor: pointer;
+	opacity: 1;
+	border: none !important;
+	border-radius: 0;
+	transition: 0.2s;
+	border: none !important;
 }
 
+.pc-rating__group:focus,
+.rating__star:focus {outline: none !important; 	box-shadow: none; }
 
+.star,
+.star-gray,
+.rating__star:checked,
+.rating__star:hover {
+	display: inline-block;
+	background-image: var(--star_bg_fill);
+	width: var(--star_width);
+	height: var(--star_width);
+	background-size: var(--star_width);
+}
+
+.star-gray,.rating__star:hover ~ .rating__star {background-image: var(--star_bg); }
+
+.rating__star:nth-child(1) {
+	width: var(--star_width);
+	z-index: 5;
+}
+
+.rating__star:nth-child(2) {
+	width: calc(var(--star_width)* 2);
+	z-index: 4;
+}
+
+.rating__star:nth-child(3) {
+	width: calc(var(--star_width)* 3);
+	z-index: 3;
+}
+
+.rating__star:nth-child(4) {
+	width: calc(var(--star_width)* 4);
+	z-index: 2;
+}
+
+.rating__star:nth-child(5) {
+	width: calc(var(--star_width)* 5);
+	z-index: 1;
+}
 
 @media (max-width: 780px) {
     .pc-teacher-list__desktop {  display: none; }
