@@ -35,6 +35,12 @@ get_header();
           <?php endif; ?>
       </div>
     </div>
+    
+    <div class="wp-block-button center-button">
+      <a class="wp-block-button__link wp-element-button" href="https://anika-themes.in.ua/rozklad/">
+        <b><?php _e( 'See courses schedule', 'psychology-courses' ); ?></b></a>
+    </div>
+  
     <div class="wp-block-columns olvia-form-bottom is-layout-flex wp-block-columns-is-layout-flex">
       <div class="wp-block-column olvia-form-header is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:66.66%">
         <h2><?php _e( 'Have you any question <strong>about the training?</strong>', 'psychology-courses' ); ?></h2>

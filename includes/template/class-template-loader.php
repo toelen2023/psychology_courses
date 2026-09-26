@@ -24,12 +24,18 @@ class PC_Template_Loader {
 
         if ( is_post_type_archive( 'course' ) ) 
             return PC_PLUGIN_PATH . 'templates/course/archive-course.php';
-       // teacher templates
+        // teachers templates
         if ( is_singular( 'teacher' ) ) 
             return PC_PLUGIN_PATH . 'templates/teacher/single-teacher.php';
 
         if ( is_post_type_archive( 'teacher' ) ) 
             return PC_PLUGIN_PATH . 'templates/teacher/archive-teacher.php';
+        //reviews template
+        if ( is_singular( 'review' ) ) 
+            return PC_PLUGIN_PATH . 'templates/review/single-review.php';
+
+        if ( is_post_type_archive( 'review' ) ) 
+            return PC_PLUGIN_PATH . 'templates/review/archiv-review.php';
 
         return $template;
 
