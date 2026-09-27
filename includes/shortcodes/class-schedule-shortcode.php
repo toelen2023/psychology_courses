@@ -113,7 +113,7 @@ class PC_Schedule_Shortcode {
         $duration = esc_html( $row['duration'] );
         $lessons  = ! empty( $row['lessons'] ) ?  esc_html( $row['lessons'] ) : "10"; ?>
       <div class="wp-block-column schedule-list__duration">
-       <b><?php printf( _n('%d month','%d months', $duration, 'psychology-courses'), $duration); ?></b> | <?php echo $lessons; ?> <?php  _e (' lessons', 'psychology-courses' );   ?>
+       <b><?php printf( _n('%d month','%d months', $duration, 'psychology-courses'), $duration); ?></b><span class="m-hidden"> | <?php echo $lessons; ?> <?php  _e (' lessons', 'psychology-courses' );  ?></span>
       </div>
      <?php endif; ?>
 

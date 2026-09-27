@@ -382,7 +382,7 @@ button.pc-course-cards__toggle.is-open  {
     line-height: 1.5;
 }
 .pc-review-card {
-    max-width: 600px;
+    max-width: 620px;
     width: 100%;
     border-radius: 17px;
     border: 1px solid var(--light-accent-color);

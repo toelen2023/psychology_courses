@@ -31,8 +31,8 @@ $teacher_link = get_the_permalink($teacher_id);
  
  <div class="pc-teacher-card-content">
 
-    <h3><?php the_title(); ?></h3>
-    <p><?php pc_get_template_part('teacher/parts/teacher-courses-shortlist'); ?></p>
+    <h2 class="my-30"><?php the_title(); ?></h2>
+   
     <div>
         <?php echo wp_kses_post($teacher_excerpt); ?>
     </div>

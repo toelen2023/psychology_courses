@@ -16,7 +16,7 @@ $consult_price = get_post_meta( $teacher_id, pc_get_consultation_price_meta_key(
     <div class="entry-content d-flex-between" itemprop="text">
         <div class="pc-teacher-intro column-1-4">
               <?php if ( has_post_thumbnail() ) : ?>
-            <div class="pc-teacher-image">
+            <div class="pc-teacher-image round-img">
                 <?php
                 the_post_thumbnail('medium',
                     array('alt' => get_the_title(),  )

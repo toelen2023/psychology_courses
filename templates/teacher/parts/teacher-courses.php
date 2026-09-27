@@ -35,7 +35,7 @@ $teacher_id = get_the_ID();
 
     <?php if ( $courses->have_posts() ) : ?>
 
-     <ul class="pc-teacher dash-list">
+     <ul class="pc-teacher">
 
        <?php while ( $courses->have_posts() ) : ?>
 
@@ -49,8 +49,9 @@ $teacher_id = get_the_ID();
             <li class="pc-teacher__course-item">
                 <a href="<?php the_permalink(); ?>">
                     <?php
-                    if ( $short_title ) echo esc_html( $short_title );
-                    else the_title();  
+                    /* if ( $short_title ) echo esc_html( $short_title );
+                    else the_title();  */ 
+                    the_title();
                     ?>
                 </a>
             </li>
