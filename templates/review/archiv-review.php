@@ -13,12 +13,10 @@ get_header();
 <main class="site-main" id="main">
  <div class="inside-article pc-reviews">
   <header class="entry-header">
-   <h1 class="entry-title">
-    <?php post_type_archive_title(); ?>
-   </h1>
+   <h1 class="entry-title"> <?php post_type_archive_title(); ?></h1>
   </header>
 
-  <div class="pc-reviews-list">
+  <div class="pc-reviews-list d-flex-between flex-wrap">
    <?php if ( have_posts() ) : ?>
 
     <?php while ( have_posts() ) : ?>
@@ -36,6 +34,7 @@ get_header();
     </p>
 
    <?php endif; ?>
+   <?php echo do_shortcode('[review_form]'); ?>
 
   </div>
  </div>

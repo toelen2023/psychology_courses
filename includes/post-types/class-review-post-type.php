@@ -47,12 +47,16 @@ class PC_Review_Post_Type {
    'publicly_queryable' => true,
    'show_ui'            => true,
    'show_in_menu'       => true,
+   'show_in_nav_menus'  => true,
    'menu_position'      => 25,
    'menu_icon'          => 'dashicons-star-filled',
    'supports'           => array( 'title', 'editor', ),
    'show_in_rest'       => true,
-   'has_archive'        => false,
-   'rewrite'            => false,
+   'has_archive'        => 'reviews',
+    'rewrite'            => [
+        'slug'       => 'reviews',
+        'with_front' => false,
+    ],
    
   );
 

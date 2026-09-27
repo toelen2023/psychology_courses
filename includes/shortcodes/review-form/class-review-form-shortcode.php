@@ -47,7 +47,7 @@ class PC_Review_Form {
 
   ob_start();
   ?>
-  <h3><?php _e( 'Add Review', 'psychology-courses' ); ?></h3>
+  <h3 id="add-review" class="mt-30"><?php _e( 'Add Review', 'psychology-courses' ); ?></h3>
   <form class="pc-review-form" method="post">
 
    <?php wp_nonce_field( 'pc_submit_review', 'pc_review_form_nonce' ); ?>
