@@ -371,7 +371,35 @@ button.pc-course-cards__toggle.is-open  {
 	width: calc(var(--star_width)* 5);
 	z-index: 1;
 }
+/* Review modal */
+.pc-review-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.45);
+}
 
+.pc-review-modal[hidden] {  display: none; }
+
+.pc-review-modal__content {
+    position: relative;
+    width: min(500px, 100%);
+    padding: 30px 35px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.pc-review-modal__content p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
 @media (max-width: 780px) {
     .pc-teacher-list__desktop {  display: none; }
     .pc-teacher-list__mobile {  display: block;  }

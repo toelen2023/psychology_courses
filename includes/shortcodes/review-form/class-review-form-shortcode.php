@@ -47,7 +47,7 @@ class PC_Review_Form {
 
   ob_start();
   ?>
-  <h3><?php _e( 'Add review', 'psychology-courses' ); ?></h3>
+  <h3><?php _e( 'Add Review', 'psychology-courses' ); ?></h3>
   <form class="pc-review-form" method="post">
 
    <?php wp_nonce_field( 'pc_submit_review', 'pc_review_form_nonce' ); ?>
@@ -92,16 +92,74 @@ class PC_Review_Form {
      <?php esc_html_e('I consent to the processing of my personal data in accordance with the Law of Ukraine No. 2297-VI dated June 1, 2010, "On Personal Data Protection."', 'psychology-courses'); ?>
     </label>
    </div>  
-   <input type="hidden" name="success-message" id="success-message" value="<?php _e( 'Thanks for your review!', 'psychology-courses' ); ?>">
+   <input type="hidden" name="success_message" id="success_message" value="<?php  esc_attr_e( 'Thanks for your review!', 'psychology-courses' ); ?>">
    <input type="hidden" name="action" value="add_review">
-   <!-- Дякуємо за ваш відгук! -->
-    <input type="hidden" name="error-message" id="error-message" value="<?php _e( 'Sorry. An error occurred.', 'psychology-courses' ); ?>">
-    <!-- Вибачте. Сталася помилка. -->
+    <input type="hidden"  name="error_message" id="error_message" value="<?php  esc_attr_e( 'Sorry. An error occurred.', 'psychology-courses' ); ?>">
    <button  type="submit"  name="pc_review_submit"  value="1" class="center-button my-30">
     <?php esc_html_e( 'Send review', 'psychology-courses' ); ?>
    </button>
   </form>
+  <div class="pc-review-modal" id="pc-review-modal" hidden>
+  <div class="pc-review-modal__content">
+    <p id="pc-review-modal-message"></p>
+  </div>
+  </div>
 
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+  const form = document.querySelector('.pc-review-form');
+  const modal = document.getElementById('pc-review-modal');
+  const message = document.getElementById('pc-review-modal-message');
+
+  if (!form || !modal || !message)  return;
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const submitButton = form.querySelector('[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
+    
+    const formData = new FormData(form);
+    formData.set( 'action', 'add_review' );
+
+    fetch('<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'same-origin'
+      })
+    .then( response => response.json() )
+    .then(response => {
+      const successMessage = form.querySelector( '[name="success_message"]');
+      const errorMessage = form.querySelector( '[name="error_message"]');
+
+      if (response.success) {
+        message.textContent = response.data.message;
+        modal.hidden = false;
+        form.reset();
+        setTimeout(function () {  modal.hidden = true;  }, 5000);
+      } else {
+        message.textContent = response.data.message;
+        modal.hidden = false;
+        setTimeout(function () { modal.hidden = true; }, 5000);
+      }
+    })
+    .catch(function () {
+
+    const errorMessage = form.querySelector('[name="error_message"]');
+
+    message.textContent = errorMessage ? errorMessage.value : 'Sorry. An error occurred.';
+
+    modal.hidden = false;
+
+    setTimeout(function () {  modal.hidden = true; }, 5000);
+    }).finally(function () {
+
+      if (submitButton) submitButton.disabled = false;
+    });
+   });
+  });
+  </script>
   <?php
   return ob_get_clean();
  }

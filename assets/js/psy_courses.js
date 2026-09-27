@@ -1,7 +1,7 @@
 const swiper = new Swiper('.pc-teacher-slider-swiper', {
 
   speed: 400,
-  loop: true,
+  // loop: true,
   slidesPerView: 1.1,
   spaceBetween: 20,
   pagination: {
@@ -144,34 +144,23 @@ function updateCards() {
 
     cards.forEach(function (card) {
 
-        /*
-         * Cards excluded by the selected filter
-         * remain hidden.
-         */
         if (card.classList.contains('is-hidden')) {
             card.classList.add('is-removed');
             return;
         }
 
-        /*
-         * Filter is selected:
-         * show all matching cards.
-         */
+        // Filter is selected: show all matching cards.
         if (cardsExpanded) {
             card.classList.remove('is-removed');
             return;
         }
 
-        /*
-         * Normal state:
-         * show only the first 4/6 matching cards.
-         */
+        // Normal state: show only the first 4/6 matching cards.
         if (visibleCount < visibleLimit) {
             card.classList.remove('is-removed');
             visibleCount++;
-        } else {
-            card.classList.add('is-removed');
-        }
+        } else card.classList.add('is-removed');
+        
     });
 
     updateToggleButton();
@@ -179,15 +168,11 @@ function updateCards() {
 
 
 if (toggle) {
-
     toggle.addEventListener('click', function () {
-
         cardsExpanded = !cardsExpanded;
-
         updateCards();
     });
 }
-
 
 updateCards();
 
