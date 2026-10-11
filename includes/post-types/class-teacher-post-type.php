@@ -36,7 +36,7 @@ class PC_Teacher_Post_Type {
                 'show_in_rest'       => true,
 
                 'menu_position'      => 22,
-                'menu_icon'          => PC_PLUGIN_URL. 'assets/img/teacher.png',
+                'menu_icon'          => 'dashicons-businesswoman',
 
                 'supports'           => [
                     'title',

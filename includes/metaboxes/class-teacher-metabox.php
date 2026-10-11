@@ -14,18 +14,18 @@ class PC_Teacher_Metabox {
   */
  public function register(): void {
 
-  add_action(
-   'add_meta_boxes',
+  add_action('add_meta_boxes',
    array( $this, 'add_meta_boxes' ) );
 
-   add_filter(
-    'manage_teacher_posts_columns',
+   add_filter('manage_teacher_posts_columns',
     array( $this, 'add_admin_columns' ) );
 
-   add_action(
-     'manage_teacher_posts_custom_column',
+   add_action('manage_teacher_posts_custom_column',
      array( $this, 'render_admin_column' ),
      10, 2 );
+   add_action('quick_edit_custom_box',
+    array( $this, 'render_quick_edit_fields' ),
+    10, 2);
 
  }
 
@@ -70,6 +70,7 @@ public function render_courses( WP_Post $post ): void {
         'posts_per_page' => -1,
         'orderby'        => 'title',
         'order'          => 'ASC',
+        'lang'           => pll_current_language(),
         )
     );
 
@@ -77,7 +78,7 @@ public function render_courses( WP_Post $post ): void {
         esc_html_e('No courses available.', 'psychology-courses');
         return;
     }
-
+   
     wp_nonce_field(
         'pc_teacher_courses',
         'pc_teacher_courses_nonce'   );
@@ -91,7 +92,7 @@ public function render_courses( WP_Post $post ): void {
     );
 
     if ( ! is_array( $teachers ) )  $teachers = array();
-
+     echo '<script>alert('.pll_current_language().')</script>';
     ?>
 
     <p>
@@ -128,14 +129,11 @@ public function render_consultation_price( WP_Post $post ): void {
 
     <p>
         <label for="pc_consultation_price">
-        <?php
-            esc_html_e('Consultation price (UAH):', 'psychology-courses');
-        ?>
+        <?php esc_html_e('Consultation price (UAH):', 'psychology-courses'); ?>
         </label>
     </p>
 
-    <input
-        type="number"
+    <input type="number"
         id="pc_consultation_price"
         name="pc_consultation_price"
         value="<?php echo esc_attr( $price ); ?>"
@@ -178,6 +176,34 @@ public function render_consultation_price( WP_Post $post ): void {
   public function render_admin_column( string $column, int $post_id ): void {
 
     if ( 'teacher_id' === $column ) {
+        $courses = get_posts(
+            array(
+                'post_type'      => 'course',
+                'post_status'    => array(
+                    'publish',
+                    'draft',
+                    'pending',
+                    'private',
+                ),
+                'posts_per_page' => -1,
+                'fields'         => 'ids',
+                'lang'           => pll_current_language(),
+            )
+        );
+    
+    $selected_courses = array();
+
+    foreach ( $courses as $course_id ) {
+        $teachers = get_post_meta($course_id,
+            pc_get_course_teachers_meta_key(), true );
+
+        if (is_array( $teachers ) && in_array( $post_id, array_map( 'absint', $teachers ), true ) ) 
+            $selected_courses[] = $course_id;
+    }
+
+    echo '<span class="pc-teacher-course-ids" data-ids="' . esc_attr( implode( ',', $selected_courses ) ) .
+            '" hidden></span>';
+
         echo esc_html( (string) $post_id );
         return;
     }
@@ -190,6 +216,65 @@ public function render_consultation_price( WP_Post $post ): void {
         echo esc_html( $price . ' грн' );
         return;
     }
+    
  }
+ /**
+ * Render Quick Edit fields for teacher courses.
+ *
+ * @param string $column_name Current column.
+ * @param string $post_type  Current post type.
+ * @return void
+ */
+public function render_quick_edit_fields(
+    string $column_name,
+    string $post_type
+): void {
+
+    if (
+        'teacher' !== $post_type
+        || 'consultation_price' !== $column_name
+    ) {
+        return;
+    }
+
+    wp_nonce_field(
+        'pc_teacher_courses',
+        'pc_teacher_courses_nonce'
+    );
+
+    $courses = get_posts(
+        array(
+            'post_type'      => 'course',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+            'lang'           => pll_current_language(),
+        )
+    );
+    ?>
+
+    <fieldset class="inline-edit-col-right">
+        <div class="inline-edit-col">
+            <span class="title">
+                <?php esc_html_e( 'Courses', 'psychology-courses' ); ?>
+            </span>
+
+            <div class="pc-quick-edit-courses">
+                <?php foreach ( $courses as $course ) : ?>
+                    <label>
+                        <input type="checkbox"
+                            class="pc-quick-edit-course"
+                            name="pc_teacher_courses[]"
+                            value="<?php echo esc_attr( $course->ID ); ?>">
+                        <?php echo esc_html( $course->post_title ); ?>
+                    </label>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </fieldset>
+
+    <?php
+}
 
 }//end class

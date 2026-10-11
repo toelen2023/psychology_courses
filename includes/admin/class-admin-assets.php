@@ -31,7 +31,7 @@ class PC_Admin_Assets {
         wp_enqueue_style( 'pc-schedule-admin', PC_PLUGIN_URL . 'assets/css/psy-admin.css',
              array(), PC_VERSION );
     }
-    if ( $screen && 'course' === $screen->post_type ) {
+    if ( $screen  && in_array( $screen->post_type, array( 'course', 'teacher' ), true ) ){
         wp_enqueue_media();
         wp_enqueue_script('pc-course-quick-edit',
         PC_PLUGIN_URL . 'assets/js/course-quick-edit.js',

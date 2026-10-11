@@ -1,31 +1,61 @@
 jQuery( function ( $ ) {
+    const wpInlineEdit = inlineEditPost.edit;
 
- const wpInlineEdit = inlineEditPost.edit;
+    inlineEditPost.edit = function ( id ) {
+        wpInlineEdit.apply( this, arguments );
 
- inlineEditPost.edit = function ( id ) {
+        let postId = 0;
 
-  wpInlineEdit.apply( this, arguments );
+        if ( typeof id === 'object' ) {
+            postId = parseInt( this.getId( id ), 10 );
+        } else {
+            postId = parseInt( id, 10 );
+        }
 
-  let postId = 0;
+        if ( ! postId ) {
+            return;
+        }
 
-  if ( typeof id === 'object' ) postId = parseInt( this.getId( id ), 10 );
-  else   postId = parseInt( id, 10 ); 
+        const row = $( '#post-' + postId );
+        const editRow = $( '#edit-' + postId );
 
-  if ( ! postId )  return;
+        // Course fields.
+        editRow.find( '.pc-quick-edit-short-title' ).val(
+            row.find( '.pc-course-short-title' ).data( 'value' ) || ''
+        );
 
+        editRow.find( '.pc-quick-edit-duration' ).val(
+            row.find( '.pc-course-duration' ).data( 'value' ) || ''
+        );
 
-  const row = $( '#post-' + postId );
+        editRow.find( '.pc-quick-edit-lessons' ).val(
+            row.find( '.pc-course-lessons' ).data( 'value' ) || ''
+        );
 
-  $( '.pc-quick-edit-short-title' ).val(
-   row.find( '.pc-course-short-title' ).data( 'value' ) || '');
+        // Selected teachers for a course.
+        const teacherIds = String(
+            row.find( '.pc-course-teacher-ids' ).data( 'ids' ) || ''
+        ).split( ',' ).filter( Boolean );
 
-  $( '.pc-quick-edit-duration' ).val(
-   row.find( '.pc-course-duration' ).data( 'value' ) || '');
+        editRow.find( '.pc-quick-edit-teacher' ).each( function () {
+            $( this ).prop(
+                'checked',
+                teacherIds.includes( String( $( this ).val() ) )
+            );
+        } );
 
-  $( '.pc-quick-edit-lessons' ).val(
-   row.find( '.pc-course-lessons' ).data( 'value' ) || '');
- };
+        // Selected courses for a teacher.
+        const courseIds = String(
+            row.find( '.pc-teacher-course-ids' ).data( 'ids' ) || ''
+        ).split( ',' ).filter( Boolean );
 
+        editRow.find( '.pc-quick-edit-course' ).each( function () {
+            $( this ).prop(
+                'checked',
+                courseIds.includes( String( $( this ).val() ) )
+            );
+        } );
+    };
 } );
 
 jQuery(document).ready(function ($) {

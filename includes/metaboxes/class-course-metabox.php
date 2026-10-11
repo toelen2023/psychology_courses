@@ -230,14 +230,15 @@ $selected_teachers = get_post_meta( $post->ID,
 if ( ! is_array( $selected_teachers ) )  $selected_teachers = array();
 
 $teachers = get_posts(
-    array(
-    'post_type'      => 'teacher',
-    'post_status'    => 'publish',
-    'posts_per_page' => -1,
-    'orderby'        => 'title',
-    'order'          => 'ASC',
-    )
-);
+      array(
+          'post_type'      => 'teacher',
+          'post_status'    => 'publish',
+          'posts_per_page' => -1,
+          'orderby'        => 'title',
+          'order'          => 'ASC',
+          'lang'           => pll_current_language(),
+      )
+  );
 
 if ( empty( $teachers ) ) {
     esc_html_e('No teachers available.', 'psychology-courses' );
@@ -251,9 +252,7 @@ if ( empty( $teachers ) ) {
 <?php foreach ( $teachers as $teacher ) : ?>
   <p>
     <label>
-     <input
-        type="checkbox"
-        name="pc_course_teachers[]"
+     <input type="checkbox" name="pc_course_teachers[]"
         value="<?php echo esc_attr( $teacher->ID ); ?>"
         <?php checked( in_array( $teacher->ID, $selected_teachers, true ) ); ?>>
 
@@ -325,9 +324,15 @@ if ( empty( $teachers ) ) {
     }
     if ( 'short_title' === $column ) {
         $short_title = get_post_meta( $post_id, 'pc_course_short_title', true );
+        $teachers = get_post_meta( $post_id, pc_get_course_teachers_meta_key(), true  );
+        if ( ! is_array( $teachers ) ) $teachers = array();
+        $teachers = array_map( 'absint', $teachers );
 
         echo '<span class="pc-course-short-title" data-value="' .  esc_attr( $short_title ) . '">' .
           esc_html( $short_title ) . '</span>';
+
+        echo '<span class="pc-course-teacher-ids" data-ids="' .  esc_attr( implode( ',', $teachers ) ) . 
+        '" hidden></span>';
         return;
       }
   } 
@@ -373,6 +378,37 @@ if ( empty( $teachers ) ) {
       name="pc_lessons" class="small-text pc-quick-edit-lessons">
     </span>
    </label>
+   <?php
+    $teachers = get_posts(
+          array(
+              'post_type'      => 'teacher',
+              'post_status'    => 'publish',
+              'posts_per_page' => -1,
+              'orderby'        => 'title',
+              'order'          => 'ASC',
+              'lang'           => pll_current_language(),
+          )
+      );
+    ?>
+
+    <div class="pc-quick-edit-relations">
+        <span class="title">
+            <?php esc_html_e( 'Teachers', 'psychology-courses' ); ?>
+              
+        </span>
+
+        <div class="pc-quick-edit-teachers">
+            <?php foreach ( $teachers as $teacher ) : ?>
+                <label>
+                    <input type="checkbox"
+                        class="pc-quick-edit-teacher"
+                        name="pc_course_teachers[]"
+                        value="<?php echo esc_attr( $teacher->ID ); ?>">
+                    <?php echo esc_html( $teacher->post_title ); ?>
+                </label>
+            <?php endforeach; ?>
+        </div>
+    </div>
 
   </div>
  </fieldset>

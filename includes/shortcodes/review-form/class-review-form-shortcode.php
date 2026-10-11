@@ -51,17 +51,21 @@ class PC_Review_Form {
   <form class="pc-review-form" method="post">
 
    <?php wp_nonce_field( 'pc_submit_review', 'pc_review_form_nonce' ); ?>
-   <label><?php _e( 'Rating', 'psychology-courses' ); ?>
-    <div class="pc-rating__group">
-        <input class="rating__star" type="radio" name="pc_review_rating" value="1" aria-label="Ужасно">
-        <input class="rating__star" type="radio" name="pc_review_rating" value="2" aria-label="Сносно">
-        <input class="rating__star" type="radio" name="pc_review_rating" value="3" aria-label="Нормально">
-        <input class="rating__star" type="radio" name="pc_review_rating" value="4" aria-label="Хорошо">
-        <input class="rating__star" type="radio" name="pc_review_rating" value="5" aria-label="Отлично" checked="">
-    </div>
-  </label>
-   <div class="d-flex-between gap=20">
-    <div class="column-1-3">  
+   
+   <div class="d-flex-between gap-20">
+    <div class="column-1-3"> 
+     <div style="margin-bottom: 10px">
+       <label><?php _e( 'Rating', 'psychology-courses' ); ?>
+        <div class="pc-rating__group">
+            <input class="rating__star" type="radio" name="pc_review_rating" value="1" aria-label="Ужасно">
+            <input class="rating__star" type="radio" name="pc_review_rating" value="2" aria-label="Сносно">
+            <input class="rating__star" type="radio" name="pc_review_rating" value="3" aria-label="Нормально">
+            <input class="rating__star" type="radio" name="pc_review_rating" value="4" aria-label="Хорошо">
+            <input class="rating__star" type="radio" name="pc_review_rating" value="5" aria-label="Отлично" checked="">
+        </div>
+           </label>
+     </div>
+
       <input type="text" name="review-author" class="w-100" placeholder="<?php _e( 'Your name', 'psychology-courses' ) ?>" required>
 
       <select id="pc-review-teacher" name="pc_review_teacher" class="w-100" required>

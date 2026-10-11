@@ -347,11 +347,11 @@ button.pc-course-cards__toggle.is-open  {
 	width: calc(var(--star_width)* 4);
 	z-index: 2;
 }
-
 .rating__star:nth-child(5) {
 	width: calc(var(--star_width)* 5);
 	z-index: 1;
 }
+#pc-review-content {height: 167px;}
 /* Review modal */
 .pc-review-modal {
     position: fixed;
