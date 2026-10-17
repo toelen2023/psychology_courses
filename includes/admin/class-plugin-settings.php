@@ -101,6 +101,13 @@ public function add_settings_link( array $links ): array {
     'psychology-courses-settings',
     'pc_general_settings'
    );
+   add_settings_field(
+    'pc_cf7_form_id_ru',
+    'ID російської форми Contact Form 7',
+    array( $this, 'render_cf7_ru_field' ),
+    'psychology-courses-settings',
+    'pc_general_settings'
+   );
 
    add_settings_section(
     'pc_shortcodes',
@@ -126,35 +133,26 @@ public function add_settings_link( array $links ): array {
    );
 
   }
-
-  /**
-   * Sanitize settings.
-   * @param array $input Settings.
-   * @return array
-   */
-/**
- * Sanitize settings.
+/* Sanitize settings.
  *
  * @param mixed $input Settings.
  * @return array
  */
 public function sanitize_settings( $input ): array {
 
-   if ( ! is_array( $input ) ) {
-      return array(
-         'cf7_form_id' => '',
-      );
-   }
+    if ( ! is_array( $input ) ) {
+        return array(
+            'cf7_form_id'    => '',
+            'cf7_form_id_ru' => '',
+        );
+    }
 
+    return array('cf7_form_id' => isset( $input['cf7_form_id'] )
+            ? absint( $input['cf7_form_id'] ) : 0,
 
-    return array(
-    'cf7_form_id'      => isset( $input['cf7_form_id'] )
-        ? sanitize_text_field( $input['cf7_form_id'] )
-        : '',
-    'course_shortcode' => isset( $input['course_shortcode'] )
-        ? sanitize_text_field( $input['course_shortcode'] )
-        : '',
-      );
+        'cf7_form_id_ru' => isset( $input['cf7_form_id_ru'] )
+            ? absint( $input['cf7_form_id_ru'] ) : 0,
+    );
 }
 
 /**
@@ -179,10 +177,33 @@ public function render_cf7_field(): void {
      'psychology-courses');
     ?>
    </p>
-
    <?php
 }
+/**
+ * Render Russian CF7 field.
+ *
+ * @return void
+ */
+public function render_cf7_ru_field(): void {
 
+    $options = get_option( self::OPTION_NAME, array() );
+
+    $form_id = isset( $options['cf7_form_id_ru'] ) ? absint( $options['cf7_form_id_ru'] )  : 0;
+    ?>
+
+    <input type="number"
+        min="1" step="1" class="regular-text"
+        name="<?php echo esc_attr( self::OPTION_NAME ); ?>[cf7_form_id_ru]"
+        value="<?php echo esc_attr( $form_id ); ?>">
+
+    <p class="description">
+        <?php
+        esc_html_e('ID російської форми для запису на курс.', 'psychology-courses');
+        ?>
+    </p>
+
+    <?php
+}
   /**
    * Render course shortcode.
    * @return void

@@ -8,11 +8,10 @@
 defined( 'ABSPATH' ) || exit;
 
 $course_id = get_the_ID();
-
 $course_url = get_permalink( $course_id );
-
 $duration = get_post_meta($course_id, pc_get_duration_meta_key(), true  );
 $extraClass="color-universal";
+
 ?>
 
 <article class="pc-course-card d-flex-column">
@@ -56,9 +55,25 @@ $extraClass="color-universal";
         </div>
       <?php endif; ?>
       </div> <!--/.content-->
+    <?php
+        $form_id = pc_get_cf7_form_id();
+
+        if ( function_exists( 'pll_current_language' ) ) {
+            $language = pll_current_language( 'slug' );
+
+            if ( 'ru' === $language ) {
+                $options = get_option( 'pc_plugin_settings', array() );
+                $form_id = absint( $options['cf7_form_id_ru'] ?? 0 );
+            }
+        }
+
+        
+    ?>
       <div class="pc-course-card__buttons d-flex-between flex-wrap">
-          <?php echo do_shortcode('[cf7ip_button form_id="'.pc_get_cf7_form_id().'" text="'. __('Sign up for a course','psychology-courses'). '" title="'. __('Sign up for','psychology-courses'). ' '.get_the_title(). '" animation="slide-left" course="'.get_the_title().'"] ');
-          ?>
+          <?php           
+          echo do_shortcode('[cf7ip_button form_id="' . absint( $form_id ) .
+            '" text="'. __('Sign up for a course','psychology-courses'). '" title="'. __('Sign up for','psychology-courses'). ' '.get_the_title(). '" animation="slide-left" course="'.get_the_title().'"] ');
+        ?>
         <a class="button pc-course-btn-more" href="<?php echo esc_url( $course_url ); ?>" >
           <?php esc_html_e('More', 'psychology-courses');  ?>
         </a>

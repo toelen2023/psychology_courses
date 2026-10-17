@@ -4,7 +4,7 @@
  * Plugin URI:  https://github.com/toelen2023/psychology_courses
  * Description: Plugin for managing psychology courses.
  * Version:     1.0.0
- * Author:      Alex Sha
+ * Author:      Olena S.
  * License:     GPL2+
  * Text Domain: psychology-courses
  * Domain Path: /languages
