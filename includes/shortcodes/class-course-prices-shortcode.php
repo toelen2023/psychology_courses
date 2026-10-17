@@ -63,6 +63,15 @@ class PC_Course_Prices_Shortcode {
 
       $cf7_form_id = pc_get_cf7_form_id();
 
+      if ( function_exists( 'pll_current_language' ) ) {
+         $language = pll_current_language( 'slug' );
+
+         if ( 'ru' === $language ) {
+               $options = get_option( 'pc_plugin_settings', array() );
+               $cf7_form_id = absint( $options['cf7_form_id_ru'] ?? 0 );
+         }
+      }
+
       ob_start();
       ?>
 
@@ -122,16 +131,11 @@ class PC_Course_Prices_Shortcode {
                $teacher_names = implode( ', ', $teacher_names );
 
                //Build CF7 button shortcode.
-               $button = '';
+               $button = ''; 
 
                if ( $cf7_form_id ) {
-                  $button_shortcode = sprintf(
-                        '[cf7ip_button form_id="%s" text="Записатися" title="Заявка на курс %s" form_button="Відправити заявку" animation="fade" course="%s" teacher="%s"]',
-                        sanitize_text_field( $cf7_form_id ),
-                        sanitize_text_field( $course_title ),
-                        sanitize_text_field( $course_title ),
-                        sanitize_text_field( $teacher_names )
-                  );
+                  $button_shortcode = 
+                        '[cf7ip_button form_id="'.sanitize_text_field( $cf7_form_id ).'" text="'.__('Sign up','psychology-courses').'" title="'.__('Registration for ','psychology-courses').' '.sanitize_text_field( $course_title ).'" form_button="'.__('Submit a request','psychology-courses').'" animation="fade" course="'.sanitize_text_field( $course_title ).'" teacher="'.sanitize_text_field( $teacher_names ).'"]';
 
                   $button = do_shortcode( $button_shortcode );
                }
@@ -188,9 +192,7 @@ class PC_Course_Prices_Shortcode {
       if ( 1 === $months ) return '1 місяць';
       
 
-      if (
-            $months % 10 >= 2 &&
-            $months % 10 <= 4 &&
+      if ( $months % 10 >= 2 && $months % 10 <= 4 &&
             ! in_array( $months % 100, array( 12, 13, 14 ), true )
       ) return $months . ' місяці';
       
