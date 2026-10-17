@@ -45,14 +45,14 @@ class PC_Course_Metabox {
    'default'
   );
 
-   add_meta_box(
+   /* add_meta_box(
     'pc_course_teachers',
     __( 'Teachers', 'psychology-courses' ),
     array( $this, 'render_course_teachers' ),
     'course',
     'side',
     'default'
-   );
+   ); */
 
  }
 
@@ -379,7 +379,7 @@ if ( empty( $teachers ) ) {
     </span>
    </label>
    <?php
-    $teachers = get_posts(
+    /* $teachers = get_posts(
           array(
               'post_type'      => 'teacher',
               'post_status'    => 'publish',
@@ -388,27 +388,27 @@ if ( empty( $teachers ) ) {
               'order'          => 'ASC',
               'lang'           => pll_current_language(),
           )
-      );
+      ); */
     ?>
 
-    <div class="pc-quick-edit-relations">
+    <!-- <div class="pc-quick-edit-relations">
         <span class="title">
-            <?php esc_html_e( 'Teachers', 'psychology-courses' ); ?>
+            <?php //esc_html_e( 'Teachers', 'psychology-courses' ); ?>
               
         </span>
 
         <div class="pc-quick-edit-teachers">
-            <?php foreach ( $teachers as $teacher ) : ?>
+            <?php //foreach ( $teachers as $teacher ) : ?>
                 <label>
                     <input type="checkbox"
                         class="pc-quick-edit-teacher"
                         name="pc_course_teachers[]"
-                        value="<?php echo esc_attr( $teacher->ID ); ?>">
-                    <?php echo esc_html( $teacher->post_title ); ?>
+                        value="<?php //echo esc_attr( $teacher->ID ); ?>">
+                    <?php //echo esc_html( $teacher->post_title ); ?>
                 </label>
-            <?php endforeach; ?>
+            <?php //endforeach; ?>
         </div>
-    </div>
+    </div> -->
 
   </div>
  </fieldset>

@@ -33,7 +33,7 @@ jQuery( function ( $ ) {
         );
 
         // Selected teachers for a course.
-        const teacherIds = String(
+        /* const teacherIds = String(
             row.find( '.pc-course-teacher-ids' ).data( 'ids' ) || ''
         ).split( ',' ).filter( Boolean );
 
@@ -42,10 +42,10 @@ jQuery( function ( $ ) {
                 'checked',
                 teacherIds.includes( String( $( this ).val() ) )
             );
-        } );
+        } ); */
 
         // Selected courses for a teacher.
-        const courseIds = String(
+        /* const courseIds = String(
             row.find( '.pc-teacher-course-ids' ).data( 'ids' ) || ''
         ).split( ',' ).filter( Boolean );
 
@@ -54,7 +54,7 @@ jQuery( function ( $ ) {
                 'checked',
                 courseIds.includes( String( $( this ).val() ) )
             );
-        } );
+        } ); */
     };
 } );
 

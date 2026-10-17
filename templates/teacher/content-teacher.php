@@ -8,10 +8,12 @@ defined( 'ABSPATH' ) || exit;
 
 $teacher_id = get_the_ID();
 $consult_price = get_post_meta( $teacher_id, pc_get_consultation_price_meta_key(), true );
+$slug = get_post_field( 'post_name', $teacher_id );
+
 //$content = get_the_content(null, null, $teacher_id);
 ?>
 
-<section class="pc-teacher-item">
+<section class="pc-teacher-item" id="<?php echo $slug ?>">
     
     <div class="entry-content d-flex-between" itemprop="text">
         <div class="pc-teacher-intro column-1-4">
@@ -45,7 +47,7 @@ $consult_price = get_post_meta( $teacher_id, pc_get_consultation_price_meta_key(
                     <?php pc_get_template_part('teacher/parts/teacher-courses'); ?>
                 </div>
 
-                <div class="column-1-2">
+                <div class="column-1-2" id="<?php echo $slug ?>-consultation">
                     <p><strong><?php  _e( 'Consultation Price', 'psychology-courses' ) ?> <?php echo  $consult_price ?> грн.</strong></p>
                     <?php
                     echo do_shortcode('[cf7ip_button form_id="081af97" text="'. __("Sign Up for a consultation", 'psychology-courses' ) .'" title="'. __("Sign Up for a consultation", 'psychology-courses' ) .'" animation="fade" teacher="' .get_the_title(). '"]');

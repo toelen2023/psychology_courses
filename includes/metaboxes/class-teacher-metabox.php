@@ -23,9 +23,9 @@ class PC_Teacher_Metabox {
    add_action('manage_teacher_posts_custom_column',
      array( $this, 'render_admin_column' ),
      10, 2 );
-   add_action('quick_edit_custom_box',
+   /* add_action('quick_edit_custom_box',
     array( $this, 'render_quick_edit_fields' ),
-    10, 2);
+    10, 2); */
 
  }
 
@@ -225,22 +225,11 @@ public function render_consultation_price( WP_Post $post ): void {
  * @param string $post_type  Current post type.
  * @return void
  */
-public function render_quick_edit_fields(
-    string $column_name,
-    string $post_type
-): void {
+public function render_quick_edit_fields( string $column_name, string $post_type ): void {
 
-    if (
-        'teacher' !== $post_type
-        || 'consultation_price' !== $column_name
-    ) {
-        return;
-    }
+    if ('teacher' !== $post_type  || 'consultation_price' !== $column_name ) return;   
 
-    wp_nonce_field(
-        'pc_teacher_courses',
-        'pc_teacher_courses_nonce'
-    );
+    wp_nonce_field('pc_teacher_courses', 'pc_teacher_courses_nonce' );
 
     $courses = get_posts(
         array(
@@ -252,7 +241,7 @@ public function render_quick_edit_fields(
             'lang'           => pll_current_language(),
         )
     );
-    ?>
+?>
 
     <fieldset class="inline-edit-col-right">
         <div class="inline-edit-col">
