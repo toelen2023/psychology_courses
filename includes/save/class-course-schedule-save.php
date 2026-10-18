@@ -100,7 +100,6 @@ class PC_Course_Schedule_Save {
 
    $lessons = isset( $row['lessons'] ) ? absint( $row['lessons'] ) : 0;
    
-   //$registration = isset( $row['registration'] )? sanitize_textarea_field( $row['registration'] ) : '';
 
    $allowed_icon_classes = array(
         'color-universal',
@@ -123,7 +122,6 @@ class PC_Course_Schedule_Save {
         && '' === $time
         && 0 === $duration
         && 0 === $lessons
-       // && '' === $registration
         && '' === $icon_class )  continue;
    
 
@@ -139,7 +137,6 @@ class PC_Course_Schedule_Save {
     'teacher_id'   => $teacher_id,
     'teacher_name' => $teacher_name,
     'icon_class'   => $icon_class,
-    //'registration' => $registration,
    );
   }
 

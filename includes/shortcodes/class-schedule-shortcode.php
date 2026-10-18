@@ -88,8 +88,29 @@ class PC_Schedule_Shortcode {
     </div><!--/.schedule-list__header-->
 <?php
   foreach ( $rows as $row ) {
-   $course_url = get_permalink( $row['course_id'] );
-   $teacher_url = get_permalink( $row['teacher_id'] );
+    $course_id = absint( $row['course_id'] );
+
+    if ( $course_id && function_exists( 'pll_get_post' ) ) {
+        $translated_id = pll_get_post( $course_id );
+
+        if ( $translated_id )  $course_id = $translated_id;
+    }
+
+    $course_name = get_the_title( $course_id );
+    $course_url  = get_permalink( $course_id );
+    
+    //teacher
+    $teacher_id = absint( $row['teacher_id'] );
+
+    if ( $teacher_id && function_exists( 'pll_get_post' ) ) {
+        $translated_id = pll_get_post( $teacher_id );
+
+        if ( $translated_id ) $teacher_id = $translated_id;  
+    }
+
+    $teacher_name = get_the_title( $teacher_id );
+    $teacher_url  = get_permalink( $teacher_id );
+
    ?>
    <div class="wp-block-columns is-layout-flex schedule-list__card <?php echo esc_attr( $row['icon_class'] ); ?>">
    
@@ -103,9 +124,10 @@ class PC_Schedule_Shortcode {
 
      <?php if ( ! empty( $row['course_name'] ) ) : ?>
       <div class="wp-block-column schedule-list__title">
-       <strong><a href="<?php echo $course_url; ?>"><?php echo esc_html( $row['course_name'] ); ?>
-        <?php if ( ! empty( $row['stream'] ) ) : ?>
-            -&nbsp;<?php echo esc_html( $row['stream'] ) . "&nbsp;". __("stream", 'psychology-courses'); ?></a>
+       <strong><a href="<?php echo $course_url; ?>"><?php echo esc_html( $course_name ); ?>
+        <?php if ( ! empty( $row['stream'] ) ) : 
+           $stream =  $row['stream'];  ?>
+            -&nbsp;<?php echo esc_html( $stream ) . "&nbsp;". __("stream", 'psychology-courses'); ?></a>
         <?php endif; ?>
         </strong>
       </div>
@@ -113,7 +135,7 @@ class PC_Schedule_Shortcode {
 
      <?php if ( ! empty( $row['date'] ) ) : ?>
       <div class="wp-block-column schedule-list__date">  
-        <?php echo  wp_date( 'd F', strtotime($row['date']) ). __( ' from', 'psychology-courses' );  ?> <?php echo ! empty( $row['time'] ) ? esc_html( $row['time'] ) : "10:00"; ?>
+        <?php echo  wp_date( 'd F', strtotime($row['date']) ). ' ' . __( ' from', 'psychology-courses' );  ?> <?php echo ! empty( $row['time'] ) ? esc_html( $row['time'] ) : "10:00"; ?>
       </div>
      <?php endif; ?>
 
@@ -122,13 +144,13 @@ class PC_Schedule_Shortcode {
         $duration = esc_html( $row['duration'] );
         $lessons  = ! empty( $row['lessons'] ) ?  esc_html( $row['lessons'] ) : "10"; ?>
       <div class="wp-block-column schedule-list__duration">
-       <b><?php printf( _n('%d month','%d months', $duration, 'psychology-courses'), $duration); ?></b><span class="m-hidden"> | <?php echo $lessons; ?> <?php  _e (' lessons', 'psychology-courses' );  ?></span>
+       <b><?php printf( _n('%d month','%d months', $duration, 'psychology-courses'), $duration); ?></b><span class="m-hidden"> | <?php echo $lessons; ?><?php  _e (' lessons', 'psychology-courses' );  ?></span>
       </div>
      <?php endif; ?>
 
      <?php if ( ! empty( $row['teacher_name'] ) ) : ?>
       <div class="wp-block-column schedule-list__teacher">
-       <a href="<?php echo $teacher_url; ?>"><?php echo esc_html( $row['teacher_name'] ); ?></a>
+       <a href="<?php echo $teacher_url; ?>"><?php echo esc_html( $teacher_name ); ?></a>
       </div>
      <?php endif; ?>
      <?php   
@@ -136,10 +158,11 @@ class PC_Schedule_Shortcode {
             '[cf7ip_button form_id="%d" text="%s" title="%s" animation="fade" course="%s" course_stream="%s" teacher="%s"]',
             $form_id,
             esc_attr__( 'Sign up', 'psychology-courses' ),
-            esc_attr__( 'Registration for', 'psychology-courses' ) . " ". $row['course_name'] ,
-            $row['course_name'] ,
-            $row['stream'],
-            $row['teacher_name']
+            esc_attr__( 'Registration for', 'psychology-courses' ) . " ". $course_name . ' '. 
+                    $stream . "&nbsp;". __("stream", 'psychology-courses') ,
+            $course_name . ' '. $stream . "&nbsp;". __("stream", 'psychology-courses'),
+            $stream,
+            $teacher_name
         );
       ?>
       <div class="wp-block-column schedule-list__button">

@@ -126,8 +126,6 @@ class PC_Schedule_Metabox {
   $icon_id = isset( $row['icon_id'] ) ? absint( $row['icon_id'] ) : 0;
 
   $icon_class = isset( $row['icon_class'] )? sanitize_html_class( $row['icon_class'] ) : '';
-
-  $registration = isset( $row['registration'] ) ? $row['registration']  : '';
   
 
   $courses = get_posts(
@@ -218,7 +216,7 @@ class PC_Schedule_Metabox {
     </label>
 
     <input type="date" name="pc_schedule_rows[<?php echo esc_attr( $index ); ?>][date]"
-     value="<?php echo esc_attr( $date ); ?>" class="regular-text">
+     value="<?php echo esc_attr( $date ); ?>" class="regular-text" style="width: 130px;">
 
    </div>
 
@@ -226,7 +224,7 @@ class PC_Schedule_Metabox {
     <label><?php esc_html_e( 'Start time', 'psychology-courses' ); ?> </label>
 
     <input type="time" name="pc_schedule_rows[<?php echo esc_attr( $index ); ?>][time]"
-     value="<?php echo esc_attr( $time ); ?>" class="regular-text">
+     value="<?php echo esc_attr( $time ); ?>" class="regular-text" style="width: 100px;">
 
    </div>
 
@@ -275,11 +273,7 @@ class PC_Schedule_Metabox {
 
    <div class="pc-schedule-row__field">
 
-    <label><?php esc_html_e( 'Icon class', 'psychology-courses' ); ?></label>
-
-     <label for="pc-icon-class">
-        <?php esc_html_e( 'Icon class', 'psychology-courses' ); ?>
-     </label>
+    <label for="pc-icon-class"><?php esc_html_e( 'Icon class', 'psychology-courses' ); ?></label>
 
     <select name="pc_schedule_rows[<?php echo esc_attr( $index  ); ?>][icon_class]">
         <option value="color-universal" <?php selected( $row['icon_class'] ?? '', 'color-universal' ); ?>>
@@ -294,15 +288,6 @@ class PC_Schedule_Metabox {
     </select>  
    </div>
 
-  <!--  <div class="pc-schedule-row__field pc-schedule-rowfield__registration">
-
-    <label for="pc-schedule-btncode"><?php esc_html_e( 'Registration shortcode', 'psychology-courses' ); ?></label>
-
-    <textarea id="pc-schedule-btncode"
-     name="pc_schedule_rows[<?php echo esc_attr( $index ); ?>][registration]"
-     rows="3"><?php echo esc_textarea( $registration ); ?></textarea>
-
-    </div> -->
    </div>
    <div class="pc-schedule-row__actions">
 

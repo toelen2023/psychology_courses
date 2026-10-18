@@ -62,7 +62,13 @@ class PC_Main_Schedule_Shortcode {
   
 
   $stream_id = $query->posts[0]->ID;
-  $stream_title = $query->posts[0]->post_title;
+  //$stream_title = $query->posts[0]->post_title;
+
+  $stream_title = wp_date(
+      'F Y',
+      mktime( 12, 0, 0, $month, 1, $year )
+  );
+
 
   $rows = get_post_meta( $stream_id,'pc_schedule_rows', true);
 
@@ -74,7 +80,7 @@ class PC_Main_Schedule_Shortcode {
   ?>
   
   <div class="pc-block">
-    <h2><?php echo $stream_title ?></h2>
+    <h2><?php echo esc_html( mb_convert_case( $stream_title, MB_CASE_TITLE, 'UTF-8' ) ); ?></h2>
     <div class="wp-block-group schedule-main__group">
         <div class="wp-block-columns schedule-main__header">
             <div class="schedule-main__date">
@@ -93,8 +99,28 @@ class PC_Main_Schedule_Shortcode {
     </div>
 <?php
   foreach ( $rows as $row ) {
-   $course_url = get_permalink( $row['course_id'] );
-   $teacher_url = get_permalink( $row['teacher_id'] );
+   $course_id = absint( $row['course_id'] );
+
+    if ( $course_id && function_exists( 'pll_get_post' ) ) {
+        $translated_id = pll_get_post( $course_id );
+
+        if ( $translated_id )  $course_id = $translated_id;
+    }
+
+    $course_name = get_the_title( $course_id );
+    $course_url  = get_permalink( $course_id );
+    
+    //teacher
+    $teacher_id = absint( $row['teacher_id'] );
+
+    if ( $teacher_id && function_exists( 'pll_get_post' ) ) {
+        $translated_id = pll_get_post( $teacher_id );
+
+        if ( $translated_id ) $teacher_id = $translated_id;  
+    }
+
+    $teacher_name = get_the_title( $teacher_id );
+    $teacher_url  = get_permalink( $teacher_id );
    ?>
    <div class="schedule-main__card align-items-center <?php echo esc_attr( $row['icon_class'] ); ?>">  
     <?php if ( ! empty( $row['date'] ) ) : ?>
@@ -108,16 +134,15 @@ class PC_Main_Schedule_Shortcode {
       </div>
     <?php endif; ?>  
     <div class="d-flex-between schedule-main__content">
-    <?php if ( ! empty( $row['course_name'] ) ) : ?>
+    <?php if ( ! empty( $course_name ) ) : ?>
       <div class="schedule-main__title">
-       <strong><a href="<?php echo $course_url; ?>"><?php echo esc_html( $row['course_name'] ); ?></a> </strong>
+       <strong><a href="<?php echo $course_url; ?>"><?php echo esc_html( $course_name ); ?></a> </strong>
       </div>
      <?php endif; ?>
-    <?php if ( ! empty( $row['teacher_name'] ) ) : ?>
+
       <div class="schedule-main__teacher">
-       <a href="<?php echo $teacher_url; ?>"><?php echo esc_html( $row['teacher_name'] ); ?></a>
+       <a href="<?php echo $teacher_url; ?>"><?php echo esc_html( $teacher_name ); ?></a>
       </div>
-     <?php endif; ?>
      
      <?php if ( ! empty( $row['duration'] ) ) : 
         $duration = esc_html( $row['duration'] );
@@ -128,14 +153,15 @@ class PC_Main_Schedule_Shortcode {
       </div>
      <?php endif; ?>
      <?php   
-        $registration_shortcode = sprintf(
+         $stream =  ! empty( $row['stream']) ? $row['stream'] : 1;
+         $registration_shortcode = sprintf(
             '[cf7ip_button form_id="%d" text="%s" title="%s" animation="fade" course="%s" course_stream="%s" teacher="%s"]',
             $form_id,
             esc_attr__( 'Sign up', 'psychology-courses' ),
-            esc_attr__( 'Registration for', 'psychology-courses' ) . " ". $row['course_name'] ,
-            $row['course_name'] ,
-            $row['stream'],
-            $row['teacher_name']
+            esc_attr__( 'Registration for', 'psychology-courses' ) . " ". $course_name ,
+            $course_name . ' '. $stream . "&nbsp;". __("stream", 'psychology-courses'),
+            $stream,
+            $teacher_name
         );
      ?>
       <div class="schedule-main__button">
@@ -145,7 +171,6 @@ class PC_Main_Schedule_Shortcode {
     </div><!-- /.schedule-main__content -->
    </div>
    <?php  } ?>
- </div>
 </div>
 </div><!--/.block-->
 
