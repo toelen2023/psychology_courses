@@ -131,11 +131,17 @@ class PC_Course_Prices_Shortcode {
                $teacher_names = implode( ', ', $teacher_names );
 
                //Build CF7 button shortcode.
-               $button = ''; 
+               $button = '';
 
                if ( $cf7_form_id ) {
-                  $button_shortcode = 
-                        '[cf7ip_button form_id="'.sanitize_text_field( $cf7_form_id ).'" text="'.__('Sign up','psychology-courses').'" title="'.__('Registration for ','psychology-courses').' '.sanitize_text_field( $course_title ).'" form_button="'.__('Submit a request','psychology-courses').'" animation="fade" course="'.sanitize_text_field( $course_title ).'" teacher="'.sanitize_text_field( $teacher_names ).'"]';
+                  $button_shortcode =
+                     '[cf7ip_button form_id="' . absint( $cf7_form_id ) .
+                     '" text="' . esc_attr__( 'Sign up', 'psychology-courses' ) .
+                     '" title="' . esc_attr__( 'Registration for', 'psychology-courses' ) .
+                     ' ' . esc_attr( $course_title ) .
+                     '" form_button="' . esc_attr__( 'Submit a request', 'psychology-courses' ) .
+                     '" animation="fade" course="' . esc_attr( $course_title ) .
+                     '" teacher="' . esc_attr( $teacher_names ) . '"]';
 
                   $button = do_shortcode( $button_shortcode );
                }

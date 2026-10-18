@@ -277,10 +277,21 @@ class PC_Schedule_Metabox {
 
     <label><?php esc_html_e( 'Icon class', 'psychology-courses' ); ?></label>
 
-    <input type="text" name="pc_schedule_rows[<?php echo esc_attr( $index ); ?>][icon_class]"
-     value="<?php echo esc_attr( $icon_class ); ?>"
-    >
+     <label for="pc-icon-class">
+        <?php esc_html_e( 'Icon class', 'psychology-courses' ); ?>
+     </label>
 
+    <select name="pc_schedule_rows[<?php echo esc_attr( $index  ); ?>][icon_class]">
+        <option value="color-universal" <?php selected( $row['icon_class'] ?? '', 'color-universal' ); ?>>
+            <?php esc_html_e( 'Universal', 'psychology-courses' ); ?>
+        </option>
+        <option value="color-beginner" <?php selected( $row['icon_class'] ?? '', 'color-beginner' ); ?>>
+            <?php  esc_html_e( 'For beginners', 'psychology-courses' ); ?>
+        </option>
+        <option value="color-psychologist" <?php selected( $row['icon_class'] ?? '', 'color-psychologist' ); ?>>
+            <?php esc_html_e( 'For psychologists', 'psychology-courses' ); ?>
+        </option>
+    </select>  
    </div>
 
    <div class="pc-schedule-row__field pc-schedule-rowfield__registration">

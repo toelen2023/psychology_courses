@@ -88,7 +88,7 @@ class PC_Main_Schedule_Shortcode {
    $course_url = get_permalink( $row['course_id'] );
    $teacher_url = get_permalink( $row['teacher_id'] );
    ?>
-   <div class="schedule-main__card align-items-center  <?php echo $row["icon_class"]; ?>">  
+   <div class="schedule-main__card align-items-center <?php echo esc_attr( $row['icon_class'] ); ?>">  
     <?php if ( ! empty( $row['date'] ) ) : ?>
       <div class="schedule-main__date"> 
         <?php $date = strtotime($row['date']); 

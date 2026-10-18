@@ -82,7 +82,7 @@ class PC_Schedule_Shortcode {
    $course_url = get_permalink( $row['course_id'] );
    $teacher_url = get_permalink( $row['teacher_id'] );
    ?>
-   <div class="wp-block-columns is-layout-flex schedule-list__card <?php echo $row["icon_class"]; ?>">
+   <div class="wp-block-columns is-layout-flex schedule-list__card <?php echo esc_attr( $row['icon_class'] ); ?>">
    
    <div class="wp-block-column schedule-list__logo">
     <?php
