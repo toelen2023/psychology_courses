@@ -294,7 +294,7 @@ class PC_Schedule_Metabox {
     </select>  
    </div>
 
-   <div class="pc-schedule-row__field pc-schedule-rowfield__registration">
+  <!--  <div class="pc-schedule-row__field pc-schedule-rowfield__registration">
 
     <label for="pc-schedule-btncode"><?php esc_html_e( 'Registration shortcode', 'psychology-courses' ); ?></label>
 
@@ -302,7 +302,7 @@ class PC_Schedule_Metabox {
      name="pc_schedule_rows[<?php echo esc_attr( $index ); ?>][registration]"
      rows="3"><?php echo esc_textarea( $registration ); ?></textarea>
 
-    </div>
+    </div> -->
    </div>
    <div class="pc-schedule-row__actions">
 

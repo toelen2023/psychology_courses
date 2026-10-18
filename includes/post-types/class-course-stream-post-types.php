@@ -51,11 +51,7 @@ if ( ! class_exists( 'PC_Stream_Post_Type' ) ) {
     'supports'           => array( 'title' ),
    );
 
-   register_post_type(
-    self::POST_TYPE,
-    $args
-   );
-
+   register_post_type(self::POST_TYPE, $args );
   }
  }
 }

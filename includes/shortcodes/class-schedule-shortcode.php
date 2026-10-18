@@ -24,6 +24,15 @@ class PC_Schedule_Shortcode {
 
   if ( ! $month || ! $year )  return '';
 
+  //form_id
+  $options = get_option( 'pc_plugin_settings', array() );
+
+  $language = function_exists( 'pll_current_language' ) ? pll_current_language( 'slug' ) : 'uk';
+
+  $form_id = ( 'ru' === $language )
+    ? absint( $options['cf7_form_id_ru'] ?? 0 )
+    : absint( $options['cf7_form_id'] ?? 0 );
+
   $query = new WP_Query(
    array(
     'post_type'      => 'course-stream',
@@ -49,7 +58,7 @@ class PC_Schedule_Shortcode {
     ),
    )
   );
-
+  
   if ( ! $query->have_posts() )  return '';
   
 
@@ -122,13 +131,21 @@ class PC_Schedule_Shortcode {
        <a href="<?php echo $teacher_url; ?>"><?php echo esc_html( $row['teacher_name'] ); ?></a>
       </div>
      <?php endif; ?>
-
-     <?php if ( ! empty( $row['registration'] ) ) : ?>
+     <?php   
+        $registration_shortcode = sprintf(
+            '[cf7ip_button form_id="%d" text="%s" title="%s" animation="fade" course="%s" course_stream="%s" teacher="%s"]',
+            $form_id,
+            esc_attr__( 'Sign up', 'psychology-courses' ),
+            esc_attr__( 'Registration for', 'psychology-courses' ) . " ". $row['course_name'] ,
+            $row['course_name'] ,
+            $row['stream'],
+            $row['teacher_name']
+        );
+      ?>
       <div class="wp-block-column schedule-list__button">
-       <?php echo do_shortcode( $row['registration'] ); ?>
+       <?php //echo do_shortcode( $row['registration'] ); ?>
+       <?php echo do_shortcode( $registration_shortcode ); ?>
       </div>
-     <?php endif; ?>
-
     
    </div>
    <?php  } ?>

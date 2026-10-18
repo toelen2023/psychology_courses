@@ -100,10 +100,18 @@ class PC_Course_Schedule_Save {
 
    $lessons = isset( $row['lessons'] ) ? absint( $row['lessons'] ) : 0;
    
-   $icon_class = isset( $row['icon_class'] ) ? sanitize_html_class( $row['icon_class'] ) : '';
+   //$registration = isset( $row['registration'] )? sanitize_textarea_field( $row['registration'] ) : '';
 
-   $registration = isset( $row['registration'] )? sanitize_textarea_field( $row['registration'] )
-    : '';
+   $allowed_icon_classes = array(
+        'color-universal',
+        'color-beginner',
+        'color-psychologist',
+    );
+
+    $icon_class = isset( $row['icon_class'] ) ? sanitize_html_class( $row['icon_class'] ) : '';
+
+    if ( ! in_array( $icon_class, $allowed_icon_classes, true ) ) $icon_class = 'color-universal';
+    
 
    // Ignore completely empty rows.
     
@@ -115,8 +123,8 @@ class PC_Course_Schedule_Save {
         && '' === $time
         && 0 === $duration
         && 0 === $lessons
-        && '' === $icon_class
-        && '' === $registration  )  continue;
+       // && '' === $registration
+        && '' === $icon_class )  continue;
    
 
    $rows[] = array(
@@ -131,7 +139,7 @@ class PC_Course_Schedule_Save {
     'teacher_id'   => $teacher_id,
     'teacher_name' => $teacher_name,
     'icon_class'   => $icon_class,
-    'registration' => $registration,
+    //'registration' => $registration,
    );
   }
 
