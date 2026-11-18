@@ -356,7 +356,7 @@ if ( empty( $teachers ) ) {
         '" hidden></span>';
 
         $discount = get_post_meta( $post_id, 'pc_discount', true );
-
+        $discount = '' !== $discount ? absint( $discount ) : 0;
         echo '<span class="pc-course-discount" data-value="' . esc_attr( $discount ) . '" hidden></span>';
         return;
       }

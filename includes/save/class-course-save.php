@@ -119,9 +119,7 @@ class PC_Course_Save {
  */
 private function save_discount( int $post_id ): void {
 
-    if ( ! isset( $_POST['pc_discount'] ) ) {
-        return;
-    }
+    if ( ! isset( $_POST['pc_discount'] ) ) return;
 
     $discount = absint( wp_unslash( $_POST['pc_discount'] ) );
     $discount = min( 100, $discount );
