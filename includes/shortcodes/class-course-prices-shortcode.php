@@ -117,6 +117,14 @@ class PC_Course_Prices_Shortcode {
                //Monthly UAH price.            
                $prices = pc_get_course_prices( $course_id );
                $monthly_price = $prices['uah']['month'] ?? '';
+               $discount = absint( get_post_meta( $course_id, 'pc_discount', true ) );
+               $discount = min( 100, $discount );
+
+               $discounted_price = $monthly_price;
+
+               if ( $discount > 0 && '' !== $monthly_price && is_numeric( $monthly_price ) ) {
+                  $discounted_price = round( (float) $monthly_price * ( 100 - $discount ) / 100, 2 );
+               }
 
                //Teachers assigned to the course.
                $teacher_ids = get_post_meta( $course_id, pc_get_course_teachers_meta_key(), true );
@@ -168,8 +176,33 @@ class PC_Course_Prices_Shortcode {
                   </div>
 
                   <div class="wp-block-column schedule-list__price">
-                     <?php  echo  ''!== $monthly_price ?  esc_html( $monthly_price ) . ' грн.' : ''; ?>
-                  </div>
+                  <?php if ( '' !== $monthly_price ) : ?>
+
+                     <?php if ( $discount > 0 ) : ?>
+
+                           <span class="course-price__old">
+                              <del><?php echo esc_html( $monthly_price ); ?> грн.</del>
+                           </span>
+
+                           <span class="course-price__new">
+                              <?php
+                              echo esc_html( number_format_i18n(
+                                       $discounted_price,  floor( $discounted_price ) === $discounted_price ? 0 : 2 ) );
+                              ?> грн.
+                           </span>
+
+                           <span class="course-price__discount">
+                              −<?php echo esc_html( $discount ); ?>%
+                           </span>
+
+                     <?php else : ?>
+
+                           <?php echo esc_html( $monthly_price ); ?> грн.
+
+                     <?php endif; ?>
+
+                  <?php endif; ?>
+               </div>
 
                   <div class="wp-block-column schedule-list__button">
                      <?php echo $button;  ?>

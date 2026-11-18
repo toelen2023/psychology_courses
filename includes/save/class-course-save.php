@@ -49,8 +49,9 @@ class PC_Course_Save {
   $this->save_duration( $post_id );
   $this->save_lessons( $post_id );
   $this->save_prices( $post_id );
+  $this->save_discount( $post_id );
   $this->save_short_title( $post_id );
-  $this->save_teachers( $post_id );
+  //$this->save_teachers( $post_id );
   $this->save_icon( $post_id );
 
  }
@@ -110,6 +111,23 @@ class PC_Course_Save {
   update_post_meta( $post_id, pc_get_price_meta_key(), $prices );
 
  }
+
+/**
+ * Save course discount.
+ * @param int $post_id Post ID.
+ * @return void
+ */
+private function save_discount( int $post_id ): void {
+
+    if ( ! isset( $_POST['pc_discount'] ) ) {
+        return;
+    }
+
+    $discount = absint( wp_unslash( $_POST['pc_discount'] ) );
+    $discount = min( 100, $discount );
+
+    update_post_meta( $post_id, 'pc_discount', $discount );
+}
 
   /**
   * Save short title.

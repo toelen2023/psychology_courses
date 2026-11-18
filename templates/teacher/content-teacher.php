@@ -50,7 +50,7 @@ $slug = get_post_field( 'post_name', $teacher_id );
                 <div class="column-1-2" id="<?php echo $slug ?>-consultation">
                     <p><strong><?php  _e( 'Consultation Price', 'psychology-courses' ) ?> <?php echo  $consult_price ?> грн.</strong></p>
                     <?php
-                    echo do_shortcode('[cf7ip_button form_id="081af97" text="'. __("Sign Up for a consultation", 'psychology-courses' ) .'" title="'. __("Sign Up for a consultation", 'psychology-courses' ) .'" animation="fade" teacher="' .get_the_title(). '"]');
+                    echo do_shortcode('[cf7ip_button form_id="081af97" text="'. __("Sign Up for a consultation", 'psychology-courses' ) .'" title="'. __("Sign Up for a consultation", 'psychology-courses' ) .'" animation="fade" course_stream="Консультація" course="'. __("Sign Up for a consultation", 'psychology-courses' ) .'" teacher="' .get_the_title(). '"]');
                     ?>
                 </div>    
             </div>

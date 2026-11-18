@@ -152,7 +152,11 @@ public function sanitize_settings( $input ): array {
 
         'cf7_form_id_ru' => isset( $input['cf7_form_id_ru'] )
             ? absint( $input['cf7_form_id_ru'] ) : 0,
+        'course_shortcode' => isset( $input['course_shortcode'] )
+        ? sanitize_text_field( $input['course_shortcode'] )
+        : '',
     );
+    
 }
 
 /**

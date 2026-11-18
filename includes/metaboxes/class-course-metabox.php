@@ -72,6 +72,8 @@ class PC_Course_Metabox {
   $lessons = get_post_meta( $post->ID, 'pc_lessons', true  );
 
   $prices = pc_get_course_prices( $post->ID );
+  $discount = get_post_meta( $post->ID, 'pc_discount', true );
+  $discount = '' !== $discount ? absint( $discount ) : 0;
 
   $short_title = get_post_meta( $post->ID, 'pc_course_short_title', true );
  
@@ -158,6 +160,25 @@ class PC_Course_Metabox {
         </div>
 
       </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label for="pc_discount">
+                <?php esc_html_e( 'Discount, %', 'psychology-courses' ); ?>
+            </label>
+        </th>
+        <td>
+            <input
+                type="number"
+                id="pc_discount"
+                name="pc_discount"
+                value="<?php echo esc_attr( $discount ); ?>"
+                min="0"
+                max="100"
+                step="1"
+                class="small-text"
+            >
+        </td>
     </tr>
    </tbody>
   </table>
