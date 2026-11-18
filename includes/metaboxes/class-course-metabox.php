@@ -354,6 +354,10 @@ if ( empty( $teachers ) ) {
 
         echo '<span class="pc-course-teacher-ids" data-ids="' .  esc_attr( implode( ',', $teachers ) ) . 
         '" hidden></span>';
+
+        $discount = get_post_meta( $post_id, 'pc_discount', true );
+
+        echo '<span class="pc-course-discount" data-value="' . esc_attr( $discount ) . '" hidden></span>';
         return;
       }
   } 
@@ -399,6 +403,16 @@ if ( empty( $teachers ) ) {
       name="pc_lessons" class="small-text pc-quick-edit-lessons">
     </span>
    </label>
+   <label>
+      <span class="title">
+          <?php esc_html_e( 'Discount, %', 'psychology-courses' ); ?>
+      </span>
+
+      <span class="input-text-wrap">
+        <input type="number" name="pc_discount"
+            min="0"  max="100"  step="1" class="small-text pc-quick-edit-discount">
+      </span>
+  </label>
    <?php
     /* $teachers = get_posts(
           array(

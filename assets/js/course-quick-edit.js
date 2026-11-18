@@ -31,7 +31,9 @@ jQuery( function ( $ ) {
         editRow.find( '.pc-quick-edit-lessons' ).val(
             row.find( '.pc-course-lessons' ).data( 'value' ) || ''
         );
-
+        editRow.find( '.pc-quick-edit-discount' ).val(
+            row.find( '.pc-course-discount' ).data( 'value' ) || 0
+        );
         // Selected teachers for a course.
         /* const teacherIds = String(
             row.find( '.pc-course-teacher-ids' ).data( 'ids' ) || ''
